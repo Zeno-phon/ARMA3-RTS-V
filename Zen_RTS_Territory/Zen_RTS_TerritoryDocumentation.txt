@@ -8,9 +8,9 @@ Index
     Zen_RTS_TerritoryCreate
     Zen_RTS_TerritoryEventCaptured
     Zen_RTS_TerritoryGetData
-    Zen_RTS_TerritorySearch
     Zen_RTS_TerritoryManager
     Zen_RTS_TerritoryRemove
+    Zen_RTS_TerritorySearch
     Zen_RTS_TerritoryUpdate
     Zen_RTS_TerritoryUpdateSubMarker
     Zen_RTS_TerritoryUpdateVisual
@@ -47,16 +47,6 @@ Return: Array
         4. Array of sides, the owners of the sub-markers
         5. String, a nearly identical helper marker for color
 
-Zen_RTS_TerritorySearch
-
-Returns array of all territory markers that meet the given search parameters.
-Usage : Call
-Params: 1. (opt.) Side, the side of the territory, (default: sideLogic [All])
- (opt.) 2. Scalar, territory has a number of sub-markers > (2), (default: 0)
- (opt.) 3. Scalar, territory has a number of sub-markers < (3), (default: -1 [infinite])
- (opt.) 4. Scalar, territory has a majority of sub-markers of side (4), (default: sideLogic [All])
-Return: Array of strings
-
 Zen_RTS_TerritoryManager
 
 The main territory management thread.  Controls changing the side of territories.
@@ -74,6 +64,20 @@ will no longer update this marker.  Also updates the visual representation.
 Usage : Call
 Params: 1. String, territory marker
 Return: Void
+
+Zen_RTS_TerritorySearch
+
+Returns the markers of all territories whose data elements at (1) hash (3) to
+within, inclusive, the range (2).  (1,3) are aligned with each other, so the element at
+(1.n) is hashed with (3.n) and checked within (2.n).
+Usage : Call
+Params: 1. Array of scalars, indexes of nested arrays to search
+        2. Array, ranges the element must fall within
+            Array:
+                1. Scalar, lower bound
+                2. Scalar, upper bound
+        3. Array, scalar hash functions as code or global function string
+Return: Array of strings, [] if there is no match
 
 Zen_RTS_TerritoryUpdate
 

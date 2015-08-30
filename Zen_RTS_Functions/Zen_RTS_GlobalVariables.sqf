@@ -4,7 +4,6 @@ param3 = 0;
 StopMsg = false;
 ShowStats = false;
 Dedicated = isDedicated;
-call compile format ["xp%1 = 0",Player];
 ColorCivilian = "ColorCivilian";
 // ListFlag6 = ListFlag7;
 updbg = false;
@@ -93,13 +92,17 @@ eastGearLevel = 1;
 rts_hq = [SIDE Player,"HQ"];
 
 //--- Global Client Variables.
-sideJoined = side player;
-sideJoinedText = str sideJoined;
-sideID = sideJoined Call GetSideID;
-clientID = player Call GetClientID;
-clientTeam = group player;
-clientTeams = (Format["WFBE_%1TEAMS",sideJoinedText] Call GetNamespace);
-playerType = typeOf player;
+if !(isDedicated) then {
+    call compile format ["xp%1 = 0",Player];
+    sideJoined = side player;
+    sideJoinedText = str sideJoined;
+    sideID = sideJoined Call GetSideID;
+    clientID = player Call GetClientID;
+    clientTeam = group player;
+    clientTeams = (Format["WFBE_%1TEAMS",sideJoinedText] Call GetNamespace);
+    playerType = typeOf player;
+    rts_camSides = [SIDE player];
+};
 
 GUER = Independent;
 CIV = CIVILIAN;
@@ -114,7 +117,6 @@ rts_buildDistLimit = 800;
 rts_viewdistanceindex = 0;
 
 customSquadSizeLimit = 15;
-rts_camSides = [SIDE Player];
 
 // Vars if the player wants manned vehicles to have gunners/commanders/driver
 rts_driver = true;

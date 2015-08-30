@@ -20,7 +20,7 @@ VCOM_fnc_IsDriver = compile preprocessFile "VCOM_Driving\Functions\VCOM_fnc_IsDr
       {
       _CheckVariable = _x getVariable "VCOM_FSMRunning";
       if (isNil ("_CheckVariable")) then {_CheckVariable = 0;};
-      if (!(isplayer _x) && (_CheckVariable == 0)) then {null = [_x] execFSM "VCOM_Driving\Functions\AIDRIVEBEHAVIOR.fsm";};
+      if (!(isplayer _x) && (_CheckVariable isEqualTo 0)) then {null = [_x] execFSM "VCOM_Driving\Functions\AIDRIVEBEHAVIOR.fsm";};
       };
     } forEach allUnits;
     sleep 5;

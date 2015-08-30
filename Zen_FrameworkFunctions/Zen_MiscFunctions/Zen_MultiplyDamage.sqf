@@ -29,13 +29,16 @@ ZEN_STD_Parse_GetSetArgumentDefault(_sendPacket, 2, true, false)
         };
         _x addEventHandler ["HandleDamage", {
             (if (alive (_this select 0)) then {
-                (if (((_this select 4) != "") && ((vehicle (_this select 0)) == (_this select 0)) && {(getText (configFile >> "CfgAmmo" >> (_this select 4) >> "simulation")) == "shotBullet"}) then {
+                _damage = 0;
+                if (((_this select 4) != "") && ((vehicle (_this select 0)) == (_this select 0)) && {(getText (configFile >> "CfgAmmo" >> (_this select 4) >> "simulation")) == "shotBullet"}) then {
                     _hit = (getNumber (configFile >> "CfgAmmo" >> (_this select 4) >> "hit"));
                     _multiplier = (_hit + Zen_Damage_Increase) / _hit;
-                    ((_this select 2) * (abs _multiplier))
+                    _damage = ((_this select 2) * (abs _multiplier));
                 } else {
-                    (_this select 2)
-                })
+                    _damage = (_this select 2);
+                };
+                (_this select 0) setFatigue ((getFatigue (_this select 0)) + (_damage / 2));
+                (_damage)
             } else {
                 (_this select 0) removeAllEventHandlers "HandleDamage";
                 (0)

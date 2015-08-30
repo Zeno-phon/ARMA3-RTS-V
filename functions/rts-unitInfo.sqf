@@ -1,30 +1,28 @@
-private ["_unit","_uName","_uType","_uClass","_uVcl","_uVclType","_uVclName","_cPos"];
+//
 
+private ["_unit", "_soldierType", "_vehicleName", "_vehicleSeat"];
 _unit = _this select 0;
 
+_soldierType = getText (configFile >> "CfgVehicles" >> (typeOf _unit) >> "displayName");
+if (isPlayer _unit) then {
+    _soldierType = (format ["(%1) %2", name _unit, _soldierType])
+};
 
-//Get Unit Basic Info
-_uName = name _unit;
-_uType = typeOf _unit;
-_uClass = getText (configFile >> "CfgVehicles" >> _uType >> "displayName");
+_vehicleName = if (vehicle _unit == _unit) then {
+    ("On Foot")
+} else {
+    (getText (configFile >> "CfgVehicles" >> (typeOf vehicle _unit) >> "displayName"))
+};
 
-if (isPlayer _unit) then {_uClass = format ["(%1) %2",Name Player,_uClass]};
+_vehicleSeat = if (vehicle _unit == _unit) then {
+    ("")
+} else {
+    (switch (true) do {
+        case (_unit == driver vehicle _unit): {("Driver")};
+        case (_unit == gunner vehicle _unit): {("Gunner")};
+        case (_unit == commander vehicle _unit): {("Commander")};
+        default {("In Cargo")};
+    })
+};
 
-
-//Unit vehicle if any
-_uVcl = vehicle _unit;
-_uVclType = typeOf vehicle _unit;
-_uVclName = getText (configFile >> "CfgVehicles" >> _uVclType >> "displayName");
-
-if (_uVcl == _unit) then {_uVclName = "On Foot"};
-
-//Unit Position in Vehicle
-_cPos = "";
-if (_uVcl != _unit && _unit == driver _uVcl) then {_cPos = "Driver"};
-if (_uVcl != _unit && _unit == gunner _uVcl) then {_cPos = "Gunner"};
-if (_uVcl != _unit && _unit == commander _uVcl) then {_cPos = "Commander"};
-if (_uVcl != _unit && !(_unit in [driver _uVcl,gunner _uVcl,commander _uVcl])) then {_cPos = "in Cargo"};
-
-_uInfo = [_uClass,_uVclName,_cPos];
-
-_uInfo
+([_soldierType, _vehicleName, _vehicleSeat])

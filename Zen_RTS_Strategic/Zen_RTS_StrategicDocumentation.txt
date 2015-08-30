@@ -32,8 +32,7 @@ Usage : Call
 Params: 1. String, constructor function
         2. String, name
         3. String, description
-        4. Scalar, cost
- (opt.) 5. String, access, 'All', 'Commander', (default: 'All')
+ (opt.) 4. String, access, 'All', 'Commander', (default: 'All')
 Return: String, unique identifier
 
 Zen_RTS_StrategicAssetGetData
@@ -46,8 +45,7 @@ Return: Array:
             2. String, constructor function
             3. String, name
             4. String, description
-            5. Scalar, cost
-            6. String, access, 'All', 'Commander'
+            5. String, access, 'All', 'Commander'
 
 Zen_RTS_StrategicAssetInvoke
 
@@ -76,8 +74,7 @@ Params: 1. String, identifier
         2. String, constructor function
  (opt.) 3. String, name, (default: 0)
  (opt.) 4. String, description, (default: 0)
- (opt.) 5. Scalar, cost, (default: -1)
- (opt.) 6. String, access, 'All', 'Commander', (default: 0)
+ (opt.) 5. String, access, 'All', 'Commander', (default: 0)
 Return: Void
 
 Zen_RTS_StrategicBuildingCreate
@@ -89,7 +86,6 @@ Params: 1. String, constructor function
         3. Array of strings, upgrade functions
         4. String, name
         5. String, description
-        6. Scalar, cost
 Return: String, unique identifier
 
 Zen_RTS_StrategicBuildingDestroy
@@ -194,7 +190,6 @@ Return: Array:
             4. Array of strings, upgrade functions
             5. String, name
             6. String, description
-            7. Scalar, cost
 
 Zen_RTS_StrategicBuildingTypeUpdate
 
@@ -208,7 +203,6 @@ Params: 1. String, identifier
  (opt.) 4. Array of strings, upgrade functions, (default: 0)
  (opt.) 5. String, name, (default: 0)
  (opt.) 6. String, description, (default: 0)
- (opt.) 7. Scalar, cost, (default: -1)
 Return: Void
 
 Zen_RTS_StrategicBuildingUpgrade

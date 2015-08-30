@@ -8,26 +8,38 @@
     _mcu = _this select 0;
     _player = _this select 1;
 
-    ActionUnit = _mcu;
-    Activator = _player;
+    // ActionUnit = _mcu;
+    // Activator = _player;
 
     _side = side _player;
     _side2 = [east, west] select ([west, east] find _side);
 
-    sleep 0.2;
+    // sleep 0.2;
     CloseDialog 0;
 
-    _MCUVehs = westMCUList + eastMCUList;
-    _countArray = Count _MCUVehs;
-    _type = typeOf _mcu;
+    _mcuSide = if (_mcu isEqualTo westTruck) then {(west)} else {(east)};
+    _mcuCommander = call compile format ["%1Commander", _mcuSide];
 
+    if (_player != _mcuCommander) exitWith {
+        // _found = false;
+        player groupChat format ["Only the %1 commander is authorized for this interface.", _mcuSide];
+    };
+
+    if (_side != _mcuSide) exitWith {
+        // _found = false;
+        player groupChat format ["Side %1 is not authorized for this interface.", _side];
+    };
+
+    /**
+    _MCUVehs = [westTruck, eastTruck];
+    _type = typeOf _mcu;
     _found = true;
     {
-        _unitType = _x select 0;
-        _mcuName = _x select 1;
-        bName = _mcuName;
+        // _unitType = _x select 0;
+        // _mcuName = _x;
+        // bName = _mcuName;
 
-        _mcuSide = if (_mcuName isEqualTo westMCUName) then {(west)} else {(east)};
+        _mcuSide = if (_x isEqualTo westTruck) then {(west)} else {(east)};
         _mcuCommander = call compile format ["%1Commander", _mcuSide];
 
         if (_player != _mcuCommander) exitWith {
@@ -44,12 +56,14 @@
             _found = false;
             player groupChat "MCU not available.";
         };
-    } forEach ([_MCUVehs, compile format ["!( (toLower (_this select 0) isEqualTo toLower '%1'))", _type]] call Zen_ArrayFilterCondition);
+    // } forEach ([_MCUVehs, compile format ["!( (toLower (_this select 0) isEqualTo toLower '%1'))", _type]] call Zen_ArrayFilterCondition);
+    } forEach _MCUVehs;
 
     if !(_found) exitWith {
         hintSilent "Not Found";
-        player groupChat format ["Build Type:  %1, CheckType:  %2", _type, _unitType];
+        player groupChat format ["Build Type:  %1, CheckType:  %2", _type, ""];
     };
+    //*/
 
     sleep 0.1;
     _idDlgBuild = 2002;
@@ -66,6 +80,7 @@
     _idListCustom = 2030;
     _idBgdCustom = 2031;
 
+    _idDroplist = 2045;
     _idstats = 500;
     _indnum1 = 0;
     _indnum2 = 0;
@@ -85,21 +100,21 @@
     createDialog "DlgBuild";
     {
         ctrlShow [_x, false];
-    } forEach [_idgoback, _idSquadList, _idSquadListbk, _idbuildSquad, _idBtnCustom, _idListCustom, _idBgdCustom, _idstats, _idLightQButton, _idHeavyQButton, _idAirQButton, _idLightQ, _idHeavyQ, _idAirQ, _idSldQ, _idInfQButton];
+    } forEach [_idgoback, _idSquadList, _idSquadListbk, _idbuildSquad, _idBtnCustom, _idListCustom, _idBgdCustom, _idstats, _idLightQButton, _idHeavyQButton, _idAirQButton, _idLightQ, _idHeavyQ, _idAirQ, _idSldQ, _idInfQButton, _idDroplist];
 
     // ctrlEnable [_idbuildyou, FALSE];
     // ctrlEnable [_idbuildSquad, FALSE];
 
     _idSel = 0;
-    while {((ctrlVisible _idlist) && {(alive _player)})} do {
+    // while {((ctrlVisible _idlist) && {(alive _player)})} do {
         // Clear the Stats list to repopulate
-        _stats = [_side, _side2] call compile preprocessFileLineNumbers "functions\rts-statistics-array.sqf";
-        lbClear _idStats;
+        // _stats = [_side, _side2] call compile preprocessFileLineNumbers "functions\rts-statistics-array.sqf";
+        // lbClear _idStats;
 
-        {
-            _info = format ["%1 - %2", (_x select 0), (_x select 1)];
-            _index = lbAdd [_idStats, _info];
-        } forEach _stats;
+        // {
+            // _info = format ["%1 - %2", (_x select 0), (_x select 1)];
+            // _index = lbAdd [_idStats, _info];
+        // } forEach _stats;
 
         // Set Button names
         ctrlSetText [_idbuild, "Deploy"];
@@ -115,16 +130,16 @@
             _bldData = [_x] call Zen_RTS_StrategicBuildingTypeGetData;
             _descrRaw = _bldData select 5;
 
-            _descrText = ("Cost: " + ([_descrRaw, "C,"] call Zen_StringGetDelimitedPart)) + (", Time: " + ([_descrRaw, "T,"] call Zen_StringGetDelimitedPart));
+            _descrText = ("Cost: " + ([_descrRaw, "Cost: ", ","] call Zen_StringGetDelimitedPart)) + (", Time: " + ([_descrRaw, "Time: ", ","] call Zen_StringGetDelimitedPart));
             _info = (_bldData select 4) + ", " + _descrText;
 
             _index = lbAdd [_idlist, _info];
             lbSetData [_idlist, _index, _x];
             // lbSetValue [_idlist, _index, _bldTime]
 
-            _pic = [_descrRaw, "P,"] call Zen_StringGetDelimitedPart;
+            _pic = [_descrRaw, "Picture: ", ","] call Zen_StringGetDelimitedPart;
             if (_pic == "") then {
-                _type = [_descrRaw, "O,"] call Zen_StringGetDelimitedPart;
+                _type = [_descrRaw, "Classname", ","] call Zen_StringGetDelimitedPart;
                 if (_type != "") then {
                     _pic = getText (configFile >> "CfgVehicles" >> _type >> "picture");
                     // player sidechat str _pic; // debug
@@ -137,9 +152,9 @@
         } forEach (RTS_Used_Building_Types select ([west, east] find _side));
 
         lbSetCurSel [_idlist, _idSel];
-        sleep 2;
+        // sleep 30;
         _idSel = lbCurSel _idList;
-    };
+    // };
 
     call Zen_StackRemove;
     if (true) exitWith {};

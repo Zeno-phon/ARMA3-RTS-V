@@ -4,7 +4,7 @@ class CfgUnitInsignia
 	{
 		displayName = "Death"; 
 		author = "Dr.Death jm"; 
-		texture = "pictures\Death.paa"; 
-		textures = "pictures\RTSframe.jpg"; 
+		texture = "pictures\rtspatch1.paa"; 
+		textures = "pictures\rtspatch1.paa"; 
 	};
 };

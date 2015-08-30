@@ -45,7 +45,7 @@ Spawn_Places = [];
 		case WEST : {
 				//-----------------------
 				//Houses
-				Spawn_Houses = ["Land_Cargo_House_V1_F","Land_dp_smallFactory_F","Land_Airport_Tower_F","Land_Research_HQ_F"];
+				Spawn_Houses = ["Land_Cargo_Patrol_V1_F","Land_i_Garage_V1_F","Land_Cargo_House_V1_F","rhs_2P3_1","Land_Airport_Tower_F","Land_Research_HQ_F"];
 
 				//Rooms
 				Spawn_Rooms = [[0],[-1],[5],[3]];
@@ -58,7 +58,7 @@ Spawn_Places = [];
 		case EAST : {
 				//-----------------------
 				//Houses
-				Spawn_Houses = ["Land_Cargo_House_V1_F","Land_dp_smallFactory_F","Land_Airport_Tower_F","Land_Research_HQ_F"];
+				Spawn_Houses = ["Land_Cargo_Patrol_V1_F","Land_i_Garage_V1_F","Land_Cargo_House_V1_F","rhs_2P3_1","Land_Airport_Tower_F","Land_Research_HQ_F"];
 
 				//Rooms
 				Spawn_Rooms = [[0],[-1],[5],[4]];

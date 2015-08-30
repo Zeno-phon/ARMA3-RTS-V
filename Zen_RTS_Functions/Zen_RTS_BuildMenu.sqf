@@ -16,7 +16,7 @@
     _side2 = [east, west] select ([west, east] find _side);
     _squadNames = ["Alpha", "Bravo", "Charlie", "Delta", "Echo", "Foxtrot"];
 
-    _buildingData = [_buildingType] call Zen_RTS_StrategicBuildingTypeGetData;
+    _buildingTypeData = [_buildingType] call Zen_RTS_StrategicBuildingTypeGetData;
     _buildingObjDataGlobal = [_buildingType, true, false] call Zen_RTS_StrategicBuildingObjectGetDataGlobal;
 
     if (count _buildingObjDataGlobal < 1) exitWith {
@@ -45,7 +45,7 @@
     _idListCustom = 2030;
     _idBgdCustom = 2031;
 
-    _indexCustoms = 0;
+    // _indexCustoms = 0;
     _idstats = 500;
 
     _idSldQ = 1030;
@@ -60,70 +60,92 @@
     _idAirQButton = 1039;
     // // _idNavalQButton = 1042;
 
+    // _idDroplistButton = 1010;
+    _idDroplist = 2045;
+
     _indexAssetList = 0;
     _indexSquadList = 0;
     _indexCustomList = 0;
+    _indexCrewList = 0;
 
     createDialog "DlgBuild";
-    ctrlEnable [_idstats,FALSE];
+    ctrlEnable [_idstats, false];
+    ctrlEnable [_idDroplist, true];
+    ctrlShow [_idDroplist, true];
 
     buttonSetAction [_idback, "[player, player, 0] call Zen_RTS_AlphaMenu"];
-    buttonSetAction [_idbuild, "[2000, 0, false, false] call Zen_RTS_BuildUnit"];
-    buttonSetAction [_iBuildManned, "[2000, 0, true, false] call Zen_RTS_BuildUnit"];
-    buttonSetAction [_idbuildsquad, "[2000, 2025, true, true] call Zen_RTS_BuildUnit"];
-    buttonSetAction [_idBtnCustom, "[2000, 2030, true, false] call Zen_RTS_BuildUnit"];
+    buttonSetAction [_idbuild, "[false] call Zen_RTS_BuildUnit"];
+    // buttonSetAction [_iBuildManned, "[false] call Zen_RTS_BuildUnit"];
+    buttonSetAction [_idbuildsquad, "[true] call Zen_RTS_BuildUnit"];
+    // buttonSetAction [_idBtnCustom, "[false] call Zen_RTS_BuildUnit"];
 
+    if ((_buildingTypeData select 4) isEqualTo "Barracks") then {
+        {
+            ctrlShow [ _x, false];
+        } forEach [_idDroplist];
+    };
+    if ((_buildingTypeData select 4) isEqualTo "CJ") then {
+        {
+            ctrlShow [ _x, false];
+        } forEach [_idInfQButton, _idSldQ, _idsquadlist, _idbuildsquad, _idDroplist];
+    };
+    if ((_buildingTypeData select 4) isEqualTo "HQ") then {
+        {
+            ctrlShow [ _x, false];
+        } forEach [_idDroplist, _idsquadlist, _idbuildsquad];
+    };
     {
-        ctrlShow [ _x, FALSE];
-    } forEach [_idBgdCustom, _idLightQButton, _idHeavyQButton, _idAirQButton, _idLightQ, _idHeavyQ, _idAirQ];
+        ctrlShow [ _x, false];
+    } forEach [_idBgdCustom, _idLightQButton, _idHeavyQButton, _idAirQButton, _idLightQ, _idHeavyQ, _idAirQ, _idstats, _idListCustom, _idBtnCustom, _iBuildManned];
 
     ctrlSetText [_idbuild, "Deploy"];
-    ctrlSetText [_iBuildManned, "Deploy Manned"];
+    // ctrlSetText [_iBuildManned, "Deploy Manned"];
     ctrlSetText [_idbuildsquad, "Deploy for Squad"];
-    ctrlSetText [_idBtnCustom, "Deploy Custom Squad"];
+    // ctrlSetText [_idBtnCustom, "Deploy Custom Squad"];
 
     // ctrlSetText [ _idsldQ, "Soldier Queue Empty"];
     // ctrlSetText [ _idLightQ, "Light Queue Empty"];
     // ctrlSetText [ _idHeavyQ, "Heavy Queue Empty"];
     // ctrlSetText [ _idairQ, "Air Queue Empty"];
 
-    _stats = [ _side, _side2] call compile preprocessFileLineNumbers "functions\rts-statistics-array.sqf";
-    lbClear _idStats;
-    sleep 0.1;
+    // _stats = [ _side, _side2] call compile preprocessFileLineNumbers "functions\rts-statistics-array.sqf";
+    // lbClear _idStats;
+    // sleep 0.1;
 
-    {
-        _statName = _x select 0;
-        _statLimit = _x select 1;
+    // {
+        // _statName = _x select 0;
+        // _statLimit = _x select 1;
 
-        _info = format ["%1 - %2", _statName, _statLimit];
-        _index = lbAdd [_idStats, _info];
-    } forEach _stats;
+        // _info = format ["%1 - %2", _statName, _statLimit];
+        // _index = lbAdd [_idStats, _info];
+    // } forEach _stats;
 
-    while {ctrlVisible _idlist && {alive player}} do {
-        _info = ((_buildingData select 4) + " - Level " + str (_buildingObjDataGlobal select 3));
+    // while {ctrlVisible _idlist && {alive player}} do {
+        _info = ((_buildingTypeData select 4) + " - level " + str (_buildingObjDataGlobal select 3));
         ctrlSetText [_idtitle, _info];
 
         lbClear _idlist;
         lbClear _idsquadlist;
-        lbClear _idListCustom;
+        // lbClear _idListCustom;
+        lbClear _idDroplist;
 
         // Assets
         {
             _assetData = [_x] call Zen_RTS_StrategicAssetGetData;
             _descrRaw = _assetData select 3;
-            _access = _assetData select 5;
+            _access = _assetData select 4;
 
             if ((toUpper _access isEqualTo "ALL") || {player in [WestCommander, EastCommander]}) then {
-                _descrText = ("Cost: " + ([_descrRaw, "C,"] call Zen_StringGetDelimitedPart)) + (", Time: " + ([_descrRaw, "T,"] call Zen_StringGetDelimitedPart));
+                _descrText = ("Cost: " + ([_descrRaw, "Cost: ", ","] call Zen_StringGetDelimitedPart)) + (", Time: " + ([_descrRaw, "Time: ", ","] call Zen_StringGetDelimitedPart));
                 _info = (_assetData select 2) + " - " + _descrText;
 
                 _index = lbAdd [_idlist, _info];
                 lbSetData [_idlist, _index, _x];
                 // lbSetValue [_idlist, _index, _bTime];
 
-                _pic = [_descrRaw, "P,"] call Zen_StringGetDelimitedPart;
+                _pic = [_descrRaw, "Picture: ", ","] call Zen_StringGetDelimitedPart;
                 if (_pic == "") then {
-                    _type = [_descrRaw, "O,"] call Zen_StringGetDelimitedPart;
+                    _type = [_descrRaw, "Classname: ", ","] call Zen_StringGetDelimitedPart;
                     if (_type != "") then {
                         _pic = getText (configFile >> "CfgVehicles" >> _type >> "picture");
                         // player sidechat str _pic; // debug
@@ -135,24 +157,6 @@
                 };
             };
         } forEach ((_buildingObjDataLocal select 1) + (_buildingObjDataGlobal select 4));
-
-        // Queue
-        _currentBuilding = (_buildingObjDataGlobal select 1);
-        _buildingObjData = [_currentBuilding, false, false] call Zen_RTS_StrategicBuildingObjectGetDataGlobal;
-        _assetData = [_currentBuilding] call Zen_RTS_F_StrategicRequestCurrentAssetClient;
-
-        // player commandChat str "queue display data";
-        // player commandChat str _assetData;
-
-        _text = "Queue Empty";
-        _buttonCode = "[ " + str (_buildingObjData select 1) + ", 0] spawn Zen_RTS_StrategicBuildingQueueRemove";
-        if (count _assetData > 0) then {
-            _text = _assetData select 2;
-            // player commandChat str _text;
-        };
-
-        ctrlSetText [_idSldQ, _text];
-        buttonSetAction [_idInfQButton, _buttonCode];
 
         // Group List
         _playerArray = [_side] call Zen_ConvertToObjectArray;
@@ -167,6 +171,7 @@
             // lbSetValue [_idsquadlist, _index, _x];
         } forEach _playerArray;
 
+        /**
         // Custom Squads
         for "_i" from 0 to (count RTS_Custom_Squads_Assets - 1) do {
             _index = lbAdd [_idListCustom, _squadNames select _i];
@@ -174,14 +179,44 @@
             // lbSetData [_idListCustom, _index, ""];
             // lbSetColor [_idListCustom, _index, _color];
         };
+        //*/
+
+        // Vehicle Crew Count
+        for "_i" from 0 to 9 do {
+            _index = lbAdd [_idDroplist, str _i];
+            lbSetValue [_idDroplist, _index, _i];
+        };
 
         lbSetCurSel [_idlist, _indexAssetList];
         lbSetCurSel [_idsquadlist, _indexSquadList];
-        lbSetCurSel [_idListCustom, _indexCustomList];
-        sleep 2;
+        // lbSetCurSel [_idListCustom, _indexCustomList];
+        lbSetCurSel [_idDroplist, _indexCrewList];
+        // sleep 30;
         _indexAssetList = lbCurSel _idlist;
         _indexSquadList = lbCurSel _idsquadlist;
-        _indexCustomList = lbCurSel _idListCustom;
+        // _indexCustomList = lbCurSel _idListCustom;
+        _indexCustomList = lbCurSel _indexCrewList;
+    // };
+
+    // Queue
+    _currentBuilding = (_buildingObjDataGlobal select 1);
+    _buildingObjData = [_currentBuilding, false, false] call Zen_RTS_StrategicBuildingObjectGetDataGlobal;
+    while {ctrlVisible _idlist && {alive player}} do {
+        _queueData = [_currentBuilding] call Zen_RTS_F_StrategicRequestCurrentAssetClient;
+        _text = "Queue Empty";
+        _buttonCode = "";
+        if (count _queueData > 0) then {
+            _assetData = _queueData select 0;
+            _purchasedCrewCount = _queueData select 2;
+
+            _text = _assetData select 2;
+            _cost = call compile ([(_assetData select 3), "Cost: ", ","] call Zen_StringGetDelimitedPart);
+            _buttonCode = (format ["playerMoney = playerMoney + %1 + 25 * %2; ", _cost, _purchasedCrewCount]) + "[ " + str (_buildingObjData select 1) + ", 0] spawn Zen_RTS_StrategicBuildingQueueRemove";
+        };
+
+        ctrlSetText [_idSldQ, _text];
+        buttonSetAction [_idInfQButton, _buttonCode];
+        sleep 1;
     };
 
     call Zen_StackRemove;

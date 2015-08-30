@@ -10,8 +10,8 @@ class RscButton
     soundClick[] = {"a3\sounds_f\weapons\closure\sfx3.wss", 0.2, 1};
     soundEscape[] = {"a3\sounds_f\weapons\closure\sfx11.wss", 0.2, 1};
     default = false;
-    w = 0.3;
-    h = 0.07;
+    w = 0.2;
+    h = 0.05;
     offsetX = 0.001;
     offsetY = 0.001;
     offsetPressedX = 0.003;

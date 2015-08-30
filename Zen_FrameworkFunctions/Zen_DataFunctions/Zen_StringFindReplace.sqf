@@ -57,7 +57,7 @@ if (_findString isEqualTo _totalString) then {
         };
         _totalString = _totalString - [-1];
     } else {
-        0 = ["Zen_StringFindReplace", "The string to find is longer than the string to search in", _this] call Zen_PrintError;
+        0 = ["Zen_StringFindReplace", "The string to find is longer than the string to search in.", _this] call Zen_PrintError;
         call Zen_StackPrint;
     };
 };

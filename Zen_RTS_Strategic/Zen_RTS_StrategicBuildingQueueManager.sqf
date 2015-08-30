@@ -25,7 +25,7 @@ _dataGlobal = [_bldObjId] call Zen_RTS_StrategicBuildingObjectGetDataGlobal;
 _queue = _data select 1;
 
 while {true} do {
-    sleep 5;
+    sleep 1;
     if (count _queue > 0) then {
         _nextInvoke = _queue select 0;
 
