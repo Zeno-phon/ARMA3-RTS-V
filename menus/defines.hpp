@@ -127,3 +127,4 @@ class RscEdit
        autocomplete = false;
        text = "0";
 };
+

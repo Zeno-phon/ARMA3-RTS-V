@@ -1,7 +1,7 @@
 class RscButton2
 {
         type = CT_BUTTON;
-        idc = 100;
+        idc = 101;
         Style = ST_CENTER;
         colorText[] = {0, 0, 0, 1};
         font = FontTITLEHalf;

@@ -39,7 +39,7 @@ _sideIndex = {
 };
 
 while {true} do {
-    _markers = [] call Zen_RTS_TerritorySearch;
+    _markers = [[1], [[0, 2]], [{1}]] call Zen_RTS_TerritorySearch;
     {
         0 = [_x] call Zen_RTS_TerritoryUpdate;
         _oldData = [_x] call Zen_RTS_TerritoryGetData;

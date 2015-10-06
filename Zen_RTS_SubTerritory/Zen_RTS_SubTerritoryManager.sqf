@@ -34,7 +34,7 @@ _markerListLocal = [];
 _markerTimeLocal = [];
 
 while {true} do {
-    _markers = [] call Zen_RTS_SubTerritorySearch;
+    _markers = [[1], [[0, 2]], [{1}]] call Zen_RTS_SubTerritorySearch;
     {
         if !(_x in _markerListLocal) then {
             _localIndex = count _markerListLocal;

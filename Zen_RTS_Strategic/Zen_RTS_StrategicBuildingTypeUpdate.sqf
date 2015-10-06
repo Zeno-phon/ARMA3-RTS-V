@@ -8,9 +8,9 @@
 #include "Zen_FrameworkLibrary.sqf"
 
 _Zen_stack_Trace = ["Zen_RTS_StrategicBuildingTypeUpdate", _this] call Zen_StackAdd;
-private ["_identifier", "_constructor", "_destructor", "_upgrades", "_name", "_desc", "_index", "_oldData", "_valid", "_cost", "_indexes"];
+private ["_identifier", "_constructor", "_destructor", "_upgrades", "_name", "_desc", "_index", "_oldData", "_valid", "_indexes"];
 
-if !([_this, [["STRING"], ["STRING", "SCALAR"], ["STRING", "SCALAR"], ["ARRAY", "SCALAR"], ["STRING", "SCALAR"], ["STRING", "SCALAR"]], [[], [], [], ["STRING"]], 2] call Zen_CheckArguments) exitWith {
+if !([_this, [["STRING"], ["STRING", "SCALAR"], ["STRING", "SCALAR"], ["ARRAY", "SCALAR"], ["STRING", "SCALAR"]], [[], [], [], ["STRING"]], 2] call Zen_CheckArguments) exitWith {
     call Zen_StackRemove;
 };
 
@@ -20,7 +20,6 @@ ZEN_STD_Parse_GetArgumentDefault(_destructor, 2, 0)
 ZEN_STD_Parse_GetArgumentDefault(_upgrades, 3, 0)
 ZEN_STD_Parse_GetArgumentDefault(_name, 4, 0)
 ZEN_STD_Parse_GetArgumentDefault(_desc, 5, 0)
-ZEN_STD_Parse_GetArgumentDefault(_cost, 6, -1)
 
 _indexes = [Zen_RTS_Strategic_Building_Types, _identifier, 0] call Zen_ArrayGetNestedIndex;
 if (count _indexes == 0) exitWith {
@@ -67,10 +66,6 @@ if !(_name isEqualTo 0) then {
 
 if !(_desc isEqualTo 0) then {
     _oldData set [5, _desc];
-};
-
-if (_cost > 0) then {
-    _oldData set [6, _cost];
 };
 
 publicVariable "Zen_RTS_Strategic_Building_Types";

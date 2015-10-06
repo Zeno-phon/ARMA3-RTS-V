@@ -18,8 +18,8 @@ colorCiv = "ColorGrey"
 
 TextureWest = "pictures\flags\flag_blufor.paa"
 TextureEast = "pictures\flags\flag_opfor.paa"
-TextureGuer = "pictures\RTSframe.jpg"
-TextureCiv = "pictures\RTSframe.jpg"
+TextureGuer = "pictures\rtsiii.paa"
+TextureCiv = "pictures\rtsiii.paa"
 
 rts_vpTaken = objNull
 

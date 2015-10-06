@@ -2,7 +2,10 @@
 //[] exec "Karr-SquadMarkers.sqs";
 [] exec "rts-build-unitarrays.sqs";
 [] exec "rts-init-SetRandomPos.sqs";
-[] exec "rts-build-addAction.sqs";
+
+// [] exec "rts-build-addAction.sqs";
+0 = [] execVM "RTS_Build_AddAction.sqf";
+
 [] exec "rts-build-structurePosExec.sqs";
 // [] execVM "territory\rts-territoryInit.sqf";
 // [] exec "economy\rts-moneyMonitor.sqs";

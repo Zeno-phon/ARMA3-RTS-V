@@ -65,7 +65,7 @@ group Player selectleader Player
 
 @rts_arrays_initialized
 
-_mcu = call compile format ["MCU%1",_side];
+_mcu = call compile format ["%1Truck",_side];
 _mcuName = call compile format ["%1MCUName",_side];
 
 _assets = call compile format ["%1Assets",_side];

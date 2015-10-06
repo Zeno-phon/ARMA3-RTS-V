@@ -114,6 +114,7 @@ class ZKS_RscText
 	idc = -1;
 	style = ST_CENTER;
 	h = 0.04; 
+	colorDisabled[] = { 0, 0, 0, 1 };
 	colorBackground[] = {1, 1, 1, 0};
 	colorText[] = {TextColor, 0.75};
   	font = FontMAIN;
@@ -126,6 +127,7 @@ class ZKS_RscActiveText
 	style = ST_CENTER;
 	color[] = {1, 1, 1, 1};
 	colorActive[] = {1, 1, 1, 1};
+	colorDisabled[] = { 0, 0, 0, 1 };
   	font = FontMAIN;
 	sizeEx = 0.05;
 		soundEnter[] = {"", 0.1, 1};
@@ -176,7 +178,8 @@ class ZKS_RscReviveTITLE
 	idc = -1;
 	style = ST_CENTER;
 	h = 0.04; 
-	colorBackground[] = {0, 0, 0, 0};colorText[] = {1, 1, 1, 1};
+	colorBackground[] = {0, 0, 0, 0};
+	colorText[] = {1, 1, 1, 1};
 	font = TahomaB;
 	sizeEx = 0.2;
 };
@@ -197,15 +200,16 @@ class ZKS_DlgReviveDisplay
 		style = ST_MULTI + ST_CENTER + ST_NO_RECT;
 		text = "";
 		linespacing=1;
-		x = 0.07; y = 0.45; w = 0.9; h = 0.5;
+		x = 0.07;
+		y = 0.45;
+		w = 0.9; 
+		h = 0.5;
 		colorText[] = {0.5, 0, 0, 1};
 		sizeEx = .04;
 		size = .04;
 		font = TahomaB;
 	};
 };
-
-
 
 class ZKS_RscButtonBase {
 	idc = -1;
@@ -647,17 +651,8 @@ class ZKS_RscMapControl {
 		importance = 1;
 		size = 24;
 	};
-
-
 };
 						
-
-
-
-
-
-
-
 class RscHTML{};
 
 class ZKS_DlgSpectateDeath
@@ -777,7 +772,6 @@ class ZKS_DlgSpectateDeath
 		sizeEx = 0.022;
 	};
 
-
 	class plrdis : ZKS_RscText
 	{
 		idc = 1047003;
@@ -792,7 +786,6 @@ class ZKS_DlgSpectateDeath
 		colorText[] = {0, 0, 0, 1};
 		sizeEx = 0.022;
 	};
-
 
 	class HelpBg : ZKS_RscText
 	{
@@ -837,7 +830,6 @@ class ZKS_DlgSpectateDeath
 		sizeEx = 0.044;
 		text = "Camera Views";
 	};
-
 
 	class SelectPlayer : ZKS_RscText
 	{
@@ -895,8 +887,6 @@ class ZKS_DlgSpectateDeath
 		text = "- Spectating -";		
 	};
 
-
-
 	class Title : ZKS_RscText
 	{
 		idc = -1;
@@ -910,11 +900,6 @@ class ZKS_DlgSpectateDeath
 		sizeEx = 0.040;
 		text = "YOU ARE UNCONSCIOUS";
 	};
-
-
-
-
-
 
 	class Respawn_Button_Revive_1 : ZKS_RscText
 	{
@@ -985,7 +970,8 @@ class ZKS_DlgSpectateDeath
 	idc = 10006;
 	colorBackground[] = { 0, 1, 0, 0.5 };
 	colorBackgroundActive[] = { 0, 1, 0, 0.5 };
-	colorFocused[]= { 0, 1, 0, 0.5 };  
+	colorFocused[]= { 0, 1, 0, 0.5 };
+	colorDisabled[] = { 0, 0, 0, 1 };
 	x = SafeZoneX + 0.01; y = 0.045 + SafeZoneY;
 	text = "AUTO MAP";
 	action = "automap = 0";
@@ -1013,6 +999,7 @@ class ZKS_DlgSpectateDeath
 	x = SafeZoneX + 0.32; y = 0.045 + SafeZoneY;
 	colorBackground[] = { 0, 1, 0, 0.5 };
 	colorBackgroundActive[] = { 0, 1, 0, 0.5 };
+	colorDisabled[] = { 0, 0, 0, 1 };
 	colorFocused[]= { 0, 1, 0, 0.5 }; 
 	text = "AUTO VIEW";
 	action = "autoview = 0;";
@@ -1059,15 +1046,12 @@ class ZKS_DlgSpectateDeath
 	idc = 10017;
 	colorBackground[] = { 0, 1, 0, 0.5 };
 	colorFocused[]= { 0, 1, 0, 0.5 }; 
+	colorDisabled[] = { 0, 0, 0, 1 };
 	colorBackgroundActive[] = { 0, 1, 0, 0.5 };
 	x = SafeZoneX + 0.32; y = 0.005 + SafeZoneY;
 	text = "  SHOW";
 	action = "showall = 1;ctrlShow [1047005,true];ctrlShow [1047004,true];ctrlShow [1047003,true];ctrlShow [1047001,true];ctrlShow [10001,true];ctrlShow [10002,true];ctrlShow [10003,true];ctrlShow [10004,true];ctrlShow [10013,true];ctrlShow [10014,true];ctrlShow [10015,true];ctrlShow [10016,true];ctrlShow [10017,false];ctrlShow [10019,true];ctrlShow [10100,true];ctrlShow [10101,true];ctrlShow [10105,true];ctrlShow [10106,true];ctrlShow [10107,true];ctrlShow [2222,true];";
 	};
-
-
-
-
 
 	class Respawn_Button_Revive_18 : Respawn_Button_Revive_1
 	{
@@ -1078,9 +1062,6 @@ class ZKS_DlgSpectateDeath
 	text = "< CLOSE >";
 	action = "ctrlShow [1047002,false];ctrlShow [10018,false];";
 	};
-
-
-
 
 	class Respawn_Button_Revive_19 : Respawn_Button_Revive_1
 	{
@@ -1097,13 +1078,12 @@ class ZKS_DlgSpectateDeath
 	x = SafeZoneX + 0.01;
 	y = 0.58 + SafeZoneY;
 	colorBackground[] = { 0, 1, 0, 0.5 };
+	colorDisabled[] = { 0, 0, 0, 1 };
 	colorBackgroundActive[] = { 0, 1, 0, 0.5 };
 	colorFocused[]= { 0, 1, 0, 0.5 }; 
 	text = "PLR ONLY";
 	action = "playerview = 0;Target = 3;";
 	};
-
-
 
 	controls[]=
 	{
@@ -1114,15 +1094,6 @@ class ZKS_DlgSpectateDeath
 		ButtonPREV
 
 	};
-
-
-
-
-
-
-
-
-
 
 	class activemenu : ZKS_RscActiveMenu
 	{
@@ -1184,14 +1155,7 @@ class ZKS_DlgSpectateDeath
 			arrowEmpty = "\ca\ui\data\ui_arrow_top_ca.paa";
 			border = "\ca\ui\data\ui_border_scroll_ca.paa";
 		};
-
-
 	};
-
-	
-
-		
-
 
 	class ButtonNEXT : ZKS_RscActiveMenu
 	{
@@ -1202,7 +1166,8 @@ class ZKS_DlgSpectateDeath
 		h = 0.05;
 		font = FontTITLEHalf;
 		sizeEx = 0.02;
-		colorText[] = {1, 0, 0, 1};	
+		colorText[] = {1, 0, 0, 1};
+		colorDisabled[] = { 0, 0, 0, 1 };
 		text = "Next >>";
 		default = 0;
 		soundEnter[] = {"", 0.1, 1};
@@ -1222,6 +1187,7 @@ class ZKS_DlgSpectateDeath
 		font = FontTITLEHalf;
 		sizeEx = 0.02;
 		colorText[] = {1, 0, 0, 1};
+		colorDisabled[] = { 0, 0, 0, 1 };
 		text = "<< Previous";
 		default = 0;
 		soundEnter[] = {"", 0.1, 1};
@@ -1230,9 +1196,6 @@ class ZKS_DlgSpectateDeath
 		soundEscape[] = {"", 0.1, 1}; 
 		action = "Target = -1";
 	};
-
-
-
 
 	class map : ZKS_RscMapControl 
 	{
@@ -1256,14 +1219,4 @@ class ZKS_DlgSpectateDeath
 		onMouseZChanged = "";
 	
 	};
-
-
-
-
-
-
-
-
-	
 };
-

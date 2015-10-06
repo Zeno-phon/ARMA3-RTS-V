@@ -3,12 +3,17 @@
     by Zenophon
     for RTS V
 
-    Returns array of all territory markers that meet the given search parameters.
+    Returns the markers of all territories whose data elements at (1) hash (3) to
+    within, inclusive, the range (2).  (1,3) are aligned with each other, so the element at
+    (1.n) is hashed with (3.n) and checked within (2.n).
     Usage : Call
-    Params: 1. (opt.) Side, the side of the territory, (default: sideLogic [All])
-     (opt.) 2. Scalar, territory has a number of sub-markers > (2), (default: 0)
-     (opt.) 3. Scalar, territory has a number of sub-markers < (3), (default: -1 [infinite])
-    Return: Array of strings
+    Params: 1. Array of scalars, indexes of nested arrays to search
+            2. Array, ranges the element must fall within
+                Array:
+                    1. Scalar, lower bound
+                    2. Scalar, upper bound
+            3. Array, scalar hash functions as code or global function string
+    Return: Array of strings, [] if there is no match
 //*/
 
 #include "Zen_StandardLibrary.sqf"
@@ -17,23 +22,21 @@
 _Zen_stack_Trace = ["Zen_RTS_TerritorySearch", _this] call Zen_StackAdd;
 private ["_side", "_lowerSubMarkers", "_upperSubMarkers", "_subMarkerCount", "_markers", "_data"];
 
-if !([_this, [["SIDE"], ["SCALAR"], ["SCALAR"], ["SIDE"]], [], 0] call Zen_CheckArguments) exitWith {
+if !([_this, [["ARRAY"], ["ARRAY"], ["ARRAY"]], [["SCALAR"], ["ARRAY"], ["CODE", "STRING"]], 3] call Zen_CheckArguments) exitWith {
     call Zen_StackRemove;
     ([])
 };
 
-ZEN_STD_Parse_GetArgumentDefault(_side, 0, sideLogic)
-ZEN_STD_Parse_GetArgumentDefault(_lowerSubMarkers, 1, 0)
-ZEN_STD_Parse_GetArgumentDefault(_upperSubMarkers, 2, -1)
+_indexes = _this select 0;
+_ranges = _this select 1;
+_hashes = _this select 2;
+
+_foundIndexes = [Zen_RTS_Territory_Data, _indexes, _ranges, _hashes] call Zen_ArraySearch;
 
 _markers = [];
 {
-    _data = _x;
-    _subMarkerCount = count (_data select 2);
-    if (_side == sideLogic || {_side == (_data select 1)}) then {
-        if ((_lowerSubMarkers <= _subMarkerCount) && {((_upperSubMarkers < 0) || (_upperSubMarkers >= _subMarkerCount))}) then {
-            _markers pushBack (_data select 0);
-        };
+    if (_forEachIndex in _foundIndexes) then {
+        _markers pushBack (_x select 0);
     };
 } forEach Zen_RTS_Territory_Data;
 

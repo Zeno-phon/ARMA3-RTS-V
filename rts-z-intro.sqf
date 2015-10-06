@@ -31,7 +31,7 @@ player cameraEffect ["terminate","back"];
 camDestroy _cam;
 Sleep 5;
 
-[] exec "rts-z-intro.sqs";
+// [] exec "rts-z-intro.sqs";
 
 titleText ["","White In", 2];
 
