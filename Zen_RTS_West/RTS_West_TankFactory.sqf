@@ -142,7 +142,7 @@ VEHCILE_CONSTRUCTOR(Zen_RTS_F_West_Asset_rhsusf_m1025_w_mk19, "rhsusf_m1025_w_mk
 VEHCILE_CONSTRUCTOR(Zen_RTS_F_West_Asset_rhsusf_rg33_usmc_d, "rhsusf_rg33_usmc_d", CREW_UNITS)
 VEHCILE_CONSTRUCTOR(Zen_RTS_F_West_Asset_rhsusf_rg33_usmc_wd, "rhsusf_rg33_usmc_wd", CREW_UNITS)
 VEHCILE_CONSTRUCTOR(Zen_RTS_F_West_Asset_rg33_m2_usmc_wd, "rg33_m2_usmc_wd", CREW_UNITS)
-VEHCILE_CONSTRUCTOR(Zen_RTS_F_West_Asset_hsusf_m113d_usarmy, "hsusf_m113d_usarmy", CREW_UNITS)
+VEHCILE_CONSTRUCTOR(Zen_RTS_F_West_Asset_rhsusf_m113d_usarmy, "rhsusf_m113d_usarmy", CREW_UNITS)
 VEHCILE_CONSTRUCTOR(Zen_RTS_F_West_Asset_rhsusf_M1078A1P2_B_M2_wd_fmtv_usarmy, "rhsusf_M1078A1P2_B_M2_wd_fmtv_usarmy", CREW_UNITS)
 VEHCILE_CONSTRUCTOR(Zen_RTS_F_West_Asset_rhsusf_M1083A1P2_B_M2_d_fmtv_usarmy, "rhsusf_M1083A1P2_B_M2_d_fmtv_usarmy", CREW_UNITS)
 
@@ -186,7 +186,7 @@ Zen_RTS_Asset_rhsusf_m1025_w_s_m2 = ["Zen_RTS_F_West_Asset_rhsusf_m1025_w_s_m2",
 Zen_RTS_Asset_rhsusf_rg33_usmc_d = ["Zen_RTS_F_West_Asset_rhsusf_rg33_usmc_d","rg33-d", "Cost: 100, Time: 10, Crew: 2,"] call Zen_RTS_StrategicAssetCreate;
 Zen_RTS_Asset_rhsusf_rg33_usmc_wd = ["Zen_RTS_F_West_Asset_rhsusf_rg33_usmc_wd","rg33", "Cost: 100, Time: 10, Crew: 2,"] call Zen_RTS_StrategicAssetCreate;
 Zen_RTS_Asset_rhsusf_rg33_m2_usmc_wd = ["Zen_RTS_F_West_Asset_rg33_m2_usmc_wd","rg33-m2", "Cost: 100, Time: 10, Crew: 2,"] call Zen_RTS_StrategicAssetCreate;
-Zen_RTS_Asset_rhsusf_m113d_usarmy = ["Zen_RTS_F_West_Asset_hsusf_m113d_usarmy","m113-d", "Cost: 100, Time: 10, Crew: 2,"] call Zen_RTS_StrategicAssetCreate;
+Zen_RTS_Asset_rhsusf_m113d_usarmy = ["Zen_RTS_F_West_Asset_rhsusf_m113d_usarmy","m113-d", "Cost: 100, Time: 10, Crew: 2,"] call Zen_RTS_StrategicAssetCreate;
 
 Zen_RTS_Asset_West_RHS_M2A2 = ["Zen_RTS_F_West_Asset_RHS_M2A2","M2A2", "Cost: 100, Time: 10, Crew: 3,"] call Zen_RTS_StrategicAssetCreate;
 Zen_RTS_Asset_West_RHS_M2A2_BUSKI = ["Zen_RTS_F_West_Asset_RHS_M2A2_BUSKI","M2A2_BUSKI", "Cost: 100, Time: 10, Crew: 3,"] call Zen_RTS_StrategicAssetCreate;
