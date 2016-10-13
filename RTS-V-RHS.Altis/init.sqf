@@ -44,18 +44,6 @@ call compileFinal preprocessFileLineNumbers "Zen_RTS_Strategic\Zen_RTS_Strategic
 call compileFinal preprocessFileLineNumbers "Zen_RTS_Territory\Zen_RTS_TerritoryCompile.sqf";
 call compileFinal preprocessFileLineNumbers "Zen_RTS_SubTerritory\Zen_RTS_SubTerritoryCompile.sqf";
 
-//adding rotation menu
-// call compile preProcessFile "ROTATION_MENU_SYSTEM\InitRotationMenuSystem.sqf";
-// _null = [] spawn RTMS_InitRotationMenuSystem;
-// _null = [] spawn {
-    // waitUntil {player == player};
-    // waitUntil {!(isNil "RTMS_INITIALIZED")};
-    // _menu = (call compile preprocessFile "ROTATION_MENU_SYSTEM\DEFAULT_CLASSES\ManSlay_Class.sqf") call RTMS_CreateMenuObject;
-    // [_menu, true] call RTMS_SendRequest;
-    // waitUntil {[_menu] call RTMS_IsInstalled};
-    // [_menu, false] call RTMS_SendRequest;
-// };
-
 // RTS Client ---------------------
 // #include "Zen_RTS_Functions\Zen_RTS_ClientExec.sqf"
 //[] exec "Karr-SquadMarkers.sqs";
@@ -73,9 +61,6 @@ call compileFinal preprocessFileLineNumbers "Zen_RTS_SubTerritory\Zen_RTS_SubTer
 // [] exec "rts-showMsg.sqs";
 // [] exec "rts-init-SetRandomPos.sqs";
 // 1 setRadioMsg "Null";
-// if (param3 > 0) then {
-    // [] exec "vicpoint\rts-vpInit.sqs";
-// };
 
 #define ZEN_RTS_STRATEGIC_ASSET_SPAWN_MESSAGE() \
     _buildingType = _buildingObjData select 0; \
@@ -227,7 +212,7 @@ sleep 1;
 #include "FNC_AUTOTANK.sqf";
 
 0 = [] execVM "unflip_vehicle.sqf";
-0 = [] execVM "R3F_LOG\init.sqf";
+// 0 = [] execVM "R3F_LOG\init.sqf";
 
 // [] exec "rts-init-commandermonitor.sqs";
 // [] exec "economy\rts-supplyMonitor.sqs";

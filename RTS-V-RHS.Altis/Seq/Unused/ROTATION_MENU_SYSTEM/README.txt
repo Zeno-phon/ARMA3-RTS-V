@@ -45,3 +45,17 @@ d. waitUntil {[_menuObject] call RTMS_IsInstalled}; //if you want to do anything
 
 a. waitUntil {[_menuObject] call RTMS_IsInstalled}; //make sure its loaded in the first place
 b. [_menuObject, false] call RTMS_SendRequest; //unload the menu (notice false means remove)
+
+
+
+//adding rotation menu
+// call compile preProcessFile "ROTATION_MENU_SYSTEM\InitRotationMenuSystem.sqf";
+// _null = [] spawn RTMS_InitRotationMenuSystem;
+// _null = [] spawn {
+    // waitUntil {player == player};
+    // waitUntil {!(isNil "RTMS_INITIALIZED")};
+    // _menu = (call compile preprocessFile "ROTATION_MENU_SYSTEM\DEFAULT_CLASSES\ManSlay_Class.sqf") call RTMS_CreateMenuObject;
+    // [_menu, true] call RTMS_SendRequest;
+    // waitUntil {[_menu] call RTMS_IsInstalled};
+    // [_menu, false] call RTMS_SendRequest;
+// };
