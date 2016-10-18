@@ -1,3 +1,7 @@
+//////////////////////////////////////////////////
+// Complete Feature List
+//////////////////////////////////////////////////
+
 Strategic
     // MP working data
     // Split data
@@ -171,7 +175,7 @@ Economy
         60% resource return cut-off
         resources = (resource per flag) * (flag count)  + (resource per territory) * (territory count) + (number of miners) * (resource per second per miner) * (1 second)
         time = (max time) - resources / (resources maximum) * (max time - min time) ??
-    add JIP player to money data
+    // add JIP player to money data
 AI
     // rewrite rts-init-commandermonitor.sqs in SQF
     // Chain of command selection queue
@@ -228,6 +232,41 @@ Variants
     Map Variant File Differences
         mission.sqm
 
+//////////////////////////////////////////////////
+// 
+//////////////////////////////////////////////////
+
+Test JIP
+Economy
+    current model
+        1 form of currency
+            money
+                personal
+                used to buy assets and upgrades
+                (change playerMoney) / sec = (# of subterritories) / 20
+            supply is not used
+    intended model
+        2 forms of currency
+            money
+                personal
+                used to buy assets and upgrades
+                (change playerMoney) / sec = ??
+            supply
+                team
+                changes building and asset creation times
+                (change team supply) / sec = ??
+
+Buildings get side visible map marker
+    Zen_ShowHideMarkers
+AI fire on buildings and unmanned vehicles
+    ?? proxy target hidden in building geometry
+AI orders on player death
+    ? return to player control on respawn
+    ? remove from player and give autonomous patrol orders
+
+//////////////////////////////////////////////////
+// Intro
+//////////////////////////////////////////////////
 
 Here's a draft of the introduction we might post.  I didn't include things like a download links section, contact info for feedback etc, so it's still incomplete.  We also need to update and correct the github page so an potential contributors can fork/pull easily.  If anything looks wrong or there's more you want to add, just say so.
 
