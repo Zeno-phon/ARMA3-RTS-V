@@ -16,7 +16,7 @@ _center = [(_this select 0)] call Zen_ConvertToPosition;
 _objectsArray = [];
 
 {
-    _spawnPos = [_center, (1 + random 3), (random 360)] call Zen_ExtendPosition;
+    _spawnPos = [_center, (1 + random 3), (random 360)] call Zen_ExtendVector;
     _object = createVehicle [_x, _spawnPos, [], 2, "NONE"];
     _objectsArray pushBack _object;
 } forEach ["Land_WoodPile_f", "Land_TentDome_F", "Land_TentDome_F", "Land_Bench_F", "Land_Bench_F", "Land_CampingTable_F"];

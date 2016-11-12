@@ -44,7 +44,7 @@ _centX = _centerXYPos select 0;
 _centY = _centerXYPos select 1;
 
 for "_r" from 0 to _evalDist step _evalInt do {
-    _finPos = [_centerXYPos, _r, _phi, "trig"] call Zen_ExtendPosition;
+    _finPos = [_centerXYPos, _r, _phi, "trig"] call Zen_ExtendVector;
     _isInPoly = [_finPos, _centerXYPoly, _XYSizePoly, _dirPoly, _shapeType] call Zen_IsPointInPoly;
 
     if ((_isInPoly && !_startedInside) || {(!_isInPoly && _startedInside)}) exitWith {
@@ -56,12 +56,12 @@ _centX = _finPos select 0;
 _centY = _finPos select 1;
 
 _phi = _phi + 180;
-_lastPos = [_finPos, _evalInt, _phi, "trig"] call Zen_ExtendPosition;
+_lastPos = [_finPos, _evalInt, _phi, "trig"] call Zen_ExtendVector;
 _evalDist = [_finPos, _lastPos] call Zen_Find2dDistance;
 _evalInt = _evalDist / 20;
 
 for "_r" from 0 to _evalDist step _evalInt do {
-    _finPos = [[_centX, _centY], _r, _phi, "trig"] call Zen_ExtendPosition;
+    _finPos = [[_centX, _centY], _r, _phi, "trig"] call Zen_ExtendVector;
     _isInPoly = [_finPos, _centerXYPoly, _XYSizePoly, _dirPoly, _shapeType] call Zen_IsPointInPoly;
 
     if ((!_isInPoly && !_startedInside) || {(_isInPoly && _startedInside)}) exitWith {

@@ -129,7 +129,7 @@ for "_i" from 1 to RNG(_temp_salvos) do {
                 };
             };
 
-            _artyVehicle = [([[0,0,0], 50 + random 100, random 360] call Zen_ExtendPosition), _artyVehicleClass, 1000, 0, true] call Zen_SpawnVehicle;
+            _artyVehicle = [([[0,0,0], 50 + random 100, random 360] call Zen_ExtendVector), _artyVehicleClass, 1000, 0, true] call Zen_SpawnVehicle;
             0 = [_artyVehicle] call Zen_SpawnVehicleCrew;
             hideObject _artyVehicle;
             _artyVehicle allowDamage false;

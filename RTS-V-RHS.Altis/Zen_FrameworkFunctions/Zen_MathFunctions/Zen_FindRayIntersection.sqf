@@ -24,7 +24,7 @@ _point3 = [_xSol, (_slopeRay1 * (_xSol - (_point1 select 0))) + (_point1 select 
 
 _distP1_P3 = [_point1, _point3] call Zen_Find2dDistance;
 
-if !(([([_point1, _distP1_P3, _angleRay1, "trig"] call Zen_ExtendPosition), _point3] call Zen_Find2dDistance) < 5) exitWith {
+if !(([([_point1, _distP1_P3, _angleRay1, "trig"] call Zen_ExtendVector), _point3] call Zen_Find2dDistance) < 5) exitWith {
     call Zen_StackRemove;
     ([0,0,0])
 };
@@ -54,12 +54,12 @@ _angleP1_P2_P3 = ((abs (_angle_P2toP1 - _angleRay2)) min (abs (_angle_P2toP1 + 3
 
 _angleP1_P3_P2 = 180 - _angleP2_P1_P3 - _angleP1_P2_P3;
 _dist_P2toP3 = _dist_P1toP2 * (sin _angleP2_P1_P3) / (sin _angleP1_P3_P2);
-_point3 = [_point2, _dist_P2toP3, _angleRay2, "trig"] call Zen_ExtendPosition;
+_point3 = [_point2, _dist_P2toP3, _angleRay2, "trig"] call Zen_ExtendVector;
 
 _distP1_P3 = [_point1, _point3] call Zen_Find2dDistance;
 _distP2_P3 = [_point2, _point3] call Zen_Find2dDistance;
 
-if !((([([_point1, _distP1_P3, _angleRay1, "trig"] call Zen_ExtendPosition), _point3] call Zen_Find2dDistance) < 5) &&((([([_point2, _distP2_P3, _angleRay2, "trig"] call Zen_ExtendPosition), _point3] call Zen_Find2dDistance) < 5))) exitWith {
+if !((([([_point1, _distP1_P3, _angleRay1, "trig"] call Zen_ExtendVector), _point3] call Zen_Find2dDistance) < 5) &&((([([_point2, _distP2_P3, _angleRay2, "trig"] call Zen_ExtendVector), _point3] call Zen_Find2dDistance) < 5))) exitWith {
     call Zen_StackRemove;
     ([0,0,0])
 };

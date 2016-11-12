@@ -145,15 +145,15 @@
 #define ZEN_FMW_Math_DistGreater3D(A, B, D) ((([A] call Zen_ConvertToPosition) distance ([B] call Zen_ConvertToPosition)) > D)
 #define ZEN_FMW_Math_DistGreater2D(A, B, D) (([A, B] call Zen_Find2dDistance) > D)
 #define ZEN_FMW_Math_DistLess3D(A, B, D) ((([A] call Zen_ConvertToPosition) distance ([B] call Zen_ConvertToPosition)) < D)
-#define ZEN_FMW_Math_RandomPoint(C, R) ([C, random R, random 360] call Zen_ExtendPosition)
-#define ZEN_FMW_Math_RandomPointMin(C, S, E) ([C, S + random abs (E - S), random 360] call Zen_ExtendPosition)
+#define ZEN_FMW_Math_RandomPoint(C, R) ([C, random R, random 360] call Zen_ExtendVector)
+#define ZEN_FMW_Math_RandomPointMin(C, S, E) ([C, S + random abs (E - S), random 360] call Zen_ExtendVector)
 
 #define ZEN_FMW_Math_TerrainParallelCart(P, I) \
-    _Zen_3dGradPolar = [1, [P] call Zen_FindTerrainGradient, 90 - ([P] call Zen_FindTerrainSlope)]; \
+    _Zen_3dGradPolar = [P] call Zen_FindTerrainGradient; \
     I = ZEN_STD_Math_VectPolarCart(_Zen_3dGradPolar);
 
 #define ZEN_FMW_Math_TerrainGradientCart(P, I) \
-    _Zen_2dGradCyl = [tan ([P] call Zen_FindTerrainSlope), [P] call Zen_FindTerrainGradient, 0]; \
+    _Zen_2dGradCyl = [(([P] call Zen_FindTerrainGradient) select 0), ([P] call Zen_FindTerrainGradient) select 1, 0]; \
     I = ZEN_STD_Math_VectCylCart(_Zen_2dGradCyl);
 
 #define ZEN_FMW_OBJ_DeleteDead(D) \

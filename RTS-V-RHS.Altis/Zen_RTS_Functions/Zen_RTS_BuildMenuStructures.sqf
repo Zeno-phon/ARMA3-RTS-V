@@ -133,7 +133,8 @@
             _bldData = [_x] call Zen_RTS_StrategicBuildingTypeGetData;
             _descrRaw = _bldData select 5;
 
-            _descrText = ("Cost: " + ([_descrRaw, "Cost: ", ","] call Zen_StringGetDelimitedPart)) + (", Time: " + ([_descrRaw, "Time: ", ","] call Zen_StringGetDelimitedPart));
+            _times = [_x] call Zen_RTS_F_StrategicGetBuildTimesBuilding;
+            _descrText = ("Cost: " + ([_descrRaw, "Cost: ", ","] call Zen_StringGetDelimitedPart)) + (", Time: " + str (_times select 0) + "-" + str (_times select 1));
             _info = (_bldData select 4) + ", " + _descrText;
 
             _index = lbAdd [_idlist, _info];

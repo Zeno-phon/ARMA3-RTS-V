@@ -49,6 +49,7 @@ Strategic
         // charge per crew member
         // hint on asset spawn
         // asset spawn grid
+        min creation time for all assets
         auto tank
             tracked vehicles
         base-in-a-box
@@ -140,6 +141,7 @@ Territory
     FOB
         // spawn FOB template
         // spawn AI defenders on capture
+        use Zen_CreateTemplate/Zen_SpawnTemplate in Zen_RTS_SubTerritoryEventCaptured
         capping with certain vehicles gives fob
         each flag upgraded individually by FOB vehicle
         explosive barrels
@@ -164,18 +166,21 @@ Revive/Respawn/JIP
     // rewrite rts-init-SetRandomPos.sqs in SQF
     // Get correct respawn positions
 Economy
-    // Territories have resource value
-    // total team resource value gives money increase
-    // rewrite rts-moneyMonitor.sqs in SQF
-    building and asset build time affected by resources
-        miners
-        3% overall speed increase per cap
-        buildings: 320 to 120 seconds
-        assets: 120 to 45 second
-        60% resource return cut-off
-        resources = (resource per flag) * (flag count)  + (resource per territory) * (territory count) + (number of miners) * (resource per second per miner) * (1 second)
-        time = (max time) - resources / (resources maximum) * (max time - min time) ??
-    // add JIP player to money data
+    // building and asset build time affected by resources
+    // money
+        // 100*(PvP kill) + 100*(PvAI kill) + 50*(AIvP kill) + 50*(AIvAI kill) + 5*(territory personally captured) + 3*(territory captured by team)
+    // supply
+        // supply = (1/124) * (9*(PvP kill fraction) + 3*(PvAI kill fraction) + 3*(AIvPlayer kill fraction) + (AIvAI kill fraction) + 27*(territory fraction) + 81*(subterritory fraction))
+        // (creation time) = (tmin - tmax) / (2^(-4) - 1) * (supply + 1)^(-4) + tmax - (tmin - tmax) / (2^(-4) - 1)
+        // (new build time remaining) = (creation time with current supply) * (old build time remaining) / (creation time with old supply)
+        // (player to player kill fraction) = (how many enemy players the player has personally killed) / (total # of PvP kills that player's team)
+        // (player to AI kill fraction) = (how many AI the player has personally killed) / (total # of AI kills by all players on that team)
+        // (AI to player kill fraction) = (how many kills a player's AI has against enemy player) / (total # of AI to player kills by player's team)
+        // (AI to AI kill fraction) = (how many kills a player's AI has against enemy AI) / (total # of AI to AI kills by player's team)
+        // (territory fraction) = (# of territories owned by team) / (total # of territories)
+        // (subterritory fraction) = (# of territories captured by player and still owned) / (# of subterritories territories owned by team)
+        // supply transfers by player slot (should be same obj name) on leave/join (regardless of player)
+    miners
 AI
     // rewrite rts-init-commandermonitor.sqs in SQF
     // Chain of command selection queue
@@ -233,29 +238,19 @@ Variants
         mission.sqm
 
 //////////////////////////////////////////////////
-// 
+// Recent Changelog
+//////////////////////////////////////////////////
+
+1. Added: Proper calculation of money
+2. Added: Proper calculation of supply
+3. Added: Supply affects all build times dynamically
+4. Added: Supply is transferred by player slot on disconnect/join
+
+//////////////////////////////////////////////////
+// Priority List
 //////////////////////////////////////////////////
 
 Test JIP
-Economy
-    current model
-        1 form of currency
-            money
-                personal
-                used to buy assets and upgrades
-                (change playerMoney) / sec = (# of subterritories) / 20
-            supply is not used
-    intended model
-        2 forms of currency
-            money
-                personal
-                used to buy assets and upgrades
-                (change playerMoney) / sec = ??
-            supply
-                team
-                changes building and asset creation times
-                (change team supply) / sec = ??
-
 Buildings get side visible map marker
     Zen_ShowHideMarkers
 AI fire on buildings and unmanned vehicles

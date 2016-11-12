@@ -69,7 +69,7 @@ _crewGroupArray = [];
     CALC_POS
 
     _heliDirToLand = [_veh,_mpos] call Zen_FindDirection;
-    _mposCorrected = [_mpos, 100, _heliDirToLand, "trig"] call Zen_ExtendPosition;
+    _mposCorrected = [_mpos, 100, _heliDirToLand, "trig"] call Zen_ExtendVector;
 
     (group driver _veh) setCurrentWaypoint ((group driver _veh) addWaypoint [_mposCorrected, -1]);
     (group driver _veh) move _mposCorrected;

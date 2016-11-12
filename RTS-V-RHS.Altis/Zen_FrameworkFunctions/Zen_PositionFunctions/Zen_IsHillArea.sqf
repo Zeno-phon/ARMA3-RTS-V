@@ -53,7 +53,7 @@ _downTotal = 0;
 for "_phi" from 0 to 350 step 10 do {
     _downCount = 0;
     for "_r" from 1 to _radiusMin step (_radiusMin / 10) do {
-        _point = [_center, _r, _phi] call Zen_ExtendPosition;
+        _point = [_center, _r, _phi] call Zen_ExtendVector;
         _normal = surfaceNormal _point;
         _dir = ((_normal select 0) atan2 (_normal select 1));
 

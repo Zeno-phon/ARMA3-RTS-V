@@ -1,4 +1,4 @@
-if (isMultiplayer) then }
+if (isMultiplayer) then {
     Start_Money = paramsArray select 0;
     // Start_Supply = paramsArray select 1;
     // Game_Type = paramsArray select 2;

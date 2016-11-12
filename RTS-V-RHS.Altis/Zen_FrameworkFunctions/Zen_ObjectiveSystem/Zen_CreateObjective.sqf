@@ -59,11 +59,11 @@ switch (toLower _objType) do {
     };
     case "officer": {
         _objects = [_objPos, _side] call Zen_SpawnOfficer;
-        0 = [([_objPos, 5, random 360] call Zen_ExtendPosition)] call Zen_SpawnCamp;
+        0 = [([_objPos, 5, random 360] call Zen_ExtendVector)] call Zen_SpawnCamp;
     };
     case "pow": {
         _objects = [_objPos, _side] call Zen_SpawnPOW;
-        0 = [([_objPos, 5, random 360] call Zen_ExtendPosition)] call Zen_SpawnCamp;
+        0 = [([_objPos, 5, random 360] call Zen_ExtendVector)] call Zen_SpawnCamp;
     };
     case "convoy": {
         _convoyStart = _extraVars1;

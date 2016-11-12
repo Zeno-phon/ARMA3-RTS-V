@@ -142,4 +142,8 @@ if (rts_debug) then {
     playerMoney = Start_Money;
 };
 
+playerSupply = 0;
 Zen_RTS_Show_Preview = false;
+Zen_RTS_TotalKills = [[0,0,0,0], [0,0,0,0]];
+Zen_RTS_LocalKills = [0,0,0,0];
+Zen_RTS_CapturedSubTerritories = [];

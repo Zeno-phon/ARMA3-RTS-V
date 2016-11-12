@@ -7,7 +7,7 @@ if !(isDedicated) then {
 
 enableSaving [false, false];
 player enableFatigue false;
-player addEventhandler ["Respawn", {player enableFatigue false}];
+{_x setMarkerAlpha 0;} forEach ["mkFOBTemplate"];
 RTS_Intro_Titletext_Code = {titleText [format ["%1", "-= RTS V =-\nWarGame\nFor Arma 3"], "PLAIN DOWN" , .5]};
 call RTS_Intro_Titletext_Code;
 [] execVM "briefing.sqf";
@@ -118,15 +118,14 @@ call compileFinal preprocessFileLineNumbers "Zen_RTS_SubTerritory\Zen_RTS_SubTer
     // (RTS_Recycle_Queue select (([west, east] find ([_vehicle] call Zen_GetSide)) max 0)) pushBack _vehicle; \
     // _vehicle setVariable ["Zen_RTS_IsStrategicRepairable", false, true]; \
 
-#define BUILDING_VISUALS(T, O) \
+#define BUILDING_VISUALS(T, O, C) \
     _dir = random 360; \
-    _buildTime = call compile ([(_buildingTypeData select 5), "Time: ", ","] call Zen_StringGetDelimitedPart); \
     _building = [_spawnPos, T, 0, _dir, true] call Zen_SpawnVehicle; \
     _building hideObjectGlobal true; \
     _building hideObject true; \
-    _args = [_dir, _buildingTypeData, _spawnPos, T, O]; \
+    _args = [_dir, _buildingTypeData, _spawnPos, T, O, (_buildingTypeData select 0), ([C] call Zen_RTS_F_EconomyGetPlayerSupply)]; \
     ZEN_FMW_MP_REAll("Zen_RTS_F_StrategicBuildingVisualLocal", _args, spawn) \
-    sleep _buildTime; \
+    [(_buildingTypeData select 0), ([C] call Zen_RTS_F_EconomyGetPlayerSupply)] call Zen_RTS_F_EconomyStrategicBuildDelayBuilding; \
     _building hideObjectGlobal false; \
     _building hideObject false;
 
@@ -176,7 +175,7 @@ call compileFinal preprocessFileLineNumbers "Zen_RTS_SubTerritory\Zen_RTS_SubTer
                 }; \
             } forEach _objects; \
             if !(isNull _deadBuilding) then { \
-                diag_log ("ZEN_RTS_STRATEGIC_BUILDING_DESTROYED_EH found dead building" + str _deadBuilding); \
+                diag_log ("ZEN_RTS_STRATEGIC_BUILDING_DESTROYED_EH found dead building " + str _deadBuilding); \
                 (RTS_Repair_Queue select ([west, east] find S)) pushBack _deadBuilding; \
                 _args = [_buildingSpawnGrid, S]; \
                 ZEN_FMW_MP_REAll("Zen_RTS_F_RemoveSpawnGridMarker", _args, call) \
@@ -188,7 +187,7 @@ call compileFinal preprocessFileLineNumbers "Zen_RTS_SubTerritory\Zen_RTS_SubTer
                 _deadBuilding setVariable ["Zen_RTS_StrategicRuinsType", T, true]; \
                 _deadBuilding setVariable ["Zen_RTS_StrategicBuildingSide", S, true]; \
             } else { \
-                diag_log (" ZEN_RTS_STRATEGIC_BUILDING_DESTROYED_EH  Destroyed Building" + str _building + " has no dead object"); \
+                diag_log (" ZEN_RTS_STRATEGIC_BUILDING_DESTROYED_EH  Destroyed Building " + str _building + " has no dead object"); \
             }; \
         }; \
     }];
@@ -238,11 +237,14 @@ RTS_Worker_Recycle_Queue = [[], []];
 RTS_Worker_Repair_Queue = [[], []];
 RTS_CJ_Repair_Queue = [[], []];
 
+Zen_RTS_FOB_Template = ["mkFOBTemplate"] call Zen_CreateTemplate;
+addMissionEventHandler ["HandleDisconnect", Zen_RTS_F_EconomyHandleDisconnect];
+
 #include "Zen_RTS_Functions\Zen_RTS_CustomLoadouts.sqf"
 #include "Zen_RTS_Functions\Zen_RTS_InitGiveMoneyDialog.sqf"
 0 = [] call Zen_RTS_RandomStart;
 0 = [] spawn Zen_RTS_CommanderManager;
-0 = [] spawn Zen_RTS_EconomyManager;
+// 0 = [] spawn Zen_RTS_EconomyManager;
 0 = [] spawn Zen_RTS_RecycleRepairAIManager;
 Zen_JIP_Args_Server = [overcast, fog, 2000];
 diag_log diag_tickTime;
