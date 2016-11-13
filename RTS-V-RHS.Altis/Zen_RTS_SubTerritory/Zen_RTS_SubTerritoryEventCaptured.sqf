@@ -33,15 +33,14 @@ diag_log _newData;
 _players = [_marker, [], [(_newData select 1)]] call Zen_GetAllInArea;
 _players = [_players, {!(isPlayer _this)}] call Zen_ArrayFilterCondition;
 
-_args = [Zen_RTS_CapturedSubTerritories, _marker];
 {
     ZEN_FMW_MP_REClient("Zen_RTS_F_ModifyMoney", 5, call, _x)
-    ZEN_FMW_MP_REClient("Zen_ArrayAppend", _args, call, _x)
+    ZEN_FMW_MP_REClient("Zen_RTS_F_AddSubTerritoryCaptured", _marker, call, _x)
 } forEach _players;
 
 {
     if (isPlayer _x) then {
-        ZEN_FMW_MP_REClient("Zen_ArrayRemoveValue", _args, call, _x)
+        ZEN_FMW_MP_REClient("Zen_RTS_F_RemoveSubTerritoryCaptured", _marker, call, _x)
     };
 } forEach ([(_oldData select 1)] call Zen_ConvertToObjectArray);
 

@@ -2,7 +2,6 @@
 
 #include "..\Zen_FrameworkFunctions\Zen_StandardLibrary.sqf"
 #include "..\Zen_FrameworkFunctions\Zen_FrameworkLibrary.sqf"
-#include "..\Zen_FrameworkFunctions\Zen_StandardLibrary.sqf"
 
 GetSideID = {
     (0)
@@ -157,7 +156,7 @@ Zen_RTS_F_StrategicBuildingVisualLocal = {
     _type = _this select 3;
     _offset = _this select 4;
     _buildingType = _this select 5;
-    _supply = _this select 6;
+    _commanderSide = _this select 6;
 
     _building = _type createVehicleLocal _spawnPos;
     _building setDir _dir;
@@ -167,12 +166,19 @@ Zen_RTS_F_StrategicBuildingVisualLocal = {
     ZEN_STD_OBJ_TransformATL(_building, 0, 0, -(_height))
     _orgPos = getPosATL _building;
 
+    _commander = call compile (str _commanderSide + "Commander");
+    _supply = [_commander] call Zen_RTS_F_EconomyGetPlayerSupply;
     _times = [_buildingType] call Zen_RTS_F_StrategicGetBuildTimesBuilding;
     _buildTimeOld = (_times + [_supply]) call Zen_RTS_F_EconomyStrategicBuildTime;
     _buildTimeRemainingOld = _buildTimeOld;
 
     while {true} do {
         sleep 2;
+        _commander = call compile (str _commanderSide + "Commander");
+        if (alive _commander) then {
+            _supply = [_commander] call Zen_RTS_F_EconomyGetPlayerSupply;
+        };
+
         _buildTimeRemainingOld = _buildTimeRemainingOld - 2;
         _buildTimeCurrent = (_times + [_supply]) call Zen_RTS_F_EconomyStrategicBuildTime;
 
@@ -222,6 +228,14 @@ Zen_RTS_F_EconomyHandleDisconnect = {
         _sideKillCounts set [_i, (_sideKillCounts select _i) - (_localKills select _i)];
     };
     publicVariable "Zen_RTS_TotalKills";
+};
+
+Zen_RTS_F_AddSubTerritoryCaptured = {
+    Zen_RTS_CapturedSubTerritories pushBack _this;
+};
+
+Zen_RTS_F_RemoveSubTerritoryCaptured = {
+    [Zen_RTS_CapturedSubTerritories, _this] call Zen_ArrayRemoveValue;
 };
 
 Zen_RTS_F_EconomyKillerReward = {
@@ -300,7 +314,6 @@ Zen_RTS_F_EconomyStrategicBuildTime = {
 
     _tMin = _this select 0;
     _tMax = _this select 1;
-    _supply = _this select 2;
 
     _N = 2;
     ZEN_STD_Parse_GetArgumentDefault(_supply, 2, playerSupply)
@@ -326,17 +339,34 @@ Zen_RTS_F_EconomyGetPlayerSupplyRE = {
 };
 
 Zen_RTS_F_EconomyStrategicBuildDelayBuilding = {
-    private ["_building", "_times", "_buildTimeCurrent", "_buildTimeRemainingOld", "_buildTimeOld", "_buildTimeRemainingCurrent", "_supply"];
+    private ["_building", "_times", "_buildTimeCurrent", "_buildTimeRemainingOld", "_buildTimeOld", "_buildTimeRemainingCurrent", "_supply", "_commanderSide", "_commander"];
 
     _building = _this select 0;
-    ZEN_STD_Parse_GetArgumentDefault(_supply, 1, playerSupply)
+    _commanderSide = _this select 1;
 
+    if (typeName _commanderSide == "SIDE") then {
+        _commander = call compile (str _commanderSide + "Commander");
+    } else {
+        _commander = player;
+    };
+
+    _supply = [_commander] call Zen_RTS_F_EconomyGetPlayerSupply;
     _times = [_building] call Zen_RTS_F_StrategicGetBuildTimesBuilding;
     _buildTimeOld = (_times + [_supply]) call Zen_RTS_F_EconomyStrategicBuildTime;
     _buildTimeRemainingOld = _buildTimeOld;
 
     while {true} do {
         sleep 2;
+
+        if (typeName _commanderSide == "SIDE") then {
+            _commander = call compile (str _commanderSide + "Commander");
+            if (alive _commander) then {
+                _supply = [_commander] call Zen_RTS_F_EconomyGetPlayerSupply;
+            };
+        } else {
+            _commander = player;
+        };
+
         _buildTimeRemainingOld = _buildTimeRemainingOld - 2;
         _buildTimeCurrent = (_times + [_supply]) call Zen_RTS_F_EconomyStrategicBuildTime;
 

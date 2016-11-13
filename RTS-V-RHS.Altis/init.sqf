@@ -114,6 +114,11 @@ call compileFinal preprocessFileLineNumbers "Zen_RTS_SubTerritory\Zen_RTS_SubTer
             (_this select 0) setVariable ["Zen_RTS_IsStrategicDebris", true, true]; \
             _vehicle removeAllEventHandlers "Dammaged"; \
         }; \
+    }]; \
+    _vehicle addEventHandler ["Killed", { \
+        _vehicle = _this select 0; \
+        _vehicle setVariable ["Zen_RTS_IsStrategicDebris", true, true]; \
+        _vehicle removeAllEventHandlers "Killed"; \
     }];
     // (RTS_Recycle_Queue select (([west, east] find ([_vehicle] call Zen_GetSide)) max 0)) pushBack _vehicle; \
     // _vehicle setVariable ["Zen_RTS_IsStrategicRepairable", false, true]; \
@@ -123,9 +128,9 @@ call compileFinal preprocessFileLineNumbers "Zen_RTS_SubTerritory\Zen_RTS_SubTer
     _building = [_spawnPos, T, 0, _dir, true] call Zen_SpawnVehicle; \
     _building hideObjectGlobal true; \
     _building hideObject true; \
-    _args = [_dir, _buildingTypeData, _spawnPos, T, O, (_buildingTypeData select 0), ([C] call Zen_RTS_F_EconomyGetPlayerSupply)]; \
+    _args = [_dir, _buildingTypeData, _spawnPos, T, O, (_buildingTypeData select 0), side C]; \
     ZEN_FMW_MP_REAll("Zen_RTS_F_StrategicBuildingVisualLocal", _args, spawn) \
-    [(_buildingTypeData select 0), ([C] call Zen_RTS_F_EconomyGetPlayerSupply)] call Zen_RTS_F_EconomyStrategicBuildDelayBuilding; \
+    [(_buildingTypeData select 0), side C] call Zen_RTS_F_EconomyStrategicBuildDelayBuilding; \
     _building hideObjectGlobal false; \
     _building hideObject false;
 

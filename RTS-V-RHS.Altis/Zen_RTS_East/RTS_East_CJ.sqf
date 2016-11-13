@@ -47,14 +47,16 @@ Zen_RTS_F_East_CJConstructor = {
     // };
 
     _buildingTypeData = [(_buildingObjData select 0)] call Zen_RTS_StrategicBuildingTypeGetData;
+    _assetStrRaw = _buildingObjData select 5;
 
-    [(_buildingObjData select 0)] call Zen_RTS_F_EconomyStrategicBuildDelayBuilding;
-    _vehicle = [_spawnPos, "O_MRAP_02_F"]  call Zen_SpawnVehicle;
+    [(_buildingObjData select 0), 0] call Zen_RTS_F_EconomyStrategicBuildDelayBuilding;
+    _vehicle = [_spawnPos, "O_MRAP_02_F"] call Zen_SpawnVehicle;
     _vehicle setVariable ["side", East, true];
     _assetData = _buildingObjData;
+
     ZEN_RTS_STRATEGIC_ASSET_DESTROYED_EH
 
-     // Recycle AI set up
+    // Recycle AI set up
     (RTS_CJ_Repair_Queue select 0) pushBack _vehicle;
     _vehicle setVariable ["Zen_RTS_StrategicIsAIOwned", false, true];
     _vehicle setVariable ["Zen_RTS_StrategicIsAIAssigned", false, true];

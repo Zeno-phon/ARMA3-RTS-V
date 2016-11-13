@@ -8,6 +8,7 @@
         diag_log _this; \
         _buildingObjData = _this select 0; \
         _assetData = _this select 1; \
+        _assetStrRaw = _assetData select 3; \
         _referenceUnit = _this select 2; \
         _crewCount = _this select 3; \
         _phi = 0; \
@@ -113,6 +114,7 @@ INFANTRY_CONSTRUCTOR(Zen_RTS_F_West_Assetrhsusf_army_ocp_fso, "rhsusf_army_ocp_f
         diag_log _this; \
         _buildingObjData = _this select 0; \
         _assetData = _this select 1; \
+        _assetStrRaw = _assetData select 3; \
         _spawnPos = _this select 3; \
         _building = _buildingObjData select 2; \
         _referenceUnit = driver (_buildingObjData select 2); \
@@ -212,6 +214,7 @@ UPGRADE_CONSTRUCTOR(Zen_RTS_F_West_Tech_Upgrade_SupportFactory, Zen_RTS_Building
         diag_log _this; \
         _buildingObjData = _this select 0; \
         _assetData = _this select 1; \
+        _assetStrRaw = _assetData select 3; \
         _referenceUnit = _this select 2; \
         _crewCount = _this select 3; \
         _phi = 0; \
@@ -301,7 +304,7 @@ Zen_RTS_F_West_Recycler = {
             _x addEventHandler ["Killed", Zen_RTS_F_EconomyKilledEH];
         } forEach (units _group);
 
-        _args = [(RTS_Worker_Recycle_Queue select 1), [(leader _group), false, _CJ]];
+        _args = [(RTS_Worker_Recycle_Queue select 0), [(leader _group), false, _CJ]];
         ZEN_FMW_MP_REServerOnly("Zen_ArrayAppend", _args, call)
 
     };
@@ -317,6 +320,7 @@ Zen_RTS_F_West_Recycler = {
         diag_log _this; \
         _buildingObjData = _this select 0; \
         _assetData = _this select 1; \
+        _assetStrRaw = _assetData select 3; \
         _referenceUnit = _this select 2; \
         _crewCount = _this select 3; \
         _phi = 0; \
@@ -378,6 +382,7 @@ SUPPORT_CONSTRUCTOR(Zen_RTS_F_West_Asset_rhs_9k79_B, "rhs_9k79_B", CREW_UNITS)
         diag_log _this; \
         _buildingObjData = _this select 0; \
         _assetData = _this select 1; \
+        _assetStrRaw = _assetData select 3; \
         _referenceUnit = _this select 2; \
         _crewCount = _this select 3; \
         _phi = 0; \

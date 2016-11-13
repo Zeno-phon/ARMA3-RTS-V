@@ -241,16 +241,20 @@ Variants
 // Recent Changelog
 //////////////////////////////////////////////////
 
-1. Added: Proper calculation of money
-2. Added: Proper calculation of supply
-3. Added: Supply affects all build times dynamically
-4. Added: Supply is transferred by player slot on disconnect/join
+1. Fixed: CJ build time now updates properly
+2. Fixed: AI recyclers are now tasked to destroyed assets
+3. Added: Proper calculation of money
+4. Added: Proper calculation of supply
+5. Added: Supply affects all build times dynamically
+6. Added: Supply is transferred by player slot on disconnect/join
+7. Improved: Updated to my latest framework
 
 //////////////////////////////////////////////////
 // Priority List
 //////////////////////////////////////////////////
 
 Test JIP
+Mininum creation time for all assets
 Buildings get side visible map marker
     Zen_ShowHideMarkers
 AI fire on buildings and unmanned vehicles

@@ -30,9 +30,9 @@ Zen_RTS_F_West_CJConstructor = {
     _assetsToAdd pushBack Zen_RTS_Asset_Land_BagFence_Corner_F;
     _assetsToAdd pushBack Zen_RTS_Asset_Land_CncWall4_F;
 
-    if (Zen_RTS_TechFlag_West_BuildEnemy) then {
+    // if (Zen_RTS_TechFlag_West_BuildEnemy) then {
         // ... to do
-    };
+    // };
 
     {
         (RTS_Used_Asset_Types select 0) pushBack _x;
@@ -47,11 +47,13 @@ Zen_RTS_F_West_CJConstructor = {
     // };
 
     _buildingTypeData = [(_buildingObjData select 0)] call Zen_RTS_StrategicBuildingTypeGetData;
+    _assetStrRaw = _buildingTypeData select 5;
 
-    [(_buildingObjData select 0)] call Zen_RTS_F_EconomyStrategicBuildDelayBuilding;
+    [(_buildingObjData select 0), 0] call Zen_RTS_F_EconomyStrategicBuildDelayBuilding;
     _vehicle = [_spawnPos, "B_MRAP_01_F"] call Zen_SpawnVehicle;
     _vehicle setVariable ["side", West, true];
     _assetData = _buildingObjData;
+
     ZEN_RTS_STRATEGIC_ASSET_DESTROYED_EH
 
     // Recycle AI set up
