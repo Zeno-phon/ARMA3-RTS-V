@@ -15,7 +15,7 @@
         _theta = 0; \
         _building = _buildingObjData select 2; \
         ZEN_RTS_STRATEGIC_ASSET_PLACEMENT() \
-        sleep (call compile ([_assetStrRaw, "Time: ", ","] call Zen_StringGetDelimitedPart)); \
+        [_assetData select 0] call Zen_RTS_F_EconomyStrategicBuildDelayAsset; \
         ZEN_RTS_STRATEGIC_ASSET_SPAWN_MESSAGE() \
         _vehicle = [_pos, T, 0, getDir _building + _theta, true]  call Zen_SpawnVehicle; \
         ZEN_RTS_STRATEGIC_ASSET_DESTROYED_EH \
@@ -29,18 +29,19 @@
                 sleep 1; \
                 (units _crewGroup) join _referenceUnit; \
                 sleep 1; \
-                {doStop _x;} forEach (units _crewGroup); \
+                { \
+                    doStop _x; \
+                    _x addEventHandler ["Killed", Zen_RTS_F_EconomyKilledEH]; \
+                } forEach (units _crewGroup); \
             }; \
         }; \
     };
-
 
 #define CREW_UNITS ["CUP_O_RU_Pilot", "CUP_O_RU_Pilot", "CUP_O_RU_Crew", "CUP_O_RU_Crew", "CUP_O_RU_Crew"]
 AIR_CONSTRUCTOR(CUP_O_Mi24_P_RU, "CUP_O_Mi24_P_RU", CREW_UNITS)
 AIR_CONSTRUCTOR(CUP_O_Mi24_V_RU, "CUP_O_Mi24_V_RU", CREW_UNITS)
 AIR_CONSTRUCTOR(CUP_O_Mi17_TK, "CUP_O_Mi17_TK", CREW_UNITS)
 AIR_CONSTRUCTOR(CUP_O_Mi24_D_TK, "CUP_O_Mi24_D_TK", CREW_UNITS)
-
 
 #define CREW_UNITS ["CUP_O_RU_Pilot", "CUP_O_RU_Crew"]
 AIR_CONSTRUCTOR(CUP_O_Mi8_medevac_RU, "CUP_O_Mi8_medevac_RU", CREW_UNITS)
@@ -76,13 +77,15 @@ AIR_CONSTRUCTOR(CUP_O_Su25_RU_3, "CUP_O_Su25_RU_3", CREW_UNITS)
         _buildingObjData = (_this select 0); \
         _assetData = _this select 1; \
         _referenceUnit = _this select 2; \
-        _assetStrRaw = _assetData select 3; \
-        sleep (call compile ([_assetStrRaw, "Time: ", ","] call Zen_StringGetDelimitedPart)); \
+        [_assetData select 0] call Zen_RTS_F_EconomyStrategicBuildDelayAsset; \
         if (alive (_buildingObjData select 2)) then { \
             ZEN_RTS_STRATEGIC_ASSET_SPAWN_MESSAGE() \
-            _group = [([(_buildingObjData select 2), 10 + random 10, random 360] call Zen_ExtendPosition), T] call Zen_SpawnGroup; \
+            _group = [([(_buildingObjData select 2), 10 + random 10, random 360] call Zen_ExtendVector), T] call Zen_SpawnGroup; \
             0 = [_group, S] call Zen_SetAISkill; \
             (units _group) join _referenceUnit; \
+            { \
+                _x addEventHandler ["Killed", Zen_RTS_F_EconomyKilledEH]; \
+            } forEach (units _group); \
         }; \
     };
 
@@ -95,7 +98,7 @@ INFANTRY_CONSTRUCTOR(CUP_O_INS_Soldier_Exp, "CUP_O_INS_Soldier_Exp", "infantry")
 INFANTRY_CONSTRUCTOR(CUP_O_INS_Saboteur, "CUP_O_INS_Saboteur", "infantry")
 INFANTRY_CONSTRUCTOR(CUP_O_RU_Soldier_Saiga, "CUP_O_RU_Soldier_Saiga", "infantry")
 INFANTRY_CONSTRUCTOR(CUP_O_RU_Soldier_GL, "CUP_O_RU_Soldier_GL", "infantry")
-INFANTRY_CONSTRUCTOR(CUP_O_RU_Soldier_Light, "CUP_O_RU_Soldier_Light", "infantry") 
+INFANTRY_CONSTRUCTOR(CUP_O_RU_Soldier_Light, "CUP_O_RU_Soldier_Light", "infantry")
 INFANTRY_CONSTRUCTOR(CUP_O_RU_Officer, "CUP_O_RU_Officer", "infantry")
 INFANTRY_CONSTRUCTOR(CUP_O_RU_Soldier_SL, "CUP_O_RU_Soldier_SL", "infantry")
 INFANTRY_CONSTRUCTOR(CUP_O_RU_Soldier_TL, "CUP_O_RU_Soldier_TL", "infantry")
@@ -235,7 +238,7 @@ UPGRADE_CONSTRUCTOR(Zen_RTS_F_East_Tech_Upgrade_SupportFactory, Zen_RTS_Building
         _theta = 0; \
         _building = _buildingObjData select 2; \
         _pos = [_building, [10, 30], 0, 2] call Zen_FindGroundPosition; \
-        sleep (call compile ([_assetStrRaw, "Time: ", ","] call Zen_StringGetDelimitedPart)); \
+        [_assetData select 0] call Zen_RTS_F_EconomyStrategicBuildDelayAsset; \
         ZEN_RTS_STRATEGIC_ASSET_SPAWN_MESSAGE() \
         _vehicle = [_pos, T, 0, getDir _building + _theta, false]  call Zen_SpawnVehicle; \
         ZEN_RTS_STRATEGIC_ASSET_DESTROYED_EH \
@@ -249,7 +252,10 @@ UPGRADE_CONSTRUCTOR(Zen_RTS_F_East_Tech_Upgrade_SupportFactory, Zen_RTS_Building
                 sleep 1; \
                 (units _crewGroup) join _referenceUnit; \
                 sleep 1; \
-                {doStop _x;} forEach (units _crewGroup); \
+                { \
+                    doStop _x; \
+                    _x addEventHandler ["Killed", Zen_RTS_F_EconomyKilledEH]; \
+                } forEach (units _crewGroup); \
             }; \
         }; \
     };
@@ -274,16 +280,18 @@ Zen_RTS_F_East_Repairer = {
     _buildingObjData = (_this select 0);
     _assetData = _this select 1;
     _referenceUnit = _this select 2; \
-    _assetStrRaw = _assetData select 3;
-    sleep (call compile ([_assetStrRaw, "Time: ", ","] call Zen_StringGetDelimitedPart));
+    [_assetData select 0] call Zen_RTS_F_EconomyStrategicBuildDelayAsset; \
     if (alive (_buildingObjData select 2)) then {
         ZEN_RTS_STRATEGIC_ASSET_SPAWN_MESSAGE() \
         _group = [(_buildingObjData select 2), "C_man_polo_1_F_afro"] call Zen_SpawnGroup;
         0 = [_group, "crew"] call Zen_SetAISkill;
         removeAllWeapons (leader _group);
-        (leader _group) setPosATL ([(_buildingObjData select 2), 5 + random 5, random 360] call Zen_ExtendPosition);
+        (leader _group) setPosATL ([(_buildingObjData select 2), 5 + random 5, random 360] call Zen_ExtendVector);
         _group setBehaviour "careless";
         (RTS_Worker_Repair_Queue select 1) pushBack [(leader _group), false, objNull];
+        {
+            _x addEventHandler ["Killed", Zen_RTS_F_EconomyKilledEH];
+        } forEach (units _group);
     };
 };
 
@@ -293,14 +301,13 @@ Zen_RTS_F_East_Recycler = {
     _buildingObjData = (_this select 0);
     _assetData = _this select 1;
     _referenceUnit = _this select 2;
-    _assetStrRaw = _assetData select 3;
-    sleep (call compile ([_assetStrRaw, "Time: ", ","] call Zen_StringGetDelimitedPart));
+    [_assetData select 0] call Zen_RTS_F_EconomyStrategicBuildDelayAsset; \
     if (alive (_buildingObjData select 2)) then {
         ZEN_RTS_STRATEGIC_ASSET_SPAWN_MESSAGE() \
         _group = [(_buildingObjData select 2), "C_man_shorts_4_F_afro"] call Zen_SpawnGroup;
-        _vehicleID = [Zen_RTS_BuildingType_East_CJ, [[(_buildingObjData select 2), 10, random 360] call Zen_ExtendPosition, 0]] call Zen_RTS_StrategicBuildingInvoke;
+        _vehicleID = [Zen_RTS_BuildingType_East_CJ, [[(_buildingObjData select 2), 10, random 360] call Zen_ExtendVector, 0]] call Zen_RTS_StrategicBuildingInvoke;
 
-        (leader _group) setPosATL ([(_buildingObjData select 2), 5 + random 5, random 360] call Zen_ExtendPosition);
+        (leader _group) setPosATL ([(_buildingObjData select 2), 5 + random 5, random 360] call Zen_ExtendVector);
         0 = [_group, "crew"] call Zen_SetAISkill;
         removeAllWeapons (leader _group);
         _group setBehaviour "careless";
@@ -309,6 +316,9 @@ Zen_RTS_F_East_Recycler = {
         _CJ setVariable ["Zen_RTS_StrategicIsAIOwned", true, true];
         _CJ setVariable ["Zen_RTS_StrategicIsAIAssigned", true, true];
         0 = [_group, _CJ, "all"] call Zen_MoveInVehicle;
+        {
+            _x addEventHandler ["Killed", Zen_RTS_F_EconomyKilledEH];
+        } forEach (units _group);
 
         _args = [(RTS_Worker_Recycle_Queue select 1), [(leader _group), false, _CJ]];
         ZEN_FMW_MP_REServerOnly("Zen_ArrayAppend", _args, call)
@@ -332,7 +342,7 @@ Zen_RTS_F_East_Recycler = {
         _theta = 0; \
         _building = _buildingObjData select 2; \
         ZEN_RTS_STRATEGIC_ASSET_PLACEMENT() \
-        sleep (call compile ([_assetStrRaw, "Time: ", ","] call Zen_StringGetDelimitedPart)); \
+        [_assetData select 0] call Zen_RTS_F_EconomyStrategicBuildDelayAsset; \
         ZEN_RTS_STRATEGIC_ASSET_SPAWN_MESSAGE() \
         _vehicle = [_pos, T, 0, getDir _building + _theta, true]  call Zen_SpawnVehicle; \
         ZEN_RTS_STRATEGIC_ASSET_DESTROYED_EH \
@@ -346,7 +356,10 @@ Zen_RTS_F_East_Recycler = {
                 sleep 1; \
                 (units _crewGroup) join _referenceUnit; \
                 sleep 1; \
-                {doStop _x;} forEach (units _crewGroup); \
+                { \
+                    doStop _x; \
+                    _x addEventHandler ["Killed", Zen_RTS_F_EconomyKilledEH]; \
+                } forEach (units _crewGroup); \
             }; \
         }; \
     };
@@ -386,7 +399,7 @@ SUPPORT_CONSTRUCTOR(Zen_RTS_F_East_Asset_rhs_9k79_B, "rhs_9k79_B", CREW_UNITS)
         _theta = 0; \
         _building = _buildingObjData select 2; \
         ZEN_RTS_STRATEGIC_ASSET_PLACEMENT() \
-        sleep (call compile ([_assetStrRaw, "Time: ", ","] call Zen_StringGetDelimitedPart)); \
+        [_assetData select 0] call Zen_RTS_F_EconomyStrategicBuildDelayAsset; \
         ZEN_RTS_STRATEGIC_ASSET_SPAWN_MESSAGE() \
         _vehicle = [_pos, T, 0, getDir _building + _theta, true]  call Zen_SpawnVehicle; \
         ZEN_RTS_STRATEGIC_ASSET_DESTROYED_EH \
@@ -400,7 +413,10 @@ SUPPORT_CONSTRUCTOR(Zen_RTS_F_East_Asset_rhs_9k79_B, "rhs_9k79_B", CREW_UNITS)
                 sleep 1; \
                 (units _crewGroup) join _referenceUnit; \
                 sleep 1; \
-                {doStop _x;} forEach (units _crewGroup); \
+                { \
+                    doStop _x; \
+                    _x addEventHandler ["Killed", Zen_RTS_F_EconomyKilledEH]; \
+                } forEach (units _crewGroup); \
             }; \
         }; \
         if (T in ["rhs_bmp3mera_msv"]) then { \

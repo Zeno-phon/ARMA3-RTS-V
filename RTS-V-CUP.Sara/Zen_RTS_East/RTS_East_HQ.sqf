@@ -32,7 +32,7 @@ Zen_RTS_F_East_HQConstructor = {
     ZEN_FMW_MP_RENonDedicated("Zen_RTS_F_StrategicAddAssetLocal", _args, call)
 
     _buildingTypeData = [(_buildingObjData select 0)] call Zen_RTS_StrategicBuildingTypeGetData;
-    BUILDING_VISUALS("LAND_CARGO_HQ_V2_F", -1.5)
+    BUILDING_VISUALS("LAND_CARGO_HQ_V2_F", -1.5, EastCommander)
     ZEN_RTS_STRATEGIC_BUILDING_DESTROYED_EH(Zen_RTS_BuildingType_East_HQ, east)
 
     // to-do: || false condition needs building hacking logic

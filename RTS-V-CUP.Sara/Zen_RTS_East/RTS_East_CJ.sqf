@@ -49,7 +49,7 @@ Zen_RTS_F_East_CJConstructor = {
     _buildingTypeData = [(_buildingObjData select 0)] call Zen_RTS_StrategicBuildingTypeGetData;
     _assetStrRaw = _buildingTypeData select 5;
 
-    sleep (call compile ([_assetStrRaw, "Time: ", ","] call Zen_StringGetDelimitedPart));
+     [(_buildingObjData select 0), 0] call Zen_RTS_F_EconomyStrategicBuildDelayBuilding;
     _vehicle = [_spawnPos, "O_MRAP_02_F"]  call Zen_SpawnVehicle;
     _vehicle setVariable ["side", East, true];
     _assetData = _buildingObjData;

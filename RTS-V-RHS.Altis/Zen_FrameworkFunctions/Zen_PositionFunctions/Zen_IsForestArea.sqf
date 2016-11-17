@@ -36,7 +36,7 @@ _radiusMax = (_XYSizeArray select 0) max (_XYSizeArray select 1);
     // };
 // } forEach (nearestObjects [_center, [], _radiusMax]);
 
-_trees = nearestTerrainObjects[_center, ["Tree", "Small Tree"], _radiusMax];
+_trees = nearestTerrainObjects[_center, ["Tree", "Small Tree"], _radiusMax, false];
 
 if (count _trees < 2) exitWith {
     call Zen_StackRemove;

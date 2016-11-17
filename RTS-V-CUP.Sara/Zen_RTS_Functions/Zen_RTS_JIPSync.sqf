@@ -35,10 +35,10 @@ if (_Zen_Is_JIP) then {
         if (vehicle _refUnit != _refUnit) then {
             player moveInAny (vehicle _refUnit);
             if (vehicle player == player) then {
-                player setPosATL ([_refUnit, 2 + random 3, random 360] call Zen_ExtendPosition);
+                player setPosATL ([_refUnit, 2 + random 3, random 360] call Zen_ExtendVector);
             };
         } else {
-            player setPosATL ([_refUnit, 2 + random 3, random 360] call Zen_ExtendPosition);
+            player setPosATL ([_refUnit, 2 + random 3, random 360] call Zen_ExtendVector);
         };
 
         {
@@ -53,6 +53,15 @@ if (_Zen_Is_JIP) then {
             0 = [(_x select 0)] call Zen_UpdateTask;
             sleep 0.1;
         } forEach Zen_Task_Array_Global;
+
+        _sideKillCounts = (Zen_RTS_TotalKills select ([west, east] find (side player)));
+        _localKills = _unit getVariable "Zen_RTS_LocalKills";
+        Zen_RTS_LocalKills = _localKills;
+
+        for "_i" from 0 to 3 do {
+            _sideKillCounts set [_i, (_sideKillCounts select _i) + (_localKills select _i)];
+        };
+        publicVariable "Zen_RTS_TotalKills";
     };
 
     0 = [player] spawn Zen_RTS_F_RespawnActions;
@@ -93,6 +102,7 @@ if (isServer) then {
         (owner _this) publicVariableClient "Zen_RTS_GiveMoneyDialog_Current_Money_Control";
         (owner _this) publicVariableClient "Zen_RTS_GiveMoneyDialog_Player_List";
         (owner _this) publicVariableClient "Zen_RTS_GiveMoneyDialog_Dialog";
+        (owner _this) publicVariableClient "Zen_RTS_TotalKills";
 
         (owner _this) publicVariableClient "WestCommander";
         (owner _this) publicVariableClient "EastCommander";

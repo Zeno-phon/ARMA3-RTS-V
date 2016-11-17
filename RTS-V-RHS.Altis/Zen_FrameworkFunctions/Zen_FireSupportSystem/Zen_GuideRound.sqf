@@ -35,9 +35,9 @@ while {!(isNull _round) && {(alive _round)}} do {
     _angleToTarget = [_round, _roundPosition] call Zen_FindDirection;
 
     if (_offTargetDistance > 5) then {
-        _roundAdjust = [_round, 8 + random 4, _angleToTarget, "trig", 0] call Zen_ExtendPosition;
+        _roundAdjust = [_round, 8 + random 4, _angleToTarget, "trig", 0] call Zen_ExtendVector;
     } else {
-        _roundAdjust = [_round, _offTargetDistance, _angleToTarget, "trig", 0] call Zen_ExtendPosition;
+        _roundAdjust = [_round, _offTargetDistance, _angleToTarget, "trig", 0] call Zen_ExtendVector;
         breakTo "main";
     };
 

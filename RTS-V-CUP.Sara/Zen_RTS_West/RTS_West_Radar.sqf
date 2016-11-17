@@ -25,7 +25,7 @@ Zen_RTS_F_West_RadarConstructor = {
     };
 
     _buildingTypeData = [(_buildingObjData select 0)] call Zen_RTS_StrategicBuildingTypeGetData;
-    BUILDING_VISUALS("LAND_TTOWERBIG_1_F", -2.5)
+    BUILDING_VISUALS("LAND_TTOWERBIG_1_F", -2.5, WestCommander)
     ZEN_RTS_STRATEGIC_BUILDING_DESTROYED_EH(Zen_RTS_BuildingType_West_Radar, West)
 
     if (_level > 0) then {

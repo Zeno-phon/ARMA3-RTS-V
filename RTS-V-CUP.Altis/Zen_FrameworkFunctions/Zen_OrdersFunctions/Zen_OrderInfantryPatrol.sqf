@@ -150,7 +150,7 @@ while {(count _grpsArray != 0)} do {
                             _target = _man findNearestEnemy _man;
                         };
                         if (!(isNull _target) && {((([_man, _target] call Zen_Find2dDistance) < 750) && (_target isKindOf "Man"))}) then {
-                            _mpos = [_target, (random (150 / ((_man knowsAbout _target) + 0.1))), (random 360)] call Zen_ExtendPosition;
+                            _mpos = [_target, (random (150 / ((_man knowsAbout _target) + 0.1))), (random 360)] call Zen_ExtendVector;
 
                             if !(isPlayer _man) then {
                                 if (_divers) then {

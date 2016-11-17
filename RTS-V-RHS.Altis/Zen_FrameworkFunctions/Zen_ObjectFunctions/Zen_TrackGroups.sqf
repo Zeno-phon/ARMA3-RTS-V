@@ -2,31 +2,23 @@
 // This file is released under Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)
 // See Legal.txt
 
-_Zen_stack_Trace = ["Zen_TrackGroups", _this] call Zen_StackAdd;
-private ["_groups", "_textType", "_unit", "_color", "_marker", "_txt", "_unitMarkers", "_thread", "_destMarkers", "_destMarker", "_markerShape", "_markerShapeDot", "_markerDot", "_unitMarkersDot", "_group", "_groupPos", "_showDestination", "_hideFromUnits", "_count"];
+#include "..\Zen_StandardLibrary.sqf"
+#include "..\Zen_FrameworkLibrary.sqf"
 
-if !([_this, [["VOID"], ["STRING"], ["BOOL"], ["VOID"]], [], 1] call Zen_CheckArguments) exitWith {
+_Zen_stack_Trace = ["Zen_TrackGroups", _this] call Zen_StackAdd;
+private ["_groups", "_textType", "_unit", "_color", "_marker", "_txt", "_unitMarkers", "_thread", "_destMarkers", "_destMarker", "_markerShape", "_markerShapeDot", "_markerDot", "_unitMarkersDot", "_group", "_groupPos", "_showDestination", "_hideFromUnits", "_count", "_interval"];
+
+if !([_this, [["VOID"], ["STRING"], ["BOOL"], ["VOID"], ["SCALAR"]], [], 1] call Zen_CheckArguments) exitWith {
     call Zen_StackRemove;
     ([])
 };
 
 _groups = [(_this select 0)] call Zen_ConvertToGroupArray;
 
-_textType = "group";
-_showDestination = false;
-_hideFromUnits = 0;
-
-if (count _this > 1) then {
-    _textType = _this select 1;
-};
-
-if (count _this > 2) then {
-    _showDestination = _this select 2;
-};
-
-if (count _this > 3) then {
-    _hideFromUnits = _this select 3;
-};
+ZEN_STD_Parse_GetArgumentDefault(_textType, 1, "group")
+ZEN_STD_Parse_GetArgumentDefault(_showDestination, 2, false)
+ZEN_STD_Parse_GetArgumentDefault(_hideFromUnits, 3, 0)
+ZEN_STD_Parse_GetArgumentDefault(_interval, 4, 10)
 
 _unitMarkersDot = [];
 _unitMarkers = [];
@@ -58,7 +50,7 @@ _destMarkers = [];
                 };
             };
             case "number": {
-                _txt = str _forEachIndex;
+                _txt = str (_forEachIndex + 1);
             };
             default {
                 _txt = "";
@@ -123,7 +115,7 @@ if (isMultiplayer) then {
     0 = [(_unitMarkers + _destMarkers + _unitMarkersDot), 0, _hideFromUnits] call Zen_ShowHideMarkers;
 };
 
-_thread = [_groups, _unitMarkers, _unitMarkersDot, _destMarkers, _textType, _showDestination] spawn {
+_thread = [_groups, _unitMarkers, _unitMarkersDot, _destMarkers, _textType, _showDestination, _interval] spawn {
 
     _Zen_stack_Trace = ["Zen_TrackGroups", _this] call Zen_StackAdd;
     private ["_groups", "_marker", "_unitMarkers", "_unit", "_textType", "_destMarkers", "_destMarker", "_unitMarkersDot", "_markerDot", "_markerShapeDot", "_showDestination", "_count", "_group"];
@@ -134,6 +126,7 @@ _thread = [_groups, _unitMarkers, _unitMarkersDot, _destMarkers, _textType, _sho
     _destMarkers = _this select 3;
     _textType = _this select 4;
     _showDestination = _this select 5;
+    _interval = _this select 6;
 
     while {((count _groups) != 0)} do {
         {
@@ -205,7 +198,7 @@ _thread = [_groups, _unitMarkers, _unitMarkersDot, _destMarkers, _textType, _sho
         0 = [_unitMarkersDot, 0] call Zen_ArrayRemoveValue;
         0 = [_destMarkers, 0] call Zen_ArrayRemoveValue;
 
-        sleep 10;
+        sleep _interval;
     };
     call Zen_StackRemove;
     if (true) exitWith {};

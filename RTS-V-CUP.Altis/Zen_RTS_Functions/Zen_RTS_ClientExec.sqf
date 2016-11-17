@@ -16,6 +16,3 @@
 onMapSingleClick "[_pos, _units, _shift, _alt] exec ""onMapSingleClick.sqs""";
 
 1 setRadioMsg "Null";
-if (param3 > 0) then {
-    [] exec "vicpoint\rts-vpInit.sqs";
-};

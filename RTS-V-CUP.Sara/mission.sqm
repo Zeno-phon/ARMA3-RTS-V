@@ -23,10 +23,7 @@ class Mission
 		"A3_Structures_F_Civ_InfoBoards",
 		"A3_Structures_F_Mil_Helipads",
 		"A3_Roads_F",
-		"A3_Structures_F_Items_Vessels",
-		"cup_sara_config",
-		"CUP_Creatures_Military_USMC",
-		"CUP_Creatures_People_Military_DummyInfantrySet"
+		"A3_Structures_F_Items_Vessels"
 	};
 	addOnsAuto[]=
 	{
@@ -50,10 +47,7 @@ class Mission
 		"A3_Structures_F_Civ_InfoBoards",
 		"A3_Structures_F_Mil_Helipads",
 		"A3_Roads_F",
-		"A3_Structures_F_Items_Vessels",
-		"cup_sara_config",
-		"CUP_Creatures_Military_USMC",
-		"CUP_Creatures_People_Military_DummyInfantrySet"
+		"A3_Structures_F_Items_Vessels"
 	};
 	randomSeed=8127219;
 	class Intel
@@ -110,7 +104,7 @@ class Mission
 					special="NONE";
 					id=1;
 					side="WEST";
-					vehicle="CUP_B_USMC_Officer";
+					vehicle="B_officer_F";
 					player="PLAY CDG";
 					leader=1;
 					rank="COLONEL";
@@ -134,7 +128,7 @@ class Mission
 					special="NONE";
 					id=2;
 					side="WEST";
-					vehicle="CUP_B_USMC_Officer";
+					vehicle="B_officer_F";
 					player="PLAY CDG";
 					leader=1;
 					skill=0.2;
@@ -156,7 +150,7 @@ class Mission
 					special="NONE";
 					id=3;
 					side="WEST";
-					vehicle="CUP_B_USMC_Officer";
+					vehicle="B_officer_F";
 					player="PLAY CDG";
 					leader=1;
 					skill=0.2;
@@ -178,7 +172,7 @@ class Mission
 					special="NONE";
 					id=4;
 					side="WEST";
-					vehicle="CUP_B_USMC_Officer";
+					vehicle="B_officer_F";
 					player="PLAY CDG";
 					leader=1;
 					skill=0.2;
@@ -200,7 +194,7 @@ class Mission
 					special="NONE";
 					id=5;
 					side="WEST";
-					vehicle="CUP_B_USMC_Officer";
+					vehicle="B_officer_F";
 					player="PLAY CDG";
 					leader=1;
 					skill=0.2;
@@ -222,7 +216,7 @@ class Mission
 					special="NONE";
 					id=6;
 					side="WEST";
-					vehicle="CUP_B_USMC_Officer";
+					vehicle="B_officer_F";
 					player="PLAY CDG";
 					leader=1;
 					skill=0.2;
@@ -244,7 +238,7 @@ class Mission
 					special="NONE";
 					id=7;
 					side="WEST";
-					vehicle="CUP_B_USMC_Officer";
+					vehicle="B_officer_F";
 					player="PLAY CDG";
 					leader=1;
 					skill=0.2;
@@ -266,7 +260,7 @@ class Mission
 					special="NONE";
 					id=8;
 					side="WEST";
-					vehicle="CUP_B_USMC_Officer";
+					vehicle="B_officer_F";
 					player="PLAY CDG";
 					leader=1;
 					skill=0.2;
@@ -288,7 +282,7 @@ class Mission
 					special="NONE";
 					id=9;
 					side="WEST";
-					vehicle="CUP_B_USMC_Officer";
+					vehicle="B_officer_F";
 					player="PLAY CDG";
 					leader=1;
 					skill=0.2;
@@ -310,7 +304,7 @@ class Mission
 					special="NONE";
 					id=10;
 					side="WEST";
-					vehicle="CUP_B_USMC_Officer";
+					vehicle="B_officer_F";
 					player="PLAY CDG";
 					leader=1;
 					skill=0.2;
@@ -332,7 +326,7 @@ class Mission
 					special="NONE";
 					id=11;
 					side="WEST";
-					vehicle="CUP_B_USMC_Officer";
+					vehicle="B_officer_F";
 					player="PLAY CDG";
 					leader=1;
 					skill=0.2;
@@ -354,7 +348,7 @@ class Mission
 					special="NONE";
 					id=12;
 					side="WEST";
-					vehicle="CUP_B_USMC_Officer";
+					vehicle="B_officer_F";
 					player="PLAY CDG";
 					leader=1;
 					skill=0.2;
@@ -376,7 +370,7 @@ class Mission
 					special="NONE";
 					id=13;
 					side="WEST";
-					vehicle="CUP_B_USMC_Officer";
+					vehicle="B_officer_F";
 					player="PLAY CDG";
 					leader=1;
 					skill=0.2;
@@ -397,7 +391,7 @@ class Mission
 					azimut=-360.332;
 					id=14;
 					side="EAST";
-					vehicle="CUP_O_RU_Officer";
+					vehicle="O_officer_F";
 					player="PLAY CDG";
 					leader=1;
 					rank="COLONEL";
@@ -419,7 +413,7 @@ class Mission
 					azimut=-179.724;
 					id=15;
 					side="EAST";
-					vehicle="CUP_O_RU_Officer";
+					vehicle="O_officer_F";
 					player="PLAY CDG";
 					leader=1;
 					rank="CORPORAL";
@@ -441,7 +435,7 @@ class Mission
 					azimut=-179.724;
 					id=16;
 					side="EAST";
-					vehicle="CUP_O_RU_Officer";
+					vehicle="O_officer_F";
 					player="PLAY CDG";
 					leader=1;
 					rank="CORPORAL";
@@ -463,7 +457,7 @@ class Mission
 					azimut=-359.83441;
 					id=17;
 					side="EAST";
-					vehicle="CUP_O_RU_Officer";
+					vehicle="O_officer_F";
 					player="PLAY CDG";
 					leader=1;
 					rank="CORPORAL";
@@ -485,7 +479,7 @@ class Mission
 					azimut=-92.365341;
 					id=18;
 					side="EAST";
-					vehicle="CUP_O_RU_Officer";
+					vehicle="O_officer_F";
 					player="PLAY CDG";
 					leader=1;
 					skill=0.2;
@@ -506,7 +500,7 @@ class Mission
 					azimut=-92.365341;
 					id=19;
 					side="EAST";
-					vehicle="CUP_O_RU_Officer";
+					vehicle="O_officer_F";
 					player="PLAY CDG";
 					leader=1;
 					skill=0.2;
@@ -527,7 +521,7 @@ class Mission
 					azimut=-92.365341;
 					id=20;
 					side="EAST";
-					vehicle="CUP_O_RU_Officer";
+					vehicle="O_officer_F";
 					player="PLAY CDG";
 					leader=1;
 					skill=0.2;
@@ -548,7 +542,7 @@ class Mission
 					azimut=-92.365341;
 					id=21;
 					side="EAST";
-					vehicle="CUP_O_RU_Officer";
+					vehicle="O_officer_F";
 					player="PLAY CDG";
 					leader=1;
 					skill=0.2;
@@ -569,7 +563,7 @@ class Mission
 					azimut=-259.9761;
 					id=22;
 					side="EAST";
-					vehicle="CUP_O_RU_Officer";
+					vehicle="O_officer_F";
 					player="PLAY CDG";
 					leader=1;
 					skill=0.2;
@@ -590,7 +584,7 @@ class Mission
 					azimut=-259.9761;
 					id=23;
 					side="EAST";
-					vehicle="CUP_O_RU_Officer";
+					vehicle="O_officer_F";
 					player="PLAY CDG";
 					leader=1;
 					skill=0.2;
@@ -611,7 +605,7 @@ class Mission
 					azimut=-267.02182;
 					id=24;
 					side="EAST";
-					vehicle="CUP_O_RU_Officer";
+					vehicle="O_officer_F";
 					player="PLAY CDG";
 					leader=1;
 					skill=0.2;
@@ -632,7 +626,7 @@ class Mission
 					azimut=-268.02637;
 					id=25;
 					side="EAST";
-					vehicle="CUP_O_RU_Officer";
+					vehicle="O_officer_F";
 					player="PLAY CDG";
 					leader=1;
 					skill=0.2;
@@ -653,7 +647,7 @@ class Mission
 					azimut=177.87801;
 					id=26;
 					side="EAST";
-					vehicle="CUP_O_RU_Officer";
+					vehicle="O_officer_F";
 					leader=1;
 					rank="CORPORAL";
 					player="PLAY CDG";
@@ -3479,13 +3473,9 @@ class Mission
 };
 class Intro
 {
-	addOns[]=
-	{
-		"cup_sara_config"
+	addOns[]={
 	};
-	addOnsAuto[]=
-	{
-		"cup_sara_config"
+	addOnsAuto[]={
 	};
 	randomSeed=12871697;
 	class Intel
@@ -3508,13 +3498,9 @@ class Intro
 };
 class OutroWin
 {
-	addOns[]=
-	{
-		"cup_sara_config"
+	addOns[]={
 	};
-	addOnsAuto[]=
-	{
-		"cup_sara_config"
+	addOnsAuto[]={
 	};
 	randomSeed=5667935;
 	class Intel
@@ -3537,13 +3523,9 @@ class OutroWin
 };
 class OutroLoose
 {
-	addOns[]=
-	{
-		"cup_sara_config"
+	addOns[]={
 	};
-	addOnsAuto[]=
-	{
-		"cup_sara_config"
+	addOnsAuto[]={
 	};
 	randomSeed=2953482;
 	class Intel

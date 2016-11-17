@@ -64,13 +64,13 @@ while {true} do {
             if ((_oldLevel < _maxLevel) && {(_oldSide in [West, East]) && {(time > (_lastTime + UPGRADE_TIME))}}) then { \
                 _markerTimeLocal set [_localIndex, time]; \
                 0 = [_x, -1, -1, _oldLevel + 1] call Zen_RTS_SubTerritoryUpdate; \
-                _newResources = (_oldData select 4) select (_oldLevel + 1); \
-                _winningSideEcoData = Zen_RTS_Economy_Data select ([West, East] find _oldSide); \
-                _winningSideEcoData set [2, (_winningSideEcoData select 2) + _newResources * (_oldLevel + 1) - _oldResources * _oldLevel]; \
                 _args = ["sideChat", [[_oldSide,"HQ"], format ["Flag %1 (%2) has upgraded to level %3", _name, _oldSide, _oldLevel + 1]]]; \
                 ZEN_FMW_MP_RENonDedicated("Zen_ExecuteCommand", _args, call) \
             };
 
+                // _newResources = (_oldData select 4) select (_oldLevel + 1); \
+                // _winningSideEcoData = Zen_RTS_Economy_Data select ([West, East] find _oldSide); \
+                // _winningSideEcoData set [2, (_winningSideEcoData select 2) + _newResources * (_oldLevel + 1) - _oldResources * _oldLevel]; \
         _winningPoints = [_sideCounts, {_this}] call Zen_ArrayFindExtremum;
         if ((_winningPoints > 0) && {_winningPoints == (count _units)}) then {
             _winningIndex = _sideCounts find _winningPoints;
@@ -80,13 +80,13 @@ while {true} do {
                 _markerTimeLocal set [_localIndex, time];
                 0 = [_x, _winningSide, -1, 0] call Zen_RTS_SubTerritoryUpdate;
 
-                if (_oldSide in [West, East]) then {
-                    _losingSideEcoData = Zen_RTS_Economy_Data select ([West, East] find _oldSide);
-                    _losingSideEcoData set [2, (_losingSideEcoData select 2) - _oldResources * _oldLevel];
-                };
+                // if (_oldSide in [West, East]) then {
+                    // _losingSideEcoData = Zen_RTS_Economy_Data select ([West, East] find _oldSide);
+                    // _losingSideEcoData set [2, (_losingSideEcoData select 2) - _oldResources * _oldLevel];
+                // };
 
                 // _newResources = (_oldData select 4) select 0;
-                _winningSideEcoData = Zen_RTS_Economy_Data select ([West, East] find _winningSide);
+                // _winningSideEcoData = Zen_RTS_Economy_Data select ([West, East] find _winningSide);
                 // _winningSideEcoData set [2, (_winningSideEcoData select 2) + _newResources * 0];
 
                 _args = ["sideChat", [[_winningSide,"HQ"], format ["%1 has captured flag %2", _winningSide, _name]]];

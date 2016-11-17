@@ -48,7 +48,7 @@ _obj setDamage 0.7;
 _obj setFuel 0;
 _obj lock true;
 
-_spawnPos = [(getPosATL _obj), 4 + (random 5), (random 360)] call Zen_ExtendPosition;
+_spawnPos = [(getPosATL _obj), 4 + (random 5), (random 360)] call Zen_ExtendVector;
 _deadUnits = [_spawnPos, _side, 1, [1,1], "men", _unitFaction] call Zen_SpawnInfantry;
 0 = [_deadUnits, _side, "rifleman"] call Zen_GiveLoadout;
 

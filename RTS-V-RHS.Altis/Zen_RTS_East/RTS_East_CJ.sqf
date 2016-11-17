@@ -30,9 +30,9 @@ Zen_RTS_F_East_CJConstructor = {
     _assetsToAdd pushBack Zen_RTS_Asset_Land_BagFence_Corner_F;
     _assetsToAdd pushBack Zen_RTS_Asset_Land_CncWall4_F;
 
-    if (Zen_RTS_TechFlag_East_BuildEnemy) then {
+    // if (Zen_RTS_TechFlag_East_BuildEnemy) then {
         // ... to do
-    };
+    // };
 
     {
         (RTS_Used_Asset_Types select 0) pushBack _x;
@@ -47,15 +47,16 @@ Zen_RTS_F_East_CJConstructor = {
     // };
 
     _buildingTypeData = [(_buildingObjData select 0)] call Zen_RTS_StrategicBuildingTypeGetData;
-    _assetStrRaw = _buildingTypeData select 5;
+    _assetStrRaw = _buildingObjData select 5;
 
-    sleep (call compile ([_assetStrRaw, "Time: ", ","] call Zen_StringGetDelimitedPart));
-    _vehicle = [_spawnPos, "O_MRAP_02_F"]  call Zen_SpawnVehicle;
+    [(_buildingObjData select 0), 0] call Zen_RTS_F_EconomyStrategicBuildDelayBuilding;
+    _vehicle = [_spawnPos, "O_MRAP_02_F"] call Zen_SpawnVehicle;
     _vehicle setVariable ["side", East, true];
     _assetData = _buildingObjData;
+
     ZEN_RTS_STRATEGIC_ASSET_DESTROYED_EH
 
-     // Recycle AI set up
+    // Recycle AI set up
     (RTS_CJ_Repair_Queue select 0) pushBack _vehicle;
     _vehicle setVariable ["Zen_RTS_StrategicIsAIOwned", false, true];
     _vehicle setVariable ["Zen_RTS_StrategicIsAIAssigned", false, true];
@@ -67,7 +68,6 @@ Zen_RTS_F_East_CJConstructor = {
     ZEN_FMW_MP_REAll("Zen_ExecuteCommand", _args, call)
 
     _args = ["addAction", [_vehicle, ["Take CJ from AI", {SWAP_CJ_OWNER(false)}, _vehicle, 1, false, true, "", "((_this distance2D _target) < 5) && (_target getVariable 'Zen_RTS_StrategicIsAIOwned') && (alive _target)"]]];
-
     ZEN_FMW_MP_REAll("Zen_ExecuteCommand", _args, call)
 
     if (_level > 0) then {

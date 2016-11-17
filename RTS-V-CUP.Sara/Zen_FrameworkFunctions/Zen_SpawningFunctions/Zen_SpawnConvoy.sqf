@@ -60,7 +60,7 @@ if ((count (_startPos nearRoads 50)) > 1) then {
 };
 
 {
-    _vehicles pushBack ([([_startPos, _forEachIndex * -15 + 1, _roadDir, "trig"] call Zen_ExtendPosition), _x, 90 - _roadDir] call Zen_SpawnGroundVehicle);
+    _vehicles pushBack ([([_startPos, _forEachIndex * -15 + 1, _roadDir, "trig"] call Zen_ExtendVector), _x, 90 - _roadDir] call Zen_SpawnGroundVehicle);
 } forEach _vehicleTypes;
 
 _troopVehicle = ZEN_STD_Array_LastElement(_vehicles);

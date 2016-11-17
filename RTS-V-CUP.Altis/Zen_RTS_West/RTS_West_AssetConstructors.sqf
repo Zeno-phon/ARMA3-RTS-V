@@ -85,7 +85,7 @@ AIR_CONSTRUCTOR(CUP_B_AV8B, "CUP_B_AV8B", CREW_UNITS)
         sleep (call compile ([_assetStrRaw, "Time: ", ","] call Zen_StringGetDelimitedPart)); \
         if (alive (_buildingObjData select 2)) then { \
             ZEN_RTS_STRATEGIC_ASSET_SPAWN_MESSAGE() \
-            _group = [([(_buildingObjData select 2), 10 + random 10, random 360] call Zen_ExtendPosition), T] call Zen_SpawnGroup; \
+            _group = [([(_buildingObjData select 2), 10 + random 10, random 360] call Zen_ExtendVector), T] call Zen_SpawnGroup; \
             0 = [_group, S] call Zen_SetAISkill; \
             (units _group) join _referenceUnit; \
         }; \
@@ -286,7 +286,7 @@ Zen_RTS_F_West_Repairer = {
         _group = [(_buildingObjData select 2), "CUP_B_BAF_Engineer_MTP"] call Zen_SpawnGroup;
         0 = [_group, "crew"] call Zen_SetAISkill;
         removeAllWeapons (leader _group);
-        (leader _group) setPosATL ([(_buildingObjData select 2), 5 + random 5, random 360] call Zen_ExtendPosition);
+        (leader _group) setPosATL ([(_buildingObjData select 2), 5 + random 5, random 360] call Zen_ExtendVector);
         _group setBehaviour "careless";
         (RTS_Worker_Repair_Queue select 0) pushBack [(leader _group), false, objNull];
     };
@@ -303,9 +303,9 @@ Zen_RTS_F_West_Recycler = {
     if (alive (_buildingObjData select 2)) then {
         ZEN_RTS_STRATEGIC_ASSET_SPAWN_MESSAGE() \
         _group = [(_buildingObjData select 2), "CUP_B_BAF_Engineer_MTP"] call Zen_SpawnGroup;
-        _vehicleID = [Zen_RTS_BuildingType_West_CJ, [[(_buildingObjData select 2), 10, random 360] call Zen_ExtendPosition, 0]] call Zen_RTS_StrategicBuildingInvoke;
+        _vehicleID = [Zen_RTS_BuildingType_West_CJ, [[(_buildingObjData select 2), 10, random 360] call Zen_ExtendVector, 0]] call Zen_RTS_StrategicBuildingInvoke;
 
-        (leader _group) setPosATL ([(_buildingObjData select 2), 5 + random 5, random 360] call Zen_ExtendPosition);
+        (leader _group) setPosATL ([(_buildingObjData select 2), 5 + random 5, random 360] call Zen_ExtendVector);
         0 = [_group, "crew"] call Zen_SetAISkill;
         removeAllWeapons (leader _group);
         _group setBehaviour "careless";

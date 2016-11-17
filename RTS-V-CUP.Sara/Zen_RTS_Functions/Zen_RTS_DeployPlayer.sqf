@@ -69,10 +69,9 @@ if ((isServer) && {(_unit != player)} && {(local _unit)}) then {
     execVM "RTS_JUMPACTIONS.sqf";
     onMapSingleClick "[_pos, _units, _shift, _alt] exec ""onMapSingleClick.sqs""";
 
-
     player addEventHandler ["fired","_count = player ammo (currentWeapon player); if(_count != 0) then {magazineClass = currentMagazine player;};  if(_count == 0) then {player addMagazine magazineClass; reload player;};"];
     player enableFatigue false;
-    player addEventHandler ["Respawn", {player enableFatigue false}];
+    player addEventHandler ["Killed", Zen_RTS_F_EconomyKilledEH];
 
     0 = [player] call Zen_AddRepackMagazines;
     0 = [player, str side player + "rifleman", "complete", false] call Zen_GiveLoadoutCustom;
@@ -244,7 +243,7 @@ if ((isServer) && {(_unit != player)} && {(local _unit)}) then {
     // ?_text in ["Forward Base Perimeter"] : _dist = -400
     // ?_text in ["Back Base Perimeter"] : _dist = +400
 
-    player setposATL ([_respawnloc, 12, random 360] call Zen_ExtendPosition);
+    player setPosATL ([_respawnloc, 12, random 360] call Zen_ExtendVector);
 
     player switchCamera "INTERNAL";
     player cameraEffect ["terminate","back"];
@@ -252,8 +251,8 @@ if ((isServer) && {(_unit != player)} && {(local _unit)}) then {
 
     // /**
     sleep 2;
-    [player] call TAG_loadoutRespawnDialog;
-    //*/
+    // [player] call TAG_loadoutRespawnDialog;
+    // */
 
     /** Music
     5 fadeMusic 0;

@@ -29,7 +29,7 @@ if ((typeName (_this select 0)) == "STRING") then {
 
 _radiusMax = (_XYSizeArray select 0) max (_XYSizeArray select 1);
 // _buildings = nearestObjects [_center, ["house"], _radiusMax];
-_buildings = nearestTerrainObjects [_center, ["Building", "House", "Church", "Chapel", "Fountain", "View-Tower", "FuelStation", "Hospital", "WaterTower"], _radiusMax];
+_buildings = nearestTerrainObjects [_center, ["Building", "House", "Church", "Chapel", "Fountain", "View-Tower", "FuelStation", "Hospital", "WaterTower"], _radiusMax, false];
 
 _roads = _center nearRoads _radiusMax;
 

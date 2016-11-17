@@ -100,12 +100,12 @@ if !(_minAngle == _maxAngle) then {
 FAIL_CHECK
 if (_objSwitch == 1) then {
     // _nearObjHouse = nearestObjects [_pos, ["House", "Building", "Ruins"], _objDist];
-    _nearObjHouse = nearestTerrainObjects[_pos, ["Building", "House", "Church", "Chapel", "Bunker", "Fortress", "Fountain", "View-Tower", "Lighthouse", "FuelStation", "Hospital", "Wall", "WaterTower"], _objDist];
+    _nearObjHouse = nearestTerrainObjects[_pos, ["Building", "House", "Church", "Chapel", "Bunker", "Fortress", "Fountain", "View-Tower", "Lighthouse", "FuelStation", "Hospital", "Wall", "WaterTower"], _objDist, false];
     if ((count _nearObjHouse) > _objLimit) then {FAIL};
 } else {
     if (_objSwitch == 2) then {
         // _nearObjHouse = nearestObjects [_pos, ["House", "Building", "Ruins"], _objDist];
-       _nearObjHouse = nearestTerrainObjects[_pos, ["Building", "House", "Church", "Chapel", "Bunker", "Fortress", "Fountain", "View-Tower", "Lighthouse", "FuelStation", "Hospital", "Wall", "WaterTower"], _objDist];
+       _nearObjHouse = nearestTerrainObjects[_pos, ["Building", "House", "Church", "Chapel", "Bunker", "Fortress", "Fountain", "View-Tower", "Lighthouse", "FuelStation", "Hospital", "Wall", "WaterTower"], _objDist, false];
         if ((count _nearObjHouse) < _objLimit) then {FAIL};
     };
 };
@@ -138,10 +138,10 @@ if (_nearWaterSwitch == 1) then {
 
 FAIL_CHECK
 if (_terrainSlopeSwitch == 1) then {
-    if (([_pos] call Zen_FindTerrainSlope) > _terrainSlopeAngle) then {FAIL};
+    if (90 - (([_pos] call Zen_FindTerrainGradient) select 2) > _terrainSlopeAngle) then {FAIL};
 } else {
     if (_terrainSlopeSwitch == 2) then {
-        if (([_pos] call Zen_FindTerrainSlope) < _terrainSlopeAngle) then {FAIL};
+        if (90 - (([_pos] call Zen_FindTerrainGradient) select 2) < _terrainSlopeAngle) then {FAIL};
     };
 };
 

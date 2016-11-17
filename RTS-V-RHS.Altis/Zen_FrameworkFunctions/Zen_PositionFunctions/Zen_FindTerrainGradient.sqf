@@ -6,7 +6,7 @@
 #include "..\Zen_FrameworkLibrary.sqf"
 
 _Zen_stack_Trace = ["Zen_FindTerrainGradient", _this] call Zen_StackAdd;
-private ["_center", "_normal", "_theta", "_radius", "_points"];
+private ["_center", "_normal", "_theta", "_phi", "_radius", "_points"];
 
 if !([_this, [["VOID"], ["SCALAR"]], [], 1] call Zen_CheckArguments) exitWith {
     call Zen_StackRemove;
@@ -19,15 +19,19 @@ ZEN_STD_Parse_GetArgumentDefault(_radius, 1, -1)
 if (_radius > 0) then {
     _points = ((round (_radius^2 / 4)) max 20) min 500;
     _theta = 0;
+    _phi = 0;
     for "_i" from 1 to _points do {
         _normal = surfaceNormal (ZEN_FMW_Math_RandomPoint(_center, _radius));
         _theta = _theta + ((_normal select 1) atan2 (_normal select 0));
+        _phi = _phi + acos (_normal select 2);
     };
     _theta = _theta / _points;
+    _phi = _phi / _points;
 } else {
     _normal = surfaceNormal _center;
     _theta = (_normal select 1) atan2 (_normal select 0);
+    _phi = acos (_normal select 2);
 };
 
 call Zen_StackRemove;
-(_theta + 180)
+[tan _phi, (_theta + 180), 90 - _phi]

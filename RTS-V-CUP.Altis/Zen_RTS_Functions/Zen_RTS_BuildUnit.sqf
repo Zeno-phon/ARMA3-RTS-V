@@ -91,7 +91,7 @@
                 _building addAction ["<t color='#D80000'>Place</t>", {Zen_RTS_CJ_DoPlace = true; (_this select 0) removeAction (_this select 2);}, [], 2.5, false, true, "", "(_this in _target)"];
                 waitUntil {
                     sleep 0.5;
-                    _redArrow setPosATL ([_building, 10, getDir _building, "compass", 1] call Zen_ExtendPosition);
+                    _redArrow setPosATL ([_building, 10, getDir _building, "compass", 1] call Zen_ExtendVector);
                     (Zen_RTS_CJ_DoPlace)
                 };
 

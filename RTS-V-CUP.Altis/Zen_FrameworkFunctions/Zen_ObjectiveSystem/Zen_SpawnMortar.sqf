@@ -36,8 +36,8 @@ if (_mortarClass == "") exitWith {
 };
 
 _mortar1 = [_spawnPos, _mortarClass] call Zen_SpawnVehicle;
-_mortar2 = [([_spawnPos, 2 + random 2, (random 360)] call Zen_ExtendPosition), _mortarClass] call Zen_SpawnVehicle;
-_ammoBox = [([_spawnPos, 3 + random 3, (random 360)] call Zen_ExtendPosition), _side, true] call Zen_SpawnAmmoBox;
+_mortar2 = [([_spawnPos, 2 + random 2, (random 360)] call Zen_ExtendVector), _mortarClass] call Zen_SpawnVehicle;
+_ammoBox = [([_spawnPos, 3 + random 3, (random 360)] call Zen_ExtendVector), _side, true] call Zen_SpawnAmmoBox;
 
 0 = [_mortar1, _side] call Zen_SpawnVehicleCrew;
 0 = [_mortar2, _side] call Zen_SpawnVehicleCrew;

@@ -2,26 +2,22 @@
 // This file is released under Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)
 // See Legal.txt
 
-_Zen_stack_Trace = ["Zen_TrackInfantry", _this] call Zen_StackAdd;
-private ["_textType", "_groups", "_color","_txt","_units", "_unitMarkers", "_marker", "_thread", "_hideFromUnits", "_unit"];
+#include "..\Zen_StandardLibrary.sqf"
+#include "..\Zen_FrameworkLibrary.sqf"
 
-if !([_this, [["VOID"], ["STRING"], ["VOID"]], [], 1] call Zen_CheckArguments) exitWith {
+_Zen_stack_Trace = ["Zen_TrackInfantry", _this] call Zen_StackAdd;
+private ["_textType", "_groups", "_color","_txt","_units", "_unitMarkers", "_marker", "_thread", "_hideFromUnits", "_unit", "_interval"];
+
+if !([_this, [["VOID"], ["STRING"], ["VOID"], ["SCALAR"]], [], 1] call Zen_CheckArguments) exitWith {
     call Zen_StackRemove;
     ([])
 };
 
 _units = [(_this select 0)] call Zen_ConvertToObjectArray;
 
-_textType = "name";
-_hideFromUnits = 0;
-
-if (count _this > 1) then {
-    _textType = _this select 1;
-};
-
-if (count _this > 2) then {
-    _hideFromUnits = _this select 2;
-};
+ZEN_STD_Parse_GetArgumentDefault(_textType, 1, "none")
+ZEN_STD_Parse_GetArgumentDefault(_hideFromUnits, 2, 0)
+ZEN_STD_Parse_GetArgumentDefault(_interval, 3, 10)
 
 _unitMarkers = [];
 
@@ -42,7 +38,7 @@ _unitMarkers = [];
             };
         };
         case "number": {
-            _txt = str _forEachIndex;
+            _txt = str (_forEachIndex + 1);
         };
         default {
             _txt = "";
@@ -59,7 +55,7 @@ if (isMultiplayer) then {
     0 = [_unitMarkers, 0, _hideFromUnits] call Zen_ShowHideMarkers;
 };
 
-_thread = [_units, _unitMarkers, _textType] spawn {
+_thread = [_units, _unitMarkers, _textType, _interval] spawn {
 
     _Zen_stack_Trace = ["Zen_TrackInfantry", _this] call Zen_StackAdd;
     private ["_units", "_unit", "_unitMarkers", "_textType", "_marker"];
@@ -67,6 +63,7 @@ _thread = [_units, _unitMarkers, _textType] spawn {
     _units = _this select 0;
     _unitMarkers = _this select 1;
     _textType = _this select 2;
+    _interval = _this select 3;
 
     while {((count _units) != 0)} do {
         {
@@ -101,7 +98,7 @@ _thread = [_units, _unitMarkers, _textType] spawn {
                         };
                     };
                     case "number": {
-                        _marker setMarkerText str _forEachIndex;
+                        // _marker setMarkerText str (_forEachIndex + 1);
                     };
                 };
 
@@ -112,7 +109,7 @@ _thread = [_units, _unitMarkers, _textType] spawn {
 
         0 = [_units, 0] call Zen_ArrayRemoveValue;
         0 = [_unitMarkers, 0] call Zen_ArrayRemoveValue;
-        sleep 10;
+        sleep _interval;
     };
     call Zen_StackRemove;
     if (true) exitWith {};

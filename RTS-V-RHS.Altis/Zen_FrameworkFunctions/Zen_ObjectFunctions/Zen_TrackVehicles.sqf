@@ -2,26 +2,22 @@
 // This file is released under Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)
 // See Legal.txt
 
-_Zen_stack_Trace = ["Zen_TrackVehicles", _this] call Zen_StackAdd;
-private ["_vehicles", "_textType", "_hideFromUnits", "_unitMarkers", "_vehicle", "_txt", "_markerShape", "_color", "_marker", "_thread"];
+#include "..\Zen_StandardLibrary.sqf"
+#include "..\Zen_FrameworkLibrary.sqf"
 
-if !([_this, [["ARRAY", "OBJECT"], ["STRING"], ["VOID"]], [["OBJECT", "ARRAY"]], 1] call Zen_CheckArguments) exitWith {
+_Zen_stack_Trace = ["Zen_TrackVehicles", _this] call Zen_StackAdd;
+private ["_vehicles", "_textType", "_hideFromUnits", "_unitMarkers", "_vehicle", "_txt", "_markerShape", "_color", "_marker", "_thread", "_interval"];
+
+if !([_this, [["ARRAY", "OBJECT"], ["STRING"], ["VOID"], ["SCALAR"]], [["OBJECT", "ARRAY"]], 1] call Zen_CheckArguments) exitWith {
     call Zen_StackRemove;
     ([])
 };
 
 _vehicles = [(_this select 0)] call Zen_ConvertToObjectArray;
 
-_textType = "none";
-_hideFromUnits = 0;
-
-if (count _this > 1) then {
-    _textType = _this select 1;
-};
-
-if (count _this > 2) then {
-    _hideFromUnits = _this select 2;
-};
+ZEN_STD_Parse_GetArgumentDefault(_textType, 1, "none")
+ZEN_STD_Parse_GetArgumentDefault(_hideFromUnits, 2, 0)
+ZEN_STD_Parse_GetArgumentDefault(_interval, 3, 10)
 
 _unitMarkers = [];
 
@@ -116,13 +112,14 @@ if (isMultiplayer) then {
     0 = [_unitMarkers, 0, _hideFromUnits] call Zen_ShowHideMarkers;
 };
 
-_thread = [_vehicles, _unitMarkers, _textType] spawn {
+_thread = [_vehicles, _unitMarkers, _textType, _interval] spawn {
     _Zen_stack_Trace = ["Zen_TrackVehicles", _this] call Zen_StackAdd;
     private ["_vehicles", "_unitMarkers", "_textType", "_vehicle", "_marker"];
 
     _vehicles = _this select 0;
     _unitMarkers = _this select 1;
     _textType = _this select 2;
+    _interval = _this select 3;
 
     while {((count _vehicles) != 0)} do {
         {
@@ -175,7 +172,7 @@ _thread = [_vehicles, _unitMarkers, _textType] spawn {
 
         0 = [_vehicles, 0] call Zen_ArrayRemoveValue;
         0 = [_unitMarkers, 0] call Zen_ArrayRemoveValue;
-        sleep 10;
+        sleep _interval;
     };
     call Zen_StackRemove;
     if (true) exitWith {};

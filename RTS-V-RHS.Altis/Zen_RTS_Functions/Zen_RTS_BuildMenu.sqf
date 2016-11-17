@@ -146,7 +146,8 @@
             _access = _assetData select 4;
 
             if ((toUpper _access isEqualTo "ALL") || {player in [WestCommander, EastCommander]}) then {
-                _descrText = ("Cost: " + ([_descrRaw, "Cost: ", ","] call Zen_StringGetDelimitedPart)) + (", Time: " + ([_descrRaw, "Time: ", ","] call Zen_StringGetDelimitedPart));
+                _times = [_x] call Zen_RTS_F_StrategicGetBuildTimesAsset;
+                _descrText = ("Cost: " + ([_descrRaw, "Cost: ", ","] call Zen_StringGetDelimitedPart)) + (", Time: " + str (_times select 0) + "-" + str (_times select 1));
                 _info = (_assetData select 2) + " - " + _descrText;
 
                 _index = lbAdd [_idlist, _info];

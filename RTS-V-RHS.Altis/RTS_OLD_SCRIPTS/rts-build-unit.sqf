@@ -240,7 +240,7 @@ if (rts_name in [EastAirFacName, WestAirFacName]) then {
     _dist = -50 - random 30;
 };
 
-_pos = [_bld, _dist, getDir _bld] call Zen_ExtendPosition;
+_pos = [_bld, _dist, getDir _bld] call Zen_ExtendVector;
 _posX = _pos select 0;
 _posY = _pos select 1;
 posX = _posX;

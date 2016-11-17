@@ -59,7 +59,7 @@ if (_filterWithMarker) then {
             _objResult pushBack _x;
         };
     };
-} forEach (_objRaw - (nearestTerrainObjects [_pos, [], _radius]));
+} forEach (_objRaw - (nearestTerrainObjects [_pos, [], _radius, false]));
 
 if (count _objResult == 0) exitWith {
     ZEN_FMW_Code_ErrorExitValue("Zen_CreateTemplate", "No valid objects in given search area.", "")

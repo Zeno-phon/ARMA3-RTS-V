@@ -13,7 +13,6 @@ Zen_FindNearHeight = compileFinal preprocessFileLineNumbers "Zen_FrameworkFuncti
 Zen_FindPositionPoly = compileFinal preprocessFileLineNumbers "Zen_FrameworkFunctions\Zen_PositionFunctions\Zen_FindPositionPoly.sqf";
 Zen_FindRoadDirection = compileFinal preprocessFileLineNumbers "Zen_FrameworkFunctions\Zen_PositionFunctions\Zen_FindRoadDirection.sqf";
 Zen_FindTerrainGradient = compileFinal preprocessFileLineNumbers "Zen_FrameworkFunctions\Zen_PositionFunctions\Zen_FindTerrainGradient.sqf";
-Zen_FindTerrainSlope = compileFinal preprocessFileLineNumbers "Zen_FrameworkFunctions\Zen_PositionFunctions\Zen_FindTerrainSlope.sqf";
 Zen_FindValidDirection = compileFinal preprocessFileLineNumbers "Zen_FrameworkFunctions\Zen_PositionFunctions\Zen_FindValidDirection.sqf";
 Zen_GetAmbientClutterCount = compileFinal preprocessFileLineNumbers "Zen_FrameworkFunctions\Zen_PositionFunctions\Zen_GetAmbientClutterCount.sqf";
 Zen_GetArguments = compileFinal preprocessFileLineNumbers "Zen_FrameworkFunctions\Zen_PositionFunctions\Zen_GetArguments.sqf";

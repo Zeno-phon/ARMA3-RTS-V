@@ -11,10 +11,20 @@
     _vehicle setVariable ["Zen_RTS_StrategicType", "Asset", true]; \
     _vehicle setVariable ["Zen_RTS_StrategicAssetType", (_assetData select 0), true]; \
     _vehicle setVariable ["Zen_RTS_IsStrategicDebris", false, true]; \
-    (RTS_Recycle_Queue select (([west, east] find ([_vehicle] call Zen_GetSide)) max 0)) pushBack _vehicle; \
+    ZEN_FMW_MP_REServerOnly("Zen_RTS_F_AddRecycleQueue", [_vehicle], call) \
+    _vehicle addEventHandler ["Dammaged", { \
+        _vehicle = _this select 0; \
+        if (!(canMove _vehicle) || (damage _vehicle > 0.9)) then { \
+            (_this select 0) setVariable ["Zen_RTS_IsStrategicDebris", true, true]; \
+            _vehicle removeAllEventHandlers "Dammaged"; \
+        }; \
+    }]; \
     _vehicle addEventHandler ["Killed", { \
-        (_this select 0) setVariable ["Zen_RTS_IsStrategicDebris", true, true]; \
+        _vehicle = _this select 0; \
+        _vehicle setVariable ["Zen_RTS_IsStrategicDebris", true, true]; \
+        _vehicle removeAllEventHandlers "Killed"; \
     }];
+    // (RTS_Recycle_Queue select (([west, east] find ([_vehicle] call Zen_GetSide)) max 0)) pushBack _vehicle; \
     // _vehicle setVariable ["Zen_RTS_IsStrategicRepairable", false, true]; \
 
 private ["_isAI", "_value", "_unit"];

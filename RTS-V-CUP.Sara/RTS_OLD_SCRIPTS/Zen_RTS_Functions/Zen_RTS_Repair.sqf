@@ -34,7 +34,7 @@
     while {(player getVariable "Zen_RTS_RepairActive")} do {
         sleep 1;
 
-        _pos = [_vehicle, 20, getDir _vehicle] call Zen_ExtendPosition;
+        _pos = [_vehicle, 20, getDir _vehicle] call Zen_ExtendVector;
         _objects = nearestObjects [_pos, ["All"], 10];
         // player sideChat str _objects;
         player setVariable ["Zen_RTS_RepairValid", false, false];

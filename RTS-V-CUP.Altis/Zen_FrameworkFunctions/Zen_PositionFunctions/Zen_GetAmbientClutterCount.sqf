@@ -31,9 +31,9 @@ _radius = _this select 1;
     // };
 // } forEach (nearestObjects [_center, [], _radius]);
 
-_treeCount = count (nearestTerrainObjects[_center, ["Tree", "Small Tree"], _radius]);
-_rockCount = count (nearestTerrainObjects[_center, ["Rocks", "Rock"], _radius]);
-_shrubCount = count (nearestTerrainObjects[_center, ["Bush"], _radius]);
+_treeCount = count (nearestTerrainObjects[_center, ["Tree", "Small Tree"], _radius, false]);
+_rockCount = count (nearestTerrainObjects[_center, ["Rocks", "Rock"], _radius, false]);
+_shrubCount = count (nearestTerrainObjects[_center, ["Bush"], _radius, false]);
 
 call Zen_StackRemove;
 ([_treeCount, _rockCount, _shrubCount])

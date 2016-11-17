@@ -31,7 +31,7 @@ Zen_RTS_F_West_RecyclePlantConstructor = {
         // 0 = [_ID, [Zen_RTS_Asset_Tech_West_Upgrade_Barracks]] call Zen_RTS_F_StrategicAddAssetGlobal;
     // };
 
-    BUILDING_VISUALS("LAND_SLUM_HOUSE01_F", -1)
+    BUILDING_VISUALS("LAND_SLUM_HOUSE01_F", -1, WestCommander)
     ZEN_RTS_STRATEGIC_BUILDING_DESTROYED_EH(Zen_RTS_BuildingType_West_RecyclePlant, West)
 
     // to-do: || false condition needs building hacking logic

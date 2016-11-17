@@ -32,7 +32,7 @@ _evalInt = _rayLength / 75;
 _isThruPoly = false;
 
 for "_r" from 0 to _rayLength step _evalInt do {
-    _finPos = [_centerXYPos, _r, _phi, "trig"] call Zen_ExtendPosition;
+    _finPos = [_centerXYPos, _r, _phi, "trig"] call Zen_ExtendVector;
     if ([_finPos, _centerXYPoly, _XYSizePoly, _dirPoly, _shapeType] call Zen_IsPointInPoly) exitWith {
         _isThruPoly = true;
     };

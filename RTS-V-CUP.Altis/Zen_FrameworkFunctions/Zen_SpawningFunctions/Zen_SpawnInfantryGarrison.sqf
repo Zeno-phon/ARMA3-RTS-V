@@ -7,7 +7,7 @@
 _Zen_stack_Trace = ["Zen_SpawnInfantryGarrison", _this] call Zen_StackAdd;
 private ["_centerPos", "_buildingName", "_buildingPositions", "_group", "_i"];
 
-if !([_this, [["VOID"], ["SIDE"], ["SCALAR", "ARRAY", "STRING"], ["SCALAR", "ARRAY"], ["STRING"], ["STRING"], ["ARRAY"]], [[], [], ["SCALAR"], ["SCALAR"]], 4] call Zen_CheckArguments) exitWith {
+if !([_this, [["VOID"], ["SIDE"], ["SCALAR", "ARRAY", "STRING"], ["SCALAR", "ARRAY"], ["STRING"], ["STRING"], ["ARRAY"]], [[], [], ["SCALAR", "ARRAY"], ["SCALAR"]], 4] call Zen_CheckArguments) exitWith {
     call Zen_StackRemove;
     (grpNull)
 };
@@ -21,7 +21,7 @@ if (count _buildingPositions == 0) then {
     _buildingPositions = [getPosATL _buildingName];
 };
 
-_group = ([([_buildingName, 15, random 360] call Zen_ExtendPosition)] + ([_this, 1] call Zen_ArrayGetIndexedSlice)) call Zen_SpawnInfantry;
+_group = ([([_buildingName, 15, random 360] call Zen_ExtendVector)] + ([_this, 1] call Zen_ArrayGetIndexedSlice)) call Zen_SpawnInfantry;
 
 {
     0 = [_x, ZEN_STD_Array_RandElement(_buildingPositions), 0.02, 0, (random 360)] call Zen_TransformObject;

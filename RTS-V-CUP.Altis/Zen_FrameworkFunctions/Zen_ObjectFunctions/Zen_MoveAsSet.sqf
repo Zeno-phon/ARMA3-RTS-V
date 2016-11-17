@@ -28,7 +28,7 @@ _avgCenter = _moveObjects call Zen_FindAveragePosition;
 _lowestHeight = (getPosATL ([_moveObjects, {-((getPosATL _this) select 2)}] call Zen_ArrayFindExtremum)) select 2;
 
 {
-    _newPos = [_newCenter, ([_avgCenter, _x] call Zen_Find2dDistance), ([_avgCenter, _x] call Zen_FindDirection), "trig", (_newCenter select 2)] call Zen_ExtendPosition;
+    _newPos = [_newCenter, ([_avgCenter, _x] call Zen_Find2dDistance), ([_avgCenter, _x] call Zen_FindDirection), "trig", (_newCenter select 2)] call Zen_ExtendVector;
     if (typeName _x == "STRING") then {
         _x setMarkerPos _newPos;
     } else {

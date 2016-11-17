@@ -46,11 +46,11 @@ if ((count units _group == 0) || (isNull _group)) exitWith {
 
 if (surfaceIsWater _pos) then {
     {
-        _x setPosASL ([_pos, random 2, random 360, "compass", _pos select 2] call Zen_ExtendPosition);
+        _x setPosASL ([_pos, random 2, random 360, "compass", _pos select 2] call Zen_ExtendVector);
     } forEach (units _group);
 } else {
     {
-        _x setPosATL ([_pos, random 2, random 360, "compass", _pos select 2] call Zen_ExtendPosition);
+        _x setPosATL ([_pos, random 2, random 360, "compass", _pos select 2] call Zen_ExtendVector);
     } forEach (units _group);
 };
 

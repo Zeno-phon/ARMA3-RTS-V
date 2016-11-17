@@ -30,5 +30,14 @@ diag_log ("Zen_RTS_TerritoryEventCaptured :" + str time);
 diag_log _oldData;
 diag_log _newData;
 
+_args = [west, east];
+ZEN_FMW_MP_REAll("Zen_RTS_F_EconomyComputeSupply", _args, call)
+
+{
+    if (isPlayer _x) then {
+        ZEN_FMW_MP_REClient("Zen_RTS_F_ModifyMoney", 3, call, _x)
+    };
+} forEach ([(_newData select 1)] call Zen_ConvertToObjectArray);
+
 call Zen_StackRemove;
 if (true) exitWith {};

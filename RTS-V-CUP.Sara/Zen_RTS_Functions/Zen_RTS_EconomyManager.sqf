@@ -11,15 +11,29 @@ sleep 1;
     _units = [_x] call Zen_ConvertToObjectArray;
     _units = [_units, {!(isPlayer _this)}] call Zen_ArrayFilterCondition;
     Zen_RTS_Economy_Data pushBack [_x, 0, 0, _units];
-    publicVariable "Zen_RTS_Economy_Data";
 
     _args = ["sideChat", [[_x,"HQ"], "Operating funds established."]];
     ZEN_FMW_MP_RENonDedicated("Zen_ExecuteCommand", _args, call)
     ZEN_FMW_MP_RENonDedicated("Zen_RTS_F_SetMoney", (paramsArray select 0))
 } forEach [West, East];
 
+_refreshTime = time + 10;
 while {true} do {
     sleep 0.9;
+    if (time > _refreshTime) then {
+        _refreshTime = time + 10;
+        _units = [_x] call Zen_ConvertToObjectArray;
+        _units = [_units, {!(isPlayer _this)}] call Zen_ArrayFilterCondition;
+
+        {
+            _units = [_x] call Zen_ConvertToObjectArray;
+            _units = [_units, {!(isPlayer _this)}] call Zen_ArrayFilterCondition;
+            
+            _dataArray = Zen_RTS_Economy_Data select ([West, East] find _x);
+            _dataArray set [3, _units];
+        } forEach [West, East];
+    };
+
     {
         _subTerritoryCount = (count ([[1], [[HASH_SIDE(_x), HASH_SIDE(_x)]], [{HASH_SIDE(_this)}]] call Zen_RTS_SubTerritorySearch)) + 1;
         _moneyPerMinute = _subTerritoryCount * MONEY_COEF;
@@ -37,11 +51,11 @@ while {true} do {
 
         ZEN_FMW_Array_RemoveIndexes(_playerData, _toRemove)
 
-        _supplyFactor = _dataArray select 2;
-        _supplyPerMinute = _supplyFactor;
+        // _supplyFactor = _dataArray select 2;
+        // _supplyPerMinute = _supplyFactor;
 
-        _supply = _dataArray select 1;
-        _dataArray set [1, _supply + (_supplyPerMinute / 60)];
+        // _supply = _dataArray select 1;
+        // _dataArray set [1, _supply + (_supplyPerMinute / 60)];
 
         _args = [_moneyPerMinute, _supply, _supplyPerMinute, _x];
         ZEN_FMW_MP_RENonDedicated("Zen_RTS_F_PrintMoney", _args, call)

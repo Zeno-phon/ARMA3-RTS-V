@@ -22,7 +22,7 @@ _waterSectors = 0;
 
 for "_phi" from 0 to 350 step 10 do {
     for "_r" from 10 to _distance step 10 do {
-        _checkPos = [_center, _r, _phi + (_checkAnglesAdd select _checkAddIndex), "trig"] call Zen_ExtendPosition;
+        _checkPos = [_center, _r, _phi + (_checkAnglesAdd select _checkAddIndex), "trig"] call Zen_ExtendVector;
         if (surfaceIsWater _checkPos) exitWith {
             _waterSectors = _waterSectors + 1;
         };

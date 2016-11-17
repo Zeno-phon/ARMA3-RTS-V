@@ -2,7 +2,7 @@
 // This file is released under Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)
 // See Legal.txt
 
-Zen_ExtendPosition = compileFinal preprocessFileLineNumbers "Zen_FrameworkFunctions\Zen_MathFunctions\Zen_ExtendPosition.sqf";
+Zen_ExtendVector = compileFinal preprocessFileLineNumbers "Zen_FrameworkFunctions\Zen_MathFunctions\Zen_ExtendVector.sqf";
 Zen_ExtendRay = compileFinal preprocessFileLineNumbers "Zen_FrameworkFunctions\Zen_MathFunctions\Zen_ExtendRay.sqf";
 Zen_Find2dDistance = compileFinal preprocessFileLineNumbers "Zen_FrameworkFunctions\Zen_MathFunctions\Zen_Find2dDistance.sqf";
 Zen_FindDirection = compileFinal preprocessFileLineNumbers "Zen_FrameworkFunctions\Zen_MathFunctions\Zen_FindDirection.sqf";

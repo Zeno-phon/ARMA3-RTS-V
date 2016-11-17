@@ -58,7 +58,7 @@
         };
 
         if ((([vehicle player, _HQObject] call Zen_Find2dDistance) > HQ_MAX_DIST) && {!(_isNaval)}) exitWith {
-            player sideChat "This building must be constructed within "+ str HQ_MAX_DIST + " meters of the HQ.";
+            player sideChat "This building must be constructed within " + str HQ_MAX_DIST + " meters of the HQ.";
             _exit = true;
         };
     };
@@ -76,7 +76,7 @@
 
     hintSilent "When the preview appears,\nplacement is valid\nUse confirm action to build";
     _vehicle = vehicle player;
-    _heliPad = _buildingPreviewType createVehicleLocal ([_vehicle, 31, getDir _vehicle, "compass", 0] call Zen_ExtendPosition);
+    _heliPad = _buildingPreviewType createVehicleLocal ([_vehicle, 31, getDir _vehicle, "compass", 0] call Zen_ExtendVector);
 
     _modelCenter = _heliPad modelToWorld [0,0,0];
     _heliPad attachTo [_vehicle, [0, 31, (_modelCenter select 2) - 2]];
@@ -95,7 +95,7 @@
             };
         } forEach _safezoneMarkers;
 
-        _slope = [_pos, 10] call Zen_FindTerrainSlope;
+        _slope = 90 - (([_pos, 10] call Zen_FindTerrainGradient) select 2);
         _clutter = [_pos, 32] call Zen_GetAmbientClutterCount;
         _objects = nearestObjects [_pos, [""], 10];
 

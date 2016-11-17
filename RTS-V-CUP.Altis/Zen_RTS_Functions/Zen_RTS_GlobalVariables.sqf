@@ -1,6 +1,5 @@
 rts_debug = true;
 mapDebug = true;
-param3 = 0;
 // StopMsg = false;
 ShowStats = false;
 Dedicated = isDedicated;
@@ -14,7 +13,6 @@ ColorCivilian = "ColorCivilian";
 // arms_refresh = true;
 // noBuildZone = [];
 
-aiLimit = 10;
 // rts_unitnum = 0;
 // WestSoldiers = [];
 
@@ -140,8 +138,12 @@ idFPS = 666;
 
 if (rts_debug) then {
     playerMoney = 100000;
-    Eastsupply = 100000;
-    WestSupply = 100000;
+} else {
+    playerMoney = Start_Money;
 };
 
+playerSupply = 0;
 Zen_RTS_Show_Preview = false;
+Zen_RTS_TotalKills = [[0,0,0,0], [0,0,0,0]];
+Zen_RTS_LocalKills = [0,0,0,0];
+Zen_RTS_CapturedSubTerritories = [];

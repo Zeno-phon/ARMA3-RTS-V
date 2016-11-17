@@ -20,7 +20,7 @@ ZEN_STD_Parse_GetArgumentDefault(_houseCount, 4, 1)
 
 _nearBuilding = nearestBuilding _centerPos;
 // _housesArray = nearestObjects [getPosATL _nearBuilding, ["House"], 100];
-_housesArray = nearestTerrainObjects[getPosATL _nearBuilding, ["Building", "House"], 100];
+_housesArray = nearestTerrainObjects[getPosATL _nearBuilding, ["Building", "House"], 100, false];
 // player sideChat str (nearestTerrainObjects[getPosATL player, ["BUILDING", "HOUSE"], 100]);
 // player sideChat str (nearestObjects [getPosATL player, ["House"], 100]);
 
@@ -54,7 +54,7 @@ while {(count _units > 0)} do {
                 _randHouseIndex = ZEN_STD_Array_RandIndex(_housesArray);
                 _randHouse = _housesArray select _randHouseIndex;
                 if (_patrolOutside && {((random 1) > 0.7)}) then {
-                    _x doMove ([_randHouse, 30, (random 360)] call Zen_ExtendPosition);
+                    _x doMove ([_randHouse, 30, (random 360)] call Zen_ExtendVector);
                 } else {
                     _randPosArray = _housePosArray select _randHouseIndex;
                     _x doMove ZEN_STD_Array_RandElement(_randPosArray);

@@ -24,7 +24,7 @@ _staticWeapon = objNull;
 while {_i < 352} do {
     _class = [FORT_CLASSES] call Zen_ArrayGetRandom;
     _distanceError = [-2, 2] call Zen_FindInRange;
-    _spawnPos = [_center, _distance + _distanceError, _i] call Zen_ExtendPosition;
+    _spawnPos = [_center, _distance + _distanceError, _i] call Zen_ExtendVector;
 
     _direction = [_center, _spawnPos] call Zen_FindDirection;
     _direction = [_direction] call Zen_FindTrigAngle;
@@ -37,7 +37,7 @@ while {_i < 352} do {
 
     if (!_hasMG && [_class, "Land_BagFence_Long_F"] call Zen_ValuesAreEqual) then {
         _hasMG = true;
-        _mgSpawnPos = [_object, 1.75, (_direction + 180), "compass"] call Zen_ExtendPosition;
+        _mgSpawnPos = [_object, 1.75, (_direction + 180), "compass"] call Zen_ExtendVector;
         _staticWeapon = [_mgSpawnPos, _staticClass, 0, _direction, true] call Zen_SpawnVehicle;
     };
 
