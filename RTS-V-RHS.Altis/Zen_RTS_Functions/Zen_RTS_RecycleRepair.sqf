@@ -99,7 +99,7 @@ if (_actionType == "Repair") then {
             deleteVehicle _nearestObj; \
             _index = [_type, (RTS_Used_Building_Types select ([west, east] find _side))] call Zen_ValueFindInArray; \
             _level = RTS_Building_Type_Levels select ([west, east] find _side) select _index; \
-            _args = [_type, [_pos, _level]]; \
+            _args = [_type, [_pos, _level, getDir _nearestObj]]; \
             ZEN_FMW_MP_REServerOnly("Zen_RTS_StrategicBuildingInvoke", _args, call) \
         }; \
         default { \

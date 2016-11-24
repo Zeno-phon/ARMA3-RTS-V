@@ -131,11 +131,22 @@
         lbClear _idlist;
         {
             _bldData = [_x] call Zen_RTS_StrategicBuildingTypeGetData;
+            _buildingName = _bldData select 4;
             _descrRaw = _bldData select 5;
 
             _times = [_x] call Zen_RTS_F_StrategicGetBuildTimesBuilding;
-            _descrText = ("Cost: " + ([_descrRaw, "Cost: ", ","] call Zen_StringGetDelimitedPart)) + (", Time: " + str (_times select 0) + "-" + str (_times select 1));
-            _info = (_bldData select 4) + ", " + _descrText;
+            _info = "";
+            if !(_buildingName isEqualTo "CJ") then {
+                _buildingObjData = [_x, true, false] call Zen_RTS_StrategicBuildingObjectGetDataGlobal;
+
+                if ((count _buildingObjData == 0) || {isNull (_buildingObjData select 2)}) then {
+                    _info = (_bldData select 4) + ", " + ("Cost: " + ([_descrRaw, "Cost: ", ","] call Zen_StringGetDelimitedPart)) + (", Time: " + str (_times select 0) + "-" + str (_times select 1));
+                } else {
+                    _info = _buildingName + " - Online - Level " + str (_buildingObjData select 3) + "/" + str (count (_bldData select 3));
+                };
+            } else {
+                _info = (_bldData select 4) + ", " + ("Cost: " + ([_descrRaw, "Cost: ", ","] call Zen_StringGetDelimitedPart)) + (", Time: " + str (_times select 0) + "-" + str (_times select 1));
+            };
 
             _index = lbAdd [_idlist, _info];
             lbSetData [_idlist, _index, _x];

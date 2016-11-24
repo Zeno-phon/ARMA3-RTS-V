@@ -37,6 +37,9 @@ if (typeName _skill == "STRING") exitWith {
         case "crew": {
                 0 = [_setSkillUnits, [[0.075, 0.1], [0.03, 0.04], [0.1, 0.2], 1, [0.5, 0.7], [0.2, 0.4], [0.7, 0.8], [0.4, 0.6], [0.5, 0.6], [0.3, 0.4]]] call Zen_SetAISkill;
         };
+        case "player": {
+                0 = [_setSkillUnits, [[0.39, 0.41], 1, 1, 1, 1, 1, 1, 1, 1, [0.45, 0.55]]] call Zen_SetAISkill;
+        };
         default {
             0 = ["Zen_SetAISkill", "Invalid skill preset given", _this] call Zen_PrintError;
             call Zen_StackPrint;

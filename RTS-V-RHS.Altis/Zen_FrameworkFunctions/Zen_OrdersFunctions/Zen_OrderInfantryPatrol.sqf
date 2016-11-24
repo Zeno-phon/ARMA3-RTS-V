@@ -6,7 +6,7 @@
 #include "..\Zen_FrameworkLibrary.sqf"
 
 _Zen_stack_Trace = ["Zen_OrderInfantryPatrol", _this] call Zen_StackAdd;
-private ["_grpsArray", "_movecenters", "_maxx", "_mpos", "_man", "_speedMode", "_limitAnglesSet", "_target", "_behaviorMode", "_chaseEnemy", "_waterPosition", "_divers", "_joinWeak", "_joined", "_center", "_index", "_positionFilterArgs"];
+private ["_grpsArray", "_movecenters", "_maxx", "_mpos", "_man", "_speedMode", "_limitAnglesSet", "_target", "_behaviorMode", "_chaseEnemy", "_waterPosition", "_divers", "_joinWeak", "_joined", "_center", "_index", "_positionFilterArgs", "_indexesToRemove", "_chaseFlags"];
 
 if !([_this, [["VOID"], ["ARRAY", "OBJECT", "GROUP", "STRING"], ["ARRAY"], ["ARRAY", "SCALAR"], ["STRING"], ["STRING"], ["BOOL"], ["BOOL"], ["BOOL"]], [[], ["ARRAY", "OBJECT", "GROUP", "STRING", "SCALAR"], ["STRING", "ARRAY", "SCALAR"], ["SCALAR", "ARRAY"]], 2] call Zen_CheckArguments) exitWith {
     call Zen_StackRemove;
@@ -55,7 +55,9 @@ if (_divers) then {
 };
 
 _grpsArray = [_grpsArray] call Zen_ArrayRemoveDead;
+_chaseFlags = [];
 {
+    _chaseFlags pushBack false;
     private "_group";
     _group = _x;
     _man = leader _group;
@@ -92,6 +94,7 @@ _grpsArray = [_grpsArray] call Zen_ArrayRemoveDead;
         _group move _mpos;
         _group setCombatMode "Red";
         _group setSpeedMode _speedMode;
+        _group setBehaviour _behaviorMode;
         if (side _group == civilian) then {
             _group setBehaviour "careless";
         } else {
@@ -101,6 +104,7 @@ _grpsArray = [_grpsArray] call Zen_ArrayRemoveDead;
 } forEach _grpsArray;
 
 while {(count _grpsArray != 0)} do {
+    _indexesToRemove = [];
     {
         private "_group";
         _group = _x;
@@ -151,6 +155,7 @@ while {(count _grpsArray != 0)} do {
                         };
                         if (!(isNull _target) && {((([_man, _target] call Zen_Find2dDistance) < 750) && (_target isKindOf "Man"))}) then {
                             _mpos = [_target, (random (150 / ((_man knowsAbout _target) + 0.1))), (random 360)] call Zen_ExtendVector;
+                            _chaseFlags set [_forEachIndex, true];
 
                             if !(isPlayer _man) then {
                                 if (_divers) then {
@@ -170,14 +175,36 @@ while {(count _grpsArray != 0)} do {
                                     _group setBehaviour "combat";
                                 };
                             };
+                        } else {
+                            _mpos = [0,0,0];
+                            CALC_POS
+
+                            if (!(isPlayer _man) && {_chaseFlags select _forEachIndex}) then {
+                                _chaseFlags set [_forEachIndex, false];
+                                if (_divers) then {
+                                    _mpos set [2, -10];
+                                    {
+                                        _x swimInDepth -10;
+                                    } forEach (units _group);
+                                };
+
+                                _group setCurrentWaypoint (_group addWaypoint [_mpos, -1]);
+                                _group move _mpos;
+                                _group setBehaviour _behaviorMode;
+                                _group setCombatMode "Red";
+                                _group setSpeedMode _speedMode;
+                            };
                         };
                     };
                 };
             };
+        } else {
+            _indexesToRemove pushBack _forEachIndex;
         };
     } forEach _grpsArray;
     sleep 10;
-    _grpsArray = [_grpsArray] call Zen_ArrayRemoveDead;
+    ZEN_FMW_Array_RemoveIndexes(_grpsArray, _indexesToRemove);
+    ZEN_FMW_Array_RemoveIndexes(_chaseFlags, _indexesToRemove);
 };
 
 call Zen_StackRemove;

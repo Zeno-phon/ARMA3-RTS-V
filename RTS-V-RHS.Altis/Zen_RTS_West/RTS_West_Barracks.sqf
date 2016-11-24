@@ -8,8 +8,7 @@ Zen_RTS_F_West_BarracksConstructor = {
     _buildingObjData = _this select 0;
     _args = _this select 1;
 
-    _spawnPos = _args select 0;
-    // _level = _args select 1;
+    ZEN_RTS_STRATEGIC_BUILDING_CONSTRUCTOR_ARGS()
     _buildingTypeData = [(_buildingObjData select 0)] call Zen_RTS_StrategicBuildingTypeGetData;
 
     _assetsToAdd = [];
@@ -34,7 +33,7 @@ Zen_RTS_F_West_BarracksConstructor = {
         0 = [_ID, [Zen_RTS_Asset_Tech_West_Upgrade_Barracks]] call Zen_RTS_F_StrategicAddAssetGlobal;
     };
 
-    BUILDING_VISUALS("Land_Cargo_House_V1_F", -1.3, WestCommander)
+    BUILDING_VISUALS("Land_Cargo_House_V1_F", -1.3, WestCommander, _dir)
     ZEN_RTS_STRATEGIC_BUILDING_DESTROYED_EH(Zen_RTS_BuildingType_West_Barracks, West)
 
     _args = ["addAction", [_building, ["<img size='3'image='pictures\build_CA.paa'/>", Zen_RTS_BuildMenu, [(_buildingObjData select 0), (_buildingObjData select 1)], 1, false, true, "", "((_target distance _this) < 15) && {(side _this == (_target getVariable 'Zen_RTS_StrategicBuildingSide')) || (false)}"]]];

@@ -7,8 +7,7 @@ Zen_RTS_F_East_RadarConstructor = {
     _buildingObjData = _this select 0;
     _args = _this select 1;
 
-    _spawnPos = _args select 0;
-    _level = _args select 1;
+    ZEN_RTS_STRATEGIC_BUILDING_CONSTRUCTOR_ARGS()
 
     _assetsToAdd = [];
 
@@ -25,7 +24,7 @@ Zen_RTS_F_East_RadarConstructor = {
     };
 
     _buildingTypeData = [(_buildingObjData select 0)] call Zen_RTS_StrategicBuildingTypeGetData;
-    BUILDING_VISUALS("Land_Radar_Small_F", -1, EastCommander)
+    BUILDING_VISUALS("Land_Radar_Small_F", -1, EastCommander, _dir)
     ZEN_RTS_STRATEGIC_BUILDING_DESTROYED_EH(Zen_RTS_BuildingType_East_Radar, east)
 
     if (_level > 0) then {

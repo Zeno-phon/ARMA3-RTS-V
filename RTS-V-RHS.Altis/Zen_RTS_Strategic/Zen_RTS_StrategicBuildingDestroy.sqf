@@ -29,7 +29,7 @@ ZEN_FMW_MP_REServerOnly("Zen_RTS_F_StrategicRemoveBuildingQueueClient", [_identi
 
 _index = ([Zen_RTS_Strategic_Building_Objects_Global, _objData select 1, 1] call Zen_ArrayGetNestedIndex) select 0;
 0 = [Zen_RTS_Strategic_Building_Objects_Global, _index] call Zen_ArrayRemoveIndex;
-0 = [Zen_RTS_Strategic_Building_Objects_Server, _index] call Zen_ArrayRemoveIndex;
+// 0 = [Zen_RTS_Strategic_Building_Objects_Server, _index] call Zen_ArrayRemoveIndex;
 publicVariable "Zen_RTS_Strategic_Building_Objects_Global";
 
 ZEN_FMW_MP_REAll("Zen_RTS_F_StrategicRemoveBuildingDataLocal", _index, call)

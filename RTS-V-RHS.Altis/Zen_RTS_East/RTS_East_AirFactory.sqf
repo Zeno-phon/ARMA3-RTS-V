@@ -16,8 +16,7 @@ Zen_RTS_F_East_AirFactoryConstructor = {
     _buildingObjData = _this select 0;
     _args = _this select 1;
 
-    _spawnPos = _args select 0;
-    _level = _args select 1;
+    ZEN_RTS_STRATEGIC_BUILDING_CONSTRUCTOR_ARGS()
     _buildingTypeData = [(_buildingObjData select 0)] call Zen_RTS_StrategicBuildingTypeGetData;
 
     _assetsToAdd = [];
@@ -41,7 +40,7 @@ Zen_RTS_F_East_AirFactoryConstructor = {
         0 = [_ID, [Zen_RTS_Asset_Tech_East_Upgrade_AirFactory]] call Zen_RTS_F_StrategicAddAssetGlobal;
     };
 
-    BUILDING_VISUALS("Land_Airport_Tower_F", -2, EastCommander)
+    BUILDING_VISUALS("Land_Airport_Tower_F", -2, EastCommander, _dir)
     ZEN_RTS_STRATEGIC_BUILDING_DESTROYED_EH(Zen_RTS_BuildingType_East_AirFactory, East)
 
     // to-do: || false condition needs building hacking logic

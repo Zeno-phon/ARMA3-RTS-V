@@ -138,10 +138,10 @@ if (_nearWaterSwitch == 1) then {
 
 FAIL_CHECK
 if (_terrainSlopeSwitch == 1) then {
-    if (90 - (([_pos] call Zen_FindTerrainGradient) select 2) > _terrainSlopeAngle) then {FAIL};
+    if ((90 - (([_pos] call Zen_FindTerrainGradient) select 2)) > _terrainSlopeAngle) then {FAIL};
 } else {
     if (_terrainSlopeSwitch == 2) then {
-        if (90 - (([_pos] call Zen_FindTerrainGradient) select 2) < _terrainSlopeAngle) then {FAIL};
+        if ((90 - (([_pos] call Zen_FindTerrainGradient) select 2)) < _terrainSlopeAngle) then {FAIL};
     };
 };
 

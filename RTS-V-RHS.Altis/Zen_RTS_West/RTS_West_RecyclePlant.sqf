@@ -8,8 +8,8 @@ Zen_RTS_F_West_RecyclePlantConstructor = {
     _buildingObjData = _this select 0;
     _args = _this select 1;
 
-    _spawnPos = _args select 0;
-    _level = _args select 1;
+    ZEN_RTS_STRATEGIC_BUILDING_CONSTRUCTOR_ARGS()
+
     _buildingTypeData = [(_buildingObjData select 0)] call Zen_RTS_StrategicBuildingTypeGetData;
 
     _assetsToAdd = [];
@@ -31,7 +31,7 @@ Zen_RTS_F_West_RecyclePlantConstructor = {
         // 0 = [_ID, [Zen_RTS_Asset_Tech_West_Upgrade_Barracks]] call Zen_RTS_F_StrategicAddAssetGlobal;
     // };
 
-    BUILDING_VISUALS("Land_Cargo_House_V2_F", -1, WestCommander)
+    BUILDING_VISUALS("Land_Cargo_House_V2_F", -1, WestCommander, _dir)
     ZEN_RTS_STRATEGIC_BUILDING_DESTROYED_EH(Zen_RTS_BuildingType_West_RecyclePlant, West)
 
     // to-do: || false condition needs building hacking logic

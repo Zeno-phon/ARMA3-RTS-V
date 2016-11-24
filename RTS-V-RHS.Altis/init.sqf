@@ -62,6 +62,14 @@ call compileFinal preprocessFileLineNumbers "Zen_RTS_SubTerritory\Zen_RTS_SubTer
 // [] exec "rts-init-SetRandomPos.sqs";
 // 1 setRadioMsg "Null";
 
+#define ZEN_RTS_STRATEGIC_BUILDING_CONSTRUCTOR_ARGS() \
+    _spawnPos = _args select 0; \
+    _level = _args select 1; \
+    _dir = random 360; \
+    if (count _args > 2) then { \
+        _dir = _args select 2; \
+    };
+
 #define ZEN_RTS_STRATEGIC_ASSET_SPAWN_MESSAGE() \
     _buildingType = _buildingObjData select 0; \
     _buildingTypeData = [_buildingType] call Zen_RTS_StrategicBuildingTypeGetData; \
@@ -123,12 +131,11 @@ call compileFinal preprocessFileLineNumbers "Zen_RTS_SubTerritory\Zen_RTS_SubTer
     // (RTS_Recycle_Queue select (([west, east] find ([_vehicle] call Zen_GetSide)) max 0)) pushBack _vehicle; \
     // _vehicle setVariable ["Zen_RTS_IsStrategicRepairable", false, true]; \
 
-#define BUILDING_VISUALS(T, O, C) \
-    _dir = random 360; \
-    _building = [_spawnPos, T, 0, _dir, true] call Zen_SpawnVehicle; \
+#define BUILDING_VISUALS(T, O, C, D) \
+    _building = [_spawnPos, T, 0, D, true] call Zen_SpawnVehicle; \
     _building hideObjectGlobal true; \
     _building hideObject true; \
-    _args = [_dir, _buildingTypeData, _spawnPos, T, O, (_buildingTypeData select 0), side C]; \
+    _args = [D, _buildingTypeData, _spawnPos, T, O, (_buildingTypeData select 0), side C]; \
     ZEN_FMW_MP_REAll("Zen_RTS_F_StrategicBuildingVisualLocal", _args, spawn) \
     [(_buildingTypeData select 0), side C] call Zen_RTS_F_EconomyStrategicBuildDelayBuilding; \
     _building hideObjectGlobal false; \

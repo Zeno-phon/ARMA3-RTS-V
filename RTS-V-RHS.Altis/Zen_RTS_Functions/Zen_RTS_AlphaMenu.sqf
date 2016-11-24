@@ -118,7 +118,7 @@
 
         // Heights
         lbClear _idComboHeights;
-        _flyHeightSteps = [1,10,13,20,30,50,77,100,200,300,400,500,600,700,1000,1500,2000,2500,3000];
+        _flyHeightSteps = [1,10,20,30,50,75,100,200,300,400,500,600,700,1000,1500,2000,2500,3000];
         {
             _index = lbAdd [_idComboHeights, str _x];
             lbSetValue [_idComboHeights, _index, _x];

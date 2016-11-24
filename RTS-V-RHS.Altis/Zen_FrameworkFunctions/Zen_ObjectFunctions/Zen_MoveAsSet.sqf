@@ -23,9 +23,9 @@ _moveMarkers = [_moveEntities, ""] call Zen_ArrayGetType;
 _moveObjects = [_moveEntities, {typeName _this == "STRING"}, true] call Zen_ArrayFilterCondition;
 _moveObjects = [_moveObjects] call Zen_ConvertToObjectArray;
 
+_lowestHeight = (getPosATL ([_moveObjects, {-((getPosATL _this) select 2)}] call Zen_ArrayFindExtremum)) select 2;
 0 = [_moveObjects, _moveMarkers] call Zen_ArrayAppendNested;
 _avgCenter = _moveObjects call Zen_FindAveragePosition;
-_lowestHeight = (getPosATL ([_moveObjects, {-((getPosATL _this) select 2)}] call Zen_ArrayFindExtremum)) select 2;
 
 {
     _newPos = [_newCenter, ([_avgCenter, _x] call Zen_Find2dDistance), ([_avgCenter, _x] call Zen_FindDirection), "trig", (_newCenter select 2)] call Zen_ExtendVector;

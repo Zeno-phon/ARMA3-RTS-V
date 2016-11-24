@@ -95,9 +95,9 @@
             };
         } forEach _safezoneMarkers;
 
-        _slope = 90 - (([_pos, 10] call Zen_FindTerrainGradient) select 2);
-        _clutter = [_pos, 32] call Zen_GetAmbientClutterCount;
-        _objects = nearestObjects [_pos, [""], 10];
+        _slope = 90 - (([_pos, 15] call Zen_FindTerrainGradient) select 2);
+        _clutter = [_pos, 15] call Zen_GetAmbientClutterCount;
+        _objects = nearestTerrainObjects[_pos, ["Building", "House", "Church", "Chapel", "Bunker", "Fortress", "Fountain", "View-Tower", "Lighthouse", "FuelStation", "Hospital", "Wall", "WaterTower"], 30, false];
 
         {
             if ((BB_Volume(_x) < 4) || (BB_AreaXY(_x) < 1)) then {
@@ -113,9 +113,9 @@
         // player sidechat str _safezoneMarkers;
         // player sidechat str _inSafezone;
         _canPlace = (if (_isNaval) then {
-            (!(_inSafezone) && (!(surfaceIsWater _pos) && {([_pos, 10, "water"] call Zen_IsNearTerrain)}) && {((_slope < 15) && (count _objects < 6) && {((_clutter vectorDotProduct [1, 0, 0]) < 6)})})
+            (!(_inSafezone) && (!(surfaceIsWater _pos) && {([_pos, 10, "water"] call Zen_IsNearTerrain)}) && {((_slope < 15) && {(((count _objects) + (_clutter vectorDotProduct [1, 0, 0])) < 1)})})
         } else {
-            (!(_inSafezone) && (!(surfaceIsWater _pos) && {!([_pos, 35, "water"] call Zen_IsNearTerrain)}) && {((_slope < 15) && (count _objects < 6) && {((_clutter vectorDotProduct [1, 0, 0]) < 6)} && {(([_pos, _HQObject] call Zen_Find2dDistance) < HQ_MAX_DIST)})})
+            (!(_inSafezone) && (!(surfaceIsWater _pos) && {!([_pos, 35, "water"] call Zen_IsNearTerrain)}) && {((_slope < 15) && {(((count _objects) + (_clutter vectorDotProduct [1, 0, 0])) < 1)} && {(([_pos, _HQObject] call Zen_Find2dDistance) < HQ_MAX_DIST)})})
         });
 
         if (_canPlace) then {
@@ -139,7 +139,7 @@
                     _level = (RTS_Building_Type_Levels select 0) select _index;
                 };
 
-                _args = [_type, [_pos, _level]];
+                _args = [_type, [_pos, _level, getDir _vehicle]];
                 ZEN_FMW_MP_REServerOnly("Zen_RTS_StrategicBuildingInvoke", _args, call)
                 breakTo "main";
             };

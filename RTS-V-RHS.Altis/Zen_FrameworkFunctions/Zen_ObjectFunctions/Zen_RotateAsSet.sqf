@@ -7,7 +7,7 @@
 _Zen_stack_Trace = ["Zen_RotateAsSet", _this] call Zen_StackAdd;
 private ["_moveObjects", "_center", "_moveMarkers", "_newPos", "_rotateAngle", "_redir"];
 
-if !([_this, [["VOID"], ["SCALAR"]], [], 2] call Zen_CheckArguments) exitWith {
+if !([_this, [["VOID"], ["SCALAR"], ["BOOL"]], [], 2] call Zen_CheckArguments) exitWith {
     call Zen_StackRemove;
 };
 

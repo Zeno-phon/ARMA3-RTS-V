@@ -75,9 +75,9 @@ Strategic
         // building placement shows full building
         // building placement allows for asset spawn grid
         // HQ, Radar have no safezone
+        // Placed buildings face MCU
+        // tweak building heights
         Buildings get side visible map marker
-        Placed buildings face MCU
-        tweak building heights
 
         Barracks
             // Level 1: standard infantry (rifleman, AR, etc.)
@@ -141,10 +141,10 @@ Territory
     FOB
         // spawn FOB template
         // spawn AI defenders on capture
-        use Zen_CreateTemplate/Zen_SpawnTemplate in Zen_RTS_SubTerritoryEventCaptured
+        // use Zen_CreateTemplate/Zen_SpawnTemplate in Zen_RTS_SubTerritoryEventCaptured
+        // explosive barrels
         capping with certain vehicles gives fob
         each flag upgraded individually by FOB vehicle
-        explosive barrels
 RTS menus
     // view distance fix
     // building unit dialog called from action per building
@@ -231,30 +231,34 @@ Known MP Issues
 Variants
     RHS - CUP File Differences
         mission.sqm
-        Zen_RTS_East
-        Zen_RTS_West
+        Zen_RTS_East\
+        Zen_RTS_West\
         Zen_RTS_Functions\Zen_RTS_CustomLoadouts
     Map Variant File Differences
         mission.sqm
+        Description.ext
+    Dev - Test Differences
+        Description.ext
+        menus\
 
 //////////////////////////////////////////////////
 // Recent Changelog
 //////////////////////////////////////////////////
 
-1. Fixed: CJ build time now updates properly
-2. Fixed: AI recyclers are now tasked to destroyed assets
-3. Added: Proper calculation of money
-4. Added: Proper calculation of supply
-5. Added: Supply affects all build times dynamically
-6. Added: Supply is transferred by player slot on disconnect/join
-7. Improved: Updated to my latest framework
+1. Fixed: Destroying a building caused an error
+2. Fixed: Buildings could not be repaired
+3. Improved: MCU build menu now shows which buildings have been constructed
+4. Improved: Buildings now build in the direction of the MCU
+5. Improved: Building placement approval logic
+6. Improved: Updated to my latest framework
 
 //////////////////////////////////////////////////
 // Priority List
 //////////////////////////////////////////////////
 
 Test JIP
-Mininum creation time for all assets
+Minimum creation time for all assets
+VTOL
 Buildings get side visible map marker
     Zen_ShowHideMarkers
 AI fire on buildings and unmanned vehicles
