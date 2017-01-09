@@ -43,7 +43,9 @@ if ((toUpper _type) in ["LIST", "DROPLIST"]) then {
     _index = [_controlBlocks, "ListData", 0] call Zen_ArrayGetNestedIndex;
     if (count _index > 0) then {
         _index = _index select 0;
-        _linkedArgs pushBack (((_controlBlocks select _index) select 1) select (lbCurSel _currentControl));
+        if ((lbCurSel _currentControl) > -1) then {
+            _linkedArgs pushBack (((_controlBlocks select _index) select 1) select (lbCurSel _currentControl));
+        };
     };
 };
 
@@ -70,16 +72,18 @@ if (count _index > 0) then {
                     _linkedControl = (_Zen_Dialog_Controls_Local select _indexLinkedControlLocal) select 1;
                     _listDataIndex = lbCurSel _linkedControl;
 
-                    _indexLinkControlBlock = [_properties, "Data", 0] call Zen_ArrayGetNestedIndex;
-                    if (count _indexLinkControlBlock > 0) then {
-                        _indexLinkControlBlock = _indexLinkControlBlock select 0;
-                        _linkedArgs pushBack (((_properties select _indexLinkControlBlock) select 1) select _listDataIndex);
-                    };
+                    if (_listDataIndex > -1) then {
+                        _indexLinkControlBlock = [_properties, "Data", 0] call Zen_ArrayGetNestedIndex;
+                        if (count _indexLinkControlBlock > 0) then {
+                            _indexLinkControlBlock = _indexLinkControlBlock select 0;
+                            _linkedArgs pushBack (((_properties select _indexLinkControlBlock) select 1) select _listDataIndex);
+                        };
 
-                    _indexLinkControlBlock = [_properties, "ListData", 0] call Zen_ArrayGetNestedIndex;
-                    if (count _indexLinkControlBlock > 0) then {
-                        _indexLinkControlBlock = _indexLinkControlBlock select 0;
-                        _linkedArgs pushBack (((_properties select _indexLinkControlBlock) select 1) select _listDataIndex);
+                        _indexLinkControlBlock = [_properties, "ListData", 0] call Zen_ArrayGetNestedIndex;
+                        if (count _indexLinkControlBlock > 0) then {
+                            _indexLinkControlBlock = _indexLinkControlBlock select 0;
+                            _linkedArgs pushBack (((_properties select _indexLinkControlBlock) select 1) select _listDataIndex);
+                        };
                     };
                 };
             };

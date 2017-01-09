@@ -33,6 +33,23 @@
     0 = [F, D, _this] call Zen_PrintError; \
     call Zen_StackPrint;
 
+#define ZEN_FMW_Code_GetRemoteVar(V, O) \
+    ZEN_FMW_Code_GetRemoteVar_MP_RequestFunction = { \
+        (owner _this) publicVariableClient V; \
+    }; \
+    if (typeName O == "SCALAR") then { \
+        if !(isServer) then { \
+            publicVariableServer "ZEN_FMW_Code_GetRemoteVar_MP_RequestFunction"; \
+            ZEN_FMW_MP_REServerOnly("ZEN_FMW_Code_GetRemoteVar_MP_RequestFunction", player, call) \
+        }; \
+    } else { \
+        (owner O) publicVariableClient "ZEN_FMW_Code_GetRemoteVar_MP_RequestFunction"; \
+        ZEN_FMW_MP_REClient("ZEN_FMW_Code_GetRemoteVar_MP_RequestFunction", player, call, O) \
+    }; \
+    waitUntil { \
+        !(isNil V) \
+    };
+
 #define ZEN_FMW_Code_GiveLoadoutsOrdered(U, L, S) \
     { \
         0 = [_x, S, (L select (_forEachIndex % (count L)))] call Zen_GiveLoadout; \
@@ -188,7 +205,7 @@
 #define ZEN_FMW_ZFGP_Flat 1, 0, 0, 0, 0, 0, [1,10]
 #define ZEN_FMW_ZFGP_Forest 1, [3,100], 0, [1,0,20], 0, [1,50], 0, [2,[4, -1, -1], 20]
 #define ZEN_FMW_ZFGP_Hill 1, 0, 0, 0, 0, [1,25], [2,20], 0, [2,25,10]
-#define ZEN_FMW_ZFGP_LandingZone 1, [1,100], 0, [1,0,20], 0, [1,25], [1,20], [1,[0, 1, -1], 20]
+#define ZEN_FMW_ZFGP_LandingZone 1, [1,100], 0, [1,0,20], 0, [1,25], [1,10, 5], [1,[1, 0, -1], 20]
 #define ZEN_FMW_ZFGP_NotForest 1, 0, 0, 0, 0, 0, 0, [1,[1, -1, -1], 20]
 #define ZEN_FMW_ZFGP_Urban 1, [2, 0], 0, [2,1,25], 0, [1,100], 0, [1,[1,-1,-1], 20]
 

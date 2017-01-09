@@ -9,7 +9,8 @@ Zen_Dialog_Classes_Global = [];
 Zen_Control_Classes_Global = [];
 Zen_Active_Dialog_Control_Data = [];
 Zen_Active_Dialog = "";
-uiNamespace setVariable ["Zen_Dialog_Object_Local", ["", []]];
+Zen_Active_Dialog_Position = [0,0];
+uiNamespace setVariable ["Zen_Dialog_Object_Local", ["", [], [0,0]]];
 
 Zen_LinkControl = compileFinal preprocessFileLineNumbers "Zen_FrameworkFunctions\Zen_DialogSystem\Zen_LinkControl.sqf";
 Zen_CopyControl = compileFinal preprocessFileLineNumbers "Zen_FrameworkFunctions\Zen_DialogSystem\Zen_CopyControl.sqf";
@@ -26,7 +27,7 @@ Zen_UnlinkControl = compileFinal preprocessFileLineNumbers "Zen_FrameworkFunctio
 Zen_UpdateControl = compileFinal preprocessFileLineNumbers "Zen_FrameworkFunctions\Zen_DialogSystem\Zen_UpdateControl.sqf";
 
 Zen_CloseDialog = {
-    uiNamespace setVariable ["Zen_Dialog_Object_Local", ["", []]];
+    uiNamespace setVariable ["Zen_Dialog_Object_Local", ["", [], [0,0]]];
     (findDisplay 76) closeDisplay 0;
     closeDialog 0;
     if (true) exitWith {};
@@ -37,6 +38,7 @@ Zen_RefreshDialog = {
     with uiNamespace do {
         missionNamespace setVariable ["Zen_Active_Dialog", Zen_Dialog_Object_Local select 0];
         missionNamespace setVariable ["Zen_Active_Dialog_Control_Data", +(Zen_Dialog_Object_Local select 1)];
+        missionNamespace setVariable ["Zen_Active_Dialog_Position", (Zen_Dialog_Object_Local select 2)];
     };
 
     if (Zen_Active_Dialog != "") then {
@@ -53,7 +55,7 @@ Zen_RefreshDialog = {
                 };
             };
         } forEach Zen_Active_Dialog_Control_Data;
-        0 = [Zen_Active_Dialog, _controlsToRepeat] spawn Zen_InvokeDialog;
+        0 = [Zen_Active_Dialog, Zen_Active_Dialog_Position, false, _controlsToRepeat] spawn Zen_InvokeDialog;
     };
 
     if (true) exitWith {};

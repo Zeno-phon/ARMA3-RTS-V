@@ -72,9 +72,11 @@ _chaseFlags = [];
         if (([_man, _center] call Zen_Find2dDistance) < ((_positionFilterArgs select _index) select 0)) then { \
             _mpos = [_center, _positionFilterArgs select _index, [], _waterPosition, [1,50], _limitAnglesSet select _index] call Zen_FindGroundPosition; \
         } else { \
-            while {true} do { \
-                _mpos = [_center, _positionFilterArgs select _index, [], _waterPosition, [1,50], _limitAnglesSet select _index] call Zen_FindGroundPosition; \
-                if !([_man, [_man, _mpos] call Zen_Find2dDistance, ([_man, _mpos] call Zen_FindDirection), _center, [((_positionFilterArgs select _index) select 0), ((_positionFilterArgs select _index) select 0)], 0, "ellipse"] call Zen_IsRayInPoly) exitWith {}; \
+            if !([_man, _center, [(_positionFilterArgs select _index) select 0, (_positionFilterArgs select _index) select 0], 0, "ellipse"] call Zen_IsPointInPoly) then { \
+                while {true} do { \
+                    _mpos = [_center, _positionFilterArgs select _index, [], _waterPosition, [1,50], _limitAnglesSet select _index] call Zen_FindGroundPosition; \
+                    if !([_man, [_man, _mpos] call Zen_Find2dDistance, ([_man, _mpos] call Zen_FindDirection), _center, [((_positionFilterArgs select _index) select 0), ((_positionFilterArgs select _index) select 0)], 0, "ellipse"] call Zen_IsRayInPoly) exitWith {}; \
+                }; \
             }; \
         }; \
     };
