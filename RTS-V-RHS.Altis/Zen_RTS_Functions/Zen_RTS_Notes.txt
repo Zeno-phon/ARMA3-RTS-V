@@ -31,9 +31,9 @@ Strategic
             // hacked actions and variable
             y/n menu with dynamic timer
         // Remove AI repair workers
+        CJ asset placement direction dialog
         Top-down building placement
-            CJ asset placement direction dialog
-            Placement avoids buildings
+            // Placement avoids buildings
             getMousePosition
 
     Assets
@@ -258,7 +258,7 @@ Variants
 
 Test JIP
 Minimum creation time for all assets
-VTOL
+
 Buildings get side visible map marker
     Zen_ShowHideMarkers
 AI fire on buildings and unmanned vehicles
@@ -266,6 +266,7 @@ AI fire on buildings and unmanned vehicles
 AI orders on player death
     ? return to player control on respawn
     ? remove from player and give autonomous patrol orders
+VTOL
 
 //////////////////////////////////////////////////
 // Intro

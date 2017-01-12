@@ -78,15 +78,32 @@
     _vehicle = vehicle player;
     _heliPad = _buildingPreviewType createVehicleLocal ([_vehicle, 31, getDir _vehicle, "compass", 0] call Zen_ExtendVector);
 
-    _modelCenter = _heliPad modelToWorld [0,0,0];
-    _heliPad attachTo [_vehicle, [0, 31, (_modelCenter select 2) - 2]];
+    // _modelCenter = _heliPad modelToWorld [0,0,0];
+    // _heliPad attachTo [_vehicle, [0, 31, (_modelCenter select 2) - 2]];
 
     Zen_RTS_Show_Preview = true;
-    player addAction ["Confirm Building Placement", {Zen_RTS_Show_Preview = false; (_this select 0) removeAction (_this select 2);}];
+    // player addAction ["Confirm Building Placement", {Zen_RTS_Show_Preview = false; (_this select 0) removeAction (_this select 2);}];
+
+    _emptyDialog = [] call Zen_CreateDialog;
+    0 = [_emptyDialog, [0,0]] call Zen_InvokeDialog;
+
+    _cam = "camera" camCreate [0,0,0];
+    _cam cameraEffect ["internal","back"];
+    _cam camSetTarget player;
+    _cam camSetRelPos [0, 1, 75];
+    _cam camCommit 0;
+
+    player sideChat "Press any key to place.";
+    (findDisplay 76) displayAddEventHandler ["KeyDown", {
+        Zen_RTS_Show_Preview = false;
+        (true)
+    }];
 
     scopeName "main";
     while {true} do {
-        _pos = getPosATL _heliPad;
+        // _pos = getPosATL _heliPad;
+        _pos = screenToWorld getMousePosition;
+        _heliPad setPosATL _pos;
 
         _inSafezone = false;
         {
@@ -140,7 +157,7 @@
                 };
 
                 _args = [_type, [_pos, _level, getDir _vehicle]];
-                ZEN_FMW_MP_REServerOnly("Zen_RTS_StrategicBuildingInvoke", _args, call)
+                ZEN_FMW_MP_REServerOnly("Zen_RTS_StrategicBuildingInvoke", _args, spawn)
                 breakTo "main";
             };
         } else {
@@ -157,6 +174,11 @@
         };
         ZEN_STD_Code_SleepFrames(2)
     };
+
+    call Zen_CloseDialog;
+    player switchCamera "INTERNAL";
+    player cameraEffect ["terminate","back"];
+    camDestroy _cam;
 
     call Zen_StackRemove;
     if (true) exitWith {};

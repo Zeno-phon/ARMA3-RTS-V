@@ -191,7 +191,7 @@ if ((isServer) && {(_unit != player)} && {(local _unit)}) then {
         // _cam camSetRelPos [0,-20,10];
         // _cam camCommit 0;
 
-        _obj = [[0,0,0], "land_basket_f"] call Zen_SpawnVehicle;
+        // _obj = [[0,0,0], "land_basket_f"] call Zen_SpawnVehicle;
         _maxTime = 60;
         for "_i" from 1 to _maxTime step 1 do {
             // if (StopMsg) exitWith {closeDialog 0;};
@@ -200,8 +200,8 @@ if ((isServer) && {(_unit != player)} && {(local _unit)}) then {
             if (rts_respawn) exitWith {};
 
             // player sideChat str ([(getMousePosition select 0) - safeZoneX, (getMousePosition select 1) - safeZoneY]);
-            player sideChat str (screenToWorld getMousePosition);
-            _obj setPosATL (screenToWorld getMousePosition);
+            // player sideChat str (screenToWorld getMousePosition);
+            // _obj setPosATL (screenToWorld getMousePosition);
 
             _index = lbCurSel _idcList;
             _data = lbData [_idcList, _index];
