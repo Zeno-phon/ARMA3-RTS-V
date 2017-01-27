@@ -78,15 +78,31 @@
     _vehicle = vehicle player;
     _heliPad = _buildingPreviewType createVehicleLocal ([_vehicle, 31, getDir _vehicle, "compass", 0] call Zen_ExtendVector);
 
-    _modelCenter = _heliPad modelToWorld [0,0,0];
-    _heliPad attachTo [_vehicle, [0, 31, (_modelCenter select 2) - 2]];
+    // _modelCenter = _heliPad modelToWorld [0,0,0];
+    // _heliPad attachTo [_vehicle, [0, 31, (_modelCenter select 2) - 2]];
 
     Zen_RTS_Show_Preview = true;
-    player addAction ["Confirm Building Placement", {Zen_RTS_Show_Preview = false; (_this select 0) removeAction (_this select 2);}];
+    // player addAction ["Confirm Building Placement", {Zen_RTS_Show_Preview = false; (_this select 0) removeAction (_this select 2);}];
+
+    _emptyDialog = [] call Zen_CreateDialog;
+    0 = [_emptyDialog, [0,0]] call Zen_InvokeDialog;
+
+    _cam = "camera" camCreate [0,0,0];
+    _cam cameraEffect ["internal","back"];
+    _cam camSetTarget player;
+    _cam camSetRelPos [0, 1, 75];
+    _cam camCommit 0;
+
+    player sideChat "Press any key to place.";
+    (findDisplay 76) displayAddEventHandler ["KeyDown", {
+        Zen_RTS_Show_Preview = false;
+        (true)
+    }];
 
     scopeName "main";
     while {true} do {
-        _pos = getPosATL _heliPad;
+        // _pos = getPosATL _heliPad;
+        _pos = screenToWorld getMousePosition;
 
         _inSafezone = false;
         {
@@ -97,7 +113,8 @@
 
         _slope = 90 - (([_pos, 15] call Zen_FindTerrainGradient) select 2);
         _clutter = [_pos, 15] call Zen_GetAmbientClutterCount;
-        _objects = nearestTerrainObjects[_pos, ["Building", "House", "Church", "Chapel", "Bunker", "Fortress", "Fountain", "View-Tower", "Lighthouse", "FuelStation", "Hospital", "Wall", "WaterTower"], 30, false];
+        _objects = (nearestTerrainObjects[_pos, ["Building", "House", "Church", "Chapel", "Bunker", "Fortress", "Fountain", "View-Tower", "Lighthouse", "FuelStation", "Hospital", "Wall", "WaterTower"], 30, false]) + (nearestObjects [_pos, ["Land", "Air"], 10]);
+        0 = [_objects, _heliPad] call Zen_ArrayRemoveValue;
 
         {
             if ((BB_Volume(_x) < 4) || (BB_AreaXY(_x) < 1)) then {
@@ -119,11 +136,11 @@
         });
 
         if (_canPlace) then {
-            // if (_isNaval) then {
-                // _heliPad setPosASL _pos;
-            // } else {
-                // _heliPad setPosATL _pos;
-            // };
+            if (_isNaval) then {
+                _heliPad setPosASL _pos;
+            } else {
+                _heliPad setPosATL _pos;
+            };
 
             _heliPad hideObject false;
             _heliPad setVectorUp (surfaceNormal (getPosATL _heliPad));
@@ -140,15 +157,15 @@
                 };
 
                 _args = [_type, [_pos, _level, getDir _vehicle]];
-                ZEN_FMW_MP_REServerOnly("Zen_RTS_StrategicBuildingInvoke", _args, call)
+                ZEN_FMW_MP_REServerOnly("Zen_RTS_StrategicBuildingInvoke", _args, spawn)
                 breakTo "main";
             };
         } else {
             if ((([_pos, _HQObject] call Zen_Find2dDistance) > HQ_MAX_DIST) && {!(_isNaval)}) then {
-                hintSilent "Placing this building more than " + str HQ_MAX_DIST + " meters from the HQ is not allowed.";
+                hintSilent ("Placing this building more than " + str HQ_MAX_DIST + " meters from the HQ is not allowed.");
             };
 
-            // _heliPad setPosATL [0,0,0];
+            _heliPad setPosATL [0,0,10];
             _heliPad hideObject true;
             if !(Zen_RTS_Show_Preview) then {
                 player sideChat "Building here is not allowed";
@@ -157,6 +174,11 @@
         };
         ZEN_STD_Code_SleepFrames(2)
     };
+
+    call Zen_CloseDialog;
+    player switchCamera "INTERNAL";
+    player cameraEffect ["terminate","back"];
+    camDestroy _cam;
 
     call Zen_StackRemove;
     if (true) exitWith {};

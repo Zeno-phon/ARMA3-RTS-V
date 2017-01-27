@@ -31,10 +31,10 @@ _objIdentifier = "Zen_RTS_Strategic_Building_Obj_" + ([10] call Zen_StringGenera
 // Zen_RTS_Strategic_Building_Objects_Local pushBack [_objIdentifier, [], 0];
 // publicVariable "Zen_RTS_Strategic_Building_Objects_Local";
 
-_args = [_objIdentifier, [], 0, []];
+_args = [_objIdentifier, [], 0, [], 0, 0];
 ZEN_FMW_MP_REAll("Zen_RTS_F_StrategicCreateBuildingDataClient", _args, call)
 
-// _args = [_objIdentifier, [], scriptNull, scriptNull];
+// _args = [_objIdentifier, [], 0, 0];
 // ZEN_FMW_MP_REServerOnly("Zen_RTS_F_StrategicCreateBuildingDataServer", _args, call)
 
 _index = count Zen_RTS_Strategic_Building_Objects_Global;

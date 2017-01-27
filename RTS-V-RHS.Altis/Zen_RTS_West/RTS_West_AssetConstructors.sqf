@@ -258,55 +258,61 @@ SHIP_CONSTRUCTOR(Zen_RTS_F_West_AssetZodiac, "B_Boat_Transport_01_F", CREW_UNITS
 /////////////////////////
 
 Zen_RTS_F_West_Repairer = {
-    diag_log ("Zen_RTS_F_West_Repairer asset constructor called");
-    diag_log _this;
-    _buildingObjData = _this select 0;
-    _assetData = _this select 1;
-    _referenceUnit = _this select 2;
-    [_assetData select 0] call Zen_RTS_F_EconomyStrategicBuildDelayAsset; \
-    if (alive (_buildingObjData select 2)) then {
-        ZEN_RTS_STRATEGIC_ASSET_SPAWN_MESSAGE() \
-        _group = [(_buildingObjData select 2), "rhsusf_army_ocp_rifleman"] call Zen_SpawnGroup;
-        0 = [_group, "crew"] call Zen_SetAISkill;
-        removeAllWeapons (leader _group);
-        (leader _group) setPosATL ([(_buildingObjData select 2), 5 + random 5, random 360] call Zen_ExtendVector);
-        _group setBehaviour "careless";
-        {
-            _x addEventHandler ["Killed", Zen_RTS_F_EconomyKilledEH];
-        } forEach (units _group);
+    if (isServer) then {
+        diag_log ("Zen_RTS_F_West_Repairer asset constructor called");
+        diag_log _this;
+        _buildingObjData = _this select 0;
+        _assetData = _this select 1;
+        _referenceUnit = _this select 2;
+        [_assetData select 0] call Zen_RTS_F_EconomyStrategicBuildDelayAsset;
+        if (alive (_buildingObjData select 2)) then {
+            ZEN_RTS_STRATEGIC_ASSET_SPAWN_MESSAGE() \
+            _group = [(_buildingObjData select 2), "rhsusf_army_ocp_rifleman"] call Zen_SpawnGroup;
+            0 = [_group, "crew"] call Zen_SetAISkill;
+            removeAllWeapons (leader _group);
+            (leader _group) setPosATL ([(_buildingObjData select 2), 5 + random 5, random 360] call Zen_ExtendVector);
+            _group setBehaviour "careless";
+            {
+                _x addEventHandler ["Killed", Zen_RTS_F_EconomyKilledEH];
+            } forEach (units _group);
 
-        (RTS_Worker_Repair_Queue select 0) pushBack [(leader _group), false, objNull];
+            (RTS_Worker_Repair_Queue select 0) pushBack [(leader _group), false, objNull];
+        };
+    } else {
+        ZEN_FMW_MP_REServerOnly("Zen_RTS_F_West_Repairer", _this, call)
     };
 };
 
 Zen_RTS_F_West_Recycler = {
-    diag_log ("Zen_RTS_F_West_Repairer asset constructor called");
-    diag_log _this;
-    _buildingObjData = _this select 0;
-    _assetData = _this select 1;
-    _referenceUnit = _this select 2;
-    [_assetData select 0] call Zen_RTS_F_EconomyStrategicBuildDelayAsset; \
-    if (alive (_buildingObjData select 2)) then {
-        ZEN_RTS_STRATEGIC_ASSET_SPAWN_MESSAGE() \
-        _group = [(_buildingObjData select 2), "rhsusf_army_ocp_rifleman"] call Zen_SpawnGroup;
-        _vehicleID = [Zen_RTS_BuildingType_West_CJ, [[(_buildingObjData select 2), 10, random 360] call Zen_ExtendVector, 0]] call Zen_RTS_StrategicBuildingInvoke;
+    if (isServer) then {
+        diag_log ("Zen_RTS_F_West_Recycler asset constructor called");
+        diag_log _this;
+        _buildingObjData = _this select 0;
+        _assetData = _this select 1;
+        _referenceUnit = _this select 2;
+        [_assetData select 0] call Zen_RTS_F_EconomyStrategicBuildDelayAsset; \
+        if (alive (_buildingObjData select 2)) then {
+            ZEN_RTS_STRATEGIC_ASSET_SPAWN_MESSAGE() \
+            _group = [(_buildingObjData select 2), "rhsusf_army_ocp_rifleman"] call Zen_SpawnGroup;
+            _vehicleID = [Zen_RTS_BuildingType_West_CJ, [[(_buildingObjData select 2), 10, random 360] call Zen_ExtendVector, 0]] call Zen_RTS_StrategicBuildingInvoke;
 
-        (leader _group) setPosATL ([(_buildingObjData select 2), 5 + random 5, random 360] call Zen_ExtendVector);
-        0 = [_group, "crew"] call Zen_SetAISkill;
-        removeAllWeapons (leader _group);
-        _group setBehaviour "careless";
+            (leader _group) setPosATL ([(_buildingObjData select 2), 5 + random 5, random 360] call Zen_ExtendVector);
+            0 = [_group, "crew"] call Zen_SetAISkill;
+            removeAllWeapons (leader _group);
+            _group setBehaviour "careless";
 
-        _CJ = ([_vehicleID] call Zen_RTS_StrategicBuildingObjectGetDataGlobal) select 2;
-        _CJ setVariable ["Zen_RTS_StrategicIsAIOwned", true, true];
-        _CJ setVariable ["Zen_RTS_StrategicIsAIAssigned", true, true];
-        0 = [_group, _CJ, "all"] call Zen_MoveInVehicle;
-        {
-            _x addEventHandler ["Killed", Zen_RTS_F_EconomyKilledEH];
-        } forEach (units _group);
+            _CJ = ([_vehicleID] call Zen_RTS_StrategicBuildingObjectGetDataGlobal) select 2;
+            _CJ setVariable ["Zen_RTS_StrategicIsAIOwned", true, true];
+            _CJ setVariable ["Zen_RTS_StrategicIsAIAssigned", true, true];
+            0 = [_group, _CJ, "all"] call Zen_MoveInVehicle;
+            {
+                _x addEventHandler ["Killed", Zen_RTS_F_EconomyKilledEH];
+            } forEach (units _group);
 
-        _args = [(RTS_Worker_Recycle_Queue select 0), [(leader _group), false, _CJ]];
-        ZEN_FMW_MP_REServerOnly("Zen_ArrayAppend", _args, call)
-
+            (RTS_Worker_Recycle_Queue select 0) pushBack [(leader _group), false, _CJ];
+        };
+    } else {
+        ZEN_FMW_MP_REServerOnly("Zen_RTS_F_West_Recycler", _this, call)
     };
 };
 

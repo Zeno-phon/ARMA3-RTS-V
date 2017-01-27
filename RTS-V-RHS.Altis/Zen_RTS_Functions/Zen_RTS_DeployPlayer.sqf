@@ -150,7 +150,6 @@ if ((isServer) && {(_unit != player)} && {(local _unit)}) then {
         // ctrlShow [_idclabel, false];
 
         // #ListLoop
-
         // _bldName = _baseList Select _x Select 0;
         // _varName = _baseList Select _x Select 1;
 
@@ -174,7 +173,7 @@ if ((isServer) && {(_unit != player)} && {(local _unit)}) then {
             lbSetData [_idcList, _index, _x];
             lbSetValue [_idcList, _index, 1];
         } forEach _sideFlags;
-        
+
         // #LBAdd
 
         // _x = _x + 1
@@ -192,12 +191,17 @@ if ((isServer) && {(_unit != player)} && {(local _unit)}) then {
         // _cam camSetRelPos [0,-20,10];
         // _cam camCommit 0;
 
+        // _obj = [[0,0,0], "land_basket_f"] call Zen_SpawnVehicle;
         _maxTime = 60;
         for "_i" from 1 to _maxTime step 1 do {
             // if (StopMsg) exitWith {closeDialog 0;};
             if !(ctrlVisible _idcList) exitWith {};
             if (_i == _maxTime) then {rts_respawn = true};
             if (rts_respawn) exitWith {};
+
+            // player sideChat str ([(getMousePosition select 0) - safeZoneX, (getMousePosition select 1) - safeZoneY]);
+            // player sideChat str (screenToWorld getMousePosition);
+            // _obj setPosATL (screenToWorld getMousePosition);
 
             _index = lbCurSel _idcList;
             _data = lbData [_idcList, _index];
@@ -225,7 +229,9 @@ if ((isServer) && {(_unit != player)} && {(local _unit)}) then {
             // _text = lbText [_idcList, _index];
             // ?_text in ["Forward Base Perimeter"] : _camY = -400;
             // ?_text in ["Back Base Perimeter"] : _camY = +400;
+
             _cam camSetRelPos [0, _camY, 10];
+            // _cam camSetRelPos [0, 0, 10];
             _cam camCommit 0;
             ctrlSetText [_idcTimerNumber, str (_maxTime - _i)];
             sleep 1;

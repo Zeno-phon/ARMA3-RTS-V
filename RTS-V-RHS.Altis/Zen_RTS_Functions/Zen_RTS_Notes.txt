@@ -32,9 +32,12 @@ Strategic
             y/n menu with dynamic timer
         // Remove AI repair workers
         Top-down building placement
+            cancel button
             CJ asset placement direction dialog
-            Placement avoids buildings
-            getMousePosition
+            camera movement, turning, angle
+            // for buildings
+            // Placement avoids buildings
+            // getMousePosition
 
     Assets
         // constructor macros
@@ -207,7 +210,7 @@ Loadouts
     assign money value
 Known MP Issues
     // Add more debug
-    CJ spawning
+    // CJ spawning
     Logic Issues
         // AI recycle tasking
         // AI Repair activation
@@ -245,12 +248,13 @@ Variants
 // Recent Changelog
 //////////////////////////////////////////////////
 
-1. Fixed: Destroying a building caused an error
-2. Fixed: Buildings could not be repaired
-3. Improved: MCU build menu now shows which buildings have been constructed
-4. Improved: Buildings now build in the direction of the MCU
-5. Improved: Building placement approval logic
+1. Fixed: CJ could not be created in MP
+2. Fixed: AI recyclers were not queue properly in MP
+3. Fixed: Building placement did not evaluate if placing a building was allowed before putting the preview object there
+4. Fixed: Building placement now accounts for vehicles and parked aircraft
+5. Fixed: Building placement safezone around the HQ was too small
 6. Improved: Updated to my latest framework
+7. Tweaked: Building placement safezone shape and size
 
 //////////////////////////////////////////////////
 // Priority List
@@ -282,8 +286,6 @@ Despite a long development time and rigorous testing, RTS V is still in the Beta
 We present a list of the major known issues and an estimated time we can fix them.  We will be updating this list as new issues are reported or fixed.  For the sanity of the development team, please do not report issues that we are already aware of.
 
 Known Issues
-    Building visuals
-        we are trying workarounds in MP now
     Client synch delay on mission start
         this appears to be server/client/ping dependent
         As a workaround, restart the mission once or twice; this seems to reduce the lag

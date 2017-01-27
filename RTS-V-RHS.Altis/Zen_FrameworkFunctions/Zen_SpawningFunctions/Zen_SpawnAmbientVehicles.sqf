@@ -50,7 +50,7 @@ _carObjs = [];
 
         _roadDir = [_carPos] call Zen_FindRoadDirection;
 
-        _car = [[_carPos, 4, _roadDir + 90, "trig"] call Zen_ExtendVector, _carType, 0, 90 - _roadDir] call Zen_SpawnVehicle;
+        _car = [[_carPos, 2, _roadDir + 90, "trig"] call Zen_ExtendVector, _carType, 0, 90 - _roadDir] call Zen_SpawnVehicle;
         _carObjs pushBack _car;
     };
 } forEach _townMarkers;

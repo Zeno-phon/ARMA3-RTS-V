@@ -6,43 +6,27 @@
 #include "..\Zen_FrameworkLibrary.sqf"
 
 _Zen_stack_Trace = ["Zen_OrderInfantryPatrol", _this] call Zen_StackAdd;
-private ["_grpsArray", "_movecenters", "_maxx", "_mpos", "_man", "_speedMode", "_limitAnglesSet", "_target", "_behaviorMode", "_chaseEnemy", "_waterPosition", "_divers", "_joinWeak", "_joined", "_center", "_index", "_positionFilterArgs", "_indexesToRemove", "_chaseFlags"];
+private ["_grpsArray", "_movecenter", "_maxx", "_mpos", "_man", "_speedMode", "_limitAnglesSet", "_target", "_behaviorMode", "_chaseEnemy", "_waterPosition", "_divers", "_joinWeak", "_joined", "_positionFilterArgs", "_indexesToRemove", "_chaseFlags", "_defDist", "_maxDist"];
 
 if !([_this, [["VOID"], ["ARRAY", "OBJECT", "GROUP", "STRING"], ["ARRAY"], ["ARRAY", "SCALAR"], ["STRING"], ["STRING"], ["BOOL"], ["BOOL"], ["BOOL"]], [[], ["ARRAY", "OBJECT", "GROUP", "STRING", "SCALAR"], ["STRING", "ARRAY", "SCALAR"], ["SCALAR", "ARRAY"]], 2] call Zen_CheckArguments) exitWith {
     call Zen_StackRemove;
 };
 
 _grpsArray = [(_this select 0)] call Zen_ConvertToGroupArray;
-_movecenters = _this select 1;
+_movecenter = _this select 1;
 
-if !((typeName _movecenters == "ARRAY") && {typeName (_movecenters select 0) != "SCALAR"}) then {
-    if (count _this > 2) then {
-        _positionFilterArgs = [_this select 2];
-    } else {
-        if (typeName _movecenters == "STRING") then {
-            _positionFilterArgs = [[]];
-            if ((markerShape _movecenters) == "ICON") then {
-                _positionFilterArgs = [[50, 200]];
-            };
-        } else {
-            _positionFilterArgs = [[50, 200]];
-        };
-    };
-
-    _movecenters = [_movecenters];
-    ZEN_STD_Parse_GetArgumentDefault(_limitAnglesSet, 3, 0)
-    _limitAnglesSet = [_limitAnglesSet];
+if ((typeName _movecenter == "STRING") && {((markerShape _movecenter) != "ICON")}) then {
+    ZEN_STD_Parse_GetArgumentDefault(_positionFilterArgs, 2, [])
 } else {
-    _positionFilterArgs = _this select 2;
-    _limitAnglesSet = _this select 3;
+    _defDist = [50, 200];
+    ZEN_STD_Parse_GetArgumentDefault(_positionFilterArgs, 2, _defDist)
+
+    if ((typeName _movecenter == "STRING") && {((markerShape _movecenter) == "ICON")}) then {
+        _movecenter = [_movecenter] call Zen_ConvertToPosition;
+    };
 };
 
-{
-    if ((typeName _x == "STRING") && {((markerShape _x) == "ICON")}) then {
-        _movecenters set [_forEachIndex, [_x] call Zen_ConvertToPosition];
-    };
-} forEach _movecenters;
-
+ZEN_STD_Parse_GetArgumentDefault(_limitAnglesSet, 3, 0)
 ZEN_STD_Parse_GetArgumentDefault(_speedMode, 4, "limited")
 ZEN_STD_Parse_GetArgumentDefault(_behaviorMode, 5, "aware")
 ZEN_STD_Parse_GetArgumentDefault(_chaseEnemy, 6, true)
@@ -61,23 +45,21 @@ _chaseFlags = [];
     private "_group";
     _group = _x;
     _man = leader _group;
-    _mpos = [0,0,0];
 
     #define CALC_POS \
-    _index = ZEN_STD_Array_RandIndex(_movecenters); \
-    _center = _movecenters select _index; \
-    if (typeName _center == "STRING") then { \
-        _mpos = [_center, 0, (_positionFilterArgs select _index), _waterPosition, [1,50], _limitAnglesSet select _index] call Zen_FindGroundPosition; \
-    } else { \
-        if (([_man, _center] call Zen_Find2dDistance) < ((_positionFilterArgs select _index) select 0)) then { \
-            _mpos = [_center, _positionFilterArgs select _index, [], _waterPosition, [1,50], _limitAnglesSet select _index] call Zen_FindGroundPosition; \
+        _mpos = [0,0,0]; \
+        if (typeName _movecenter == "STRING") then { \
+            _mpos = [_movecenter, 0, _positionFilterArgs, _waterPosition, [1,50], _limitAnglesSet] call Zen_FindGroundPosition; \
         } else { \
-            while {true} do { \
-                _mpos = [_center, _positionFilterArgs select _index, [], _waterPosition, [1,50], _limitAnglesSet select _index] call Zen_FindGroundPosition; \
-                if !([_man, [_man, _mpos] call Zen_Find2dDistance, ([_man, _mpos] call Zen_FindDirection), _center, [((_positionFilterArgs select _index) select 0), ((_positionFilterArgs select _index) select 0)], 0, "ellipse"] call Zen_IsRayInPoly) exitWith {}; \
+            if (([_man, _movecenter] call Zen_Find2dDistance) < (_positionFilterArgs select 0)) then { \
+                _mpos = [_movecenter, _positionFilterArgs , [], _waterPosition, [1,50], _limitAnglesSet] call Zen_FindGroundPosition; \
+            } else { \
+                while {true} do { \
+                    _mpos = [_movecenter, _positionFilterArgs , [], _waterPosition, [1,50], _limitAnglesSet] call Zen_FindGroundPosition; \
+                    if !([_man, [_man, _mpos] call Zen_Find2dDistance, ([_man, _mpos] call Zen_FindDirection), _movecenter, [(_positionFilterArgs select 0), (_positionFilterArgs select 0)], 0, "ellipse"] call Zen_IsRayInPoly) exitWith {}; \
+                }; \
             }; \
-        }; \
-    };
+        };
 
     CALC_POS
     _group = group _man;
@@ -123,7 +105,6 @@ while {(count _grpsArray != 0)} do {
             if !(_joined) then {
                 _man = leader _group;
                 if ((unitReady _man) && {(alive _man)}) then {
-                    _mpos = [0,0,0];
                     CALC_POS
 
                     if !(isPlayer _man) then {
@@ -153,7 +134,14 @@ while {(count _grpsArray != 0)} do {
                         } else {
                             _target = _man findNearestEnemy _man;
                         };
-                        if (!(isNull _target) && {((([_man, _target] call Zen_Find2dDistance) < 750) && (_target isKindOf "Man"))}) then {
+
+                        if (typeName _movecenter == "STRING") then {
+                            _maxDist = [(markerSize _movecenter)] call Zen_ArrayFindAverage;
+                        } else {
+                            _maxDist = _positionFilterArgs select 1;
+                        };
+
+                        if (!(isNull _target) && {((([_man, _target] call Zen_Find2dDistance) < 1.5*_maxDist) && (_target isKindOf "Man"))}) then {
                             _mpos = [_target, (random (150 / ((_man knowsAbout _target) + 0.1))), (random 360)] call Zen_ExtendVector;
                             _chaseFlags set [_forEachIndex, true];
 
@@ -176,7 +164,6 @@ while {(count _grpsArray != 0)} do {
                                 };
                             };
                         } else {
-                            _mpos = [0,0,0];
                             CALC_POS
 
                             if (!(isPlayer _man) && {_chaseFlags select _forEachIndex}) then {

@@ -130,6 +130,7 @@ Return: Array:
             1. String, object identifier
             2. Array of strings, available assets
             3. Scalar, number of usages
+            4. Script, the queue thread
 
 Zen_RTS_StrategicBuildingQueueAdd
 

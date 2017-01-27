@@ -323,6 +323,7 @@ Zen_RTS_F_EconomyStrategicBuildTime = {
 Zen_RTS_F_EconomyGetPlayerSupply = {
     _player = _this select 0;
 
+    // ZEN_FMW_Code_GetRemoteVar("playerSupply", _player)
     Zen_RTS_Economy_Supply = nil;
     ZEN_FMW_MP_REClient("Zen_RTS_F_EconomyGetPlayerSupplyRE", [], call, _player)
 

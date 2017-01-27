@@ -153,9 +153,9 @@ call compileFinal preprocessFileLineNumbers "Zen_RTS_SubTerritory\Zen_RTS_SubTer
     (RTS_Repair_Queue select ([west, east] find S)) pushBack _building; \
     _buildingSpawnGrid = ""; \
     if (T in [Zen_RTS_BuildingType_East_HQ, Zen_RTS_BuildingType_East_Radar, Zen_RTS_BuildingType_West_HQ, Zen_RTS_BuildingType_West_Radar]) then { \
-        _buildingSpawnGrid = [_building, "", "colorBlack", [5, 5], "rectangle", getDir _building, 0] call Zen_SpawnMarker; \
+        _buildingSpawnGrid = [_building, "", "colorBlack", [20, 20], "ellipse", getDir _building, 0] call Zen_SpawnMarker; \
     } else { \
-        _buildingSpawnGrid = [_building, "", "colorBlack", [30, 30], "rectangle", getDir _building, 0] call Zen_SpawnMarker; \
+        _buildingSpawnGrid = [_building, "", "colorBlack", [20, 20], "ellipse", getDir _building, 0] call Zen_SpawnMarker; \
     }; \
     _args = [_buildingSpawnGrid, S]; \
     ZEN_FMW_MP_REAll("Zen_RTS_F_AddSpawnGridMarker", _args, call) \

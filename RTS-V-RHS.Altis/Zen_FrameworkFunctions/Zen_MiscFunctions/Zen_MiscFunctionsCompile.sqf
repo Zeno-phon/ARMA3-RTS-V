@@ -14,5 +14,6 @@ Zen_SetWeather = compileFinal preprocessFileLineNumbers "Zen_FrameworkFunctions\
 Zen_SetViewDistance = compileFinal preprocessFileLineNumbers "Zen_FrameworkFunctions\Zen_MiscFunctions\Zen_SetViewDistance.sqf";
 Zen_ShowHideMarkers = compileFinal preprocessFileLineNumbers "Zen_FrameworkFunctions\Zen_MiscFunctions\Zen_ShowHideMarkers.sqf";
 Zen_SpawnMarker = compileFinal preprocessFileLineNumbers "Zen_FrameworkFunctions\Zen_MiscFunctions\Zen_SpawnMarker.sqf";
+Zen_SubdivideMarker = compileFinal preprocessFileLineNumbers "Zen_FrameworkFunctions\Zen_MiscFunctions\Zen_SubdivideMarker.sqf";
 
 if (true) exitWith {};

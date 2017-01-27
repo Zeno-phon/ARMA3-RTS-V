@@ -2,7 +2,7 @@
 
 // (_this select 1) : [array, spawn position, scalar, starting level]
 Zen_RTS_F_West_RecyclePlantConstructor = {
-    diag_log "West barracks constructor called";
+    diag_log "West recycle plant constructor called";
     diag_log _this;
 
     _buildingObjData = _this select 0;
