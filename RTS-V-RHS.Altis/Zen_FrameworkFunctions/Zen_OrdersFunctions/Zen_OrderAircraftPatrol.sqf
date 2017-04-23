@@ -42,7 +42,7 @@ _crewGroupArray = [];
 
     #define CALC_POS \
         _mpos = [0,0,0]; \
-        if (typeName _center == "STRING") then { \
+        if (typeName _movecenter == "STRING") then { \
             _mpos = [_movecenter, 0, _positionFilterArgs, 0, 0, _limitAnglesSet] call Zen_FindGroundPosition; \
         } else { \
             _mpos = [_movecenter, [0, _positionFilterArgs], [], 0, 0, _limitAnglesSet] call Zen_FindGroundPosition; \

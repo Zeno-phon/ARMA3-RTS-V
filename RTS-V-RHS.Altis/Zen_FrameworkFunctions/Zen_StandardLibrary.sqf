@@ -2,6 +2,8 @@
 // This file is released under Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)
 // See Legal.txt
 
+#ifndef ZEN_STD_Array_LastElement
+
 #define ZEN_STD_Array_LastElement(A) (A select (count A - 1))
 #define ZEN_STD_Array_RandIndex(A) (floor random count A)
 #define ZEN_STD_Array_RandElement(A) (A select (floor random count A))
@@ -153,3 +155,5 @@
     if (typeName X != "STRING") then { \
         X = toLower str X; \
     };
+
+#endif

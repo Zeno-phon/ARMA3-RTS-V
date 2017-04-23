@@ -7,7 +7,7 @@ disableSerialization;
 #include "..\Zen_StandardLibrary.sqf"
 
 _Zen_stack_Trace = ["Zen_ExecuteEvent", _this] call Zen_StackAdd;
-private ["_controlID", "_controlData", "_controlBlocks", "_index", "_function"];
+private ["_nestedFunctionIndex", "_additionalArgs", "_function", "_index"];
 
 if !([_this, [["STRING"], ["STRING"]], [], 2] call Zen_CheckArguments) exitWith {
     call Zen_StackRemove;
@@ -15,6 +15,8 @@ if !([_this, [["STRING"], ["STRING"]], [], 2] call Zen_CheckArguments) exitWith 
 
 _controlID = _this select 0;
 _functionType = _this select 1;
+ZEN_STD_Parse_GetArgumentDefault(_nestedFunctionIndex, 2, -1)
+ZEN_STD_Parse_GetArgumentDefault(_additionalArgs, 3, [])
 
 _linkedArgs = [];
 _Zen_Dialog_Object_Local = uiNamespace getVariable "Zen_Dialog_Object_Local";
@@ -28,7 +30,12 @@ _controlBlocks = _controlData select 2;
 _index = [_controlBlocks, _functionType, 0] call Zen_ArrayGetNestedIndex;
 if (count _index == 0) exitWith {};
 _index = _index select 0;
-_function = (_controlBlocks select _index) select 1;
+
+if (_nestedFunctionIndex > -1) then {
+    _function = (((_controlBlocks select _index) select 1) select _nestedFunctionIndex) select 1;
+} else {
+    _function = (_controlBlocks select _index) select 1;
+};
 
 _index = [_controlBlocks, "Data", 0] call Zen_ArrayGetNestedIndex;
 if (count _index > 0) then {
@@ -104,7 +111,7 @@ if (count _index > 0) then {
     } forEach (_linkedControls arrayIntersect _dialogControls);
 };
 
-0 = _linkedArgs spawn (missionNamespace getVariable _function);
+0 = (_linkedArgs + _additionalArgs) spawn (missionNamespace getVariable _function);
 
 call Zen_StackRemove;
 if (true) exitWith {};

@@ -1,4 +1,4 @@
-version=52;
+version=53;
 class EditorData
 {
 	moveGridStep=1;
@@ -16,10 +16,10 @@ class EditorData
 	};
 	class Camera
 	{
-		pos[]={22936.359,60.498928,18396.201};
-		dir[]={-0.0026090979,-0.60986125,0.79251981};
-		up[]={-0.0020082523,0.79250592,0.60986108};
-		aside[]={1.000008,-4.6654088e-007,0.0032945722};
+		pos[]={22914.467,83.678185,18353.391};
+		dir[]={0.20282152,-0.40319663,0.89237541};
+		up[]={0.089361846,0.91511077,0.3931776};
+		aside[]={0.97515035,1.8102583e-008,-0.22163145};
 	};
 };
 binarizationWanted=0;
@@ -38,96 +38,80 @@ addons[]=
 	"A3_Signs_F",
 	"A3_Structures_F_Mil_BagFence",
 	"A3_Structures_F_Civ_InfoBoards",
-	"A3_3DEN",
 	"A3_Structures_F_Mil_Helipads",
 	"A3_Roads_F",
 	"A3_Structures_F_Items_Vessels",
 	"A3_Modules_F",
 	"A3_Characters_F",
-	"A3_Modules_F_Curator_Intel",
-	"A3_Data_F_Curator_Characters"
+	"A3_Modules_F_Curator_Intel"
 };
 class AddonsMetaData
 {
 	class List
 	{
-		items=11;
+		items=9;
 		class Item0
 		{
 			className="A3_Ui_F";
 			name="Arma 3 - User Interface";
 			author="Bohemia Interactive";
-			url="http://www.arma3.com";
+			url="https://www.arma3.com";
 		};
 		class Item1
 		{
 			className="A3_Soft_F_Gamma";
 			name="Arma 3 - Unarmored Land Vehicles";
 			author="Bohemia Interactive";
-			url="http://www.arma3.com";
+			url="https://www.arma3.com";
 		};
 		class Item2
 		{
 			className="A3_Structures_F_Mil";
 			name="Arma 3 - Military Buildings and Structures";
 			author="Bohemia Interactive";
-			url="http://www.arma3.com";
+			url="https://www.arma3.com";
 		};
 		class Item3
 		{
 			className="A3_Structures_F";
 			name="Arma 3 - Buildings and Structures";
 			author="Bohemia Interactive";
-			url="http://www.arma3.com";
+			url="https://www.arma3.com";
 		};
 		class Item4
 		{
 			className="A3_Signs_F";
 			name="Arma 3 - Signs";
 			author="Bohemia Interactive";
-			url="http://www.arma3.com";
+			url="https://www.arma3.com";
 		};
 		class Item5
-		{
-			className="A3_3DEN";
-			name="Arma 3 Eden Update - Eden Editor";
-			author="Bohemia Interactive";
-			url="http://www.arma3.com";
-		};
-		class Item6
 		{
 			className="A3_Roads_F";
 			name="Arma 3 - Roads";
 			author="Bohemia Interactive";
-			url="http://www.arma3.com";
+			url="https://www.arma3.com";
 		};
-		class Item7
+		class Item6
 		{
 			className="A3_Modules_F";
 			name="Arma 3 Alpha - Scripted Modules";
 			author="Bohemia Interactive";
-			url="http://www.arma3.com";
+			url="https://www.arma3.com";
 		};
-		class Item8
+		class Item7
 		{
 			className="A3_Characters_F";
 			name="Arma 3 Alpha - Characters and Clothing";
 			author="Bohemia Interactive";
-			url="http://www.arma3.com";
+			url="https://www.arma3.com";
 		};
-		class Item9
+		class Item8
 		{
 			className="A3_Modules_F_Curator";
 			name="Arma 3 Zeus Update - Scripted Modules";
 			author="Bohemia Interactive";
-			url="http://www.arma3.com";
-		};
-		class Item10
-		{
-			className="A3_Data_F_Curator";
-			name="Arma 3 Zeus Update - Main Configuration";
-			author="Bohemia Interactive";
-			url="http://www.arma3.com";
+			url="https://www.arma3.com";
 		};
 	};
 };

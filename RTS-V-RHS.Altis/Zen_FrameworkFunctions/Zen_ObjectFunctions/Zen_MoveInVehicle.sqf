@@ -106,7 +106,7 @@ switch (toLower _vehicleSlot) do {
         _unitsArray = _unitsArray select {(vehicle _x == _x)};
 
         if (count _unitsArray > 0) then {
-            0 = [_unitsArray, _vehicle, "turret"] call Zen_MoveInVehicle;
+            0 = [_unitsArray, _vehicle, "turret", _turretTypes] call Zen_MoveInVehicle;
             // _unitsArray = [_unitsArray, {(vehicle _this != _this)}] call Zen_ArrayFilterCondition;
             _unitsArray = _unitsArray select {(vehicle _x == _x)};
             if (count _unitsArray > 0) then {

@@ -171,7 +171,7 @@ Zen_AddFireSupportAction_DialogRefresh_MP = {
 
     0 = [(Zen_Fire_Support_Action_Dialog_Data select 1), ["List", _listTitles], ["ListData", _listData]] call Zen_UpdateControl;
     0 = [(Zen_Fire_Support_Action_Dialog_Data select 2), ["Text", (if (count _textArray > 0) then {(_textArray select 0)} else {("")})]]call Zen_UpdateControl;
-    call Zen_RefreshDialog;
+    []call Zen_RefreshDialog;
     if (true) exitWith {};
 };
 
@@ -182,7 +182,7 @@ Zen_AddFireSupportAction_DialogListSel_MP = {
     _data = Zen_Fire_Support_Action_Array_Global select (_indexes select 0);
 
     0 = [(Zen_Fire_Support_Action_Dialog_Data select 2), ["Text", (_data select 8)]]call Zen_UpdateControl;
-    call Zen_RefreshDialog;
+    [] call Zen_RefreshDialog;
     if (true) exitWith {};
 };
 

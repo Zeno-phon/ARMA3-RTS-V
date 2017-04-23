@@ -60,7 +60,6 @@ while {true} do {
         _defendersAreOut = _inAreaArgs call Zen_AreNotInArea;
     };
 
-
     if (_defendersAreOut && {_attackersAreIn}) exitWith {
         {
             0 = [_x, _taskResult] call Zen_UpdateTask;

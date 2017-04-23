@@ -2,6 +2,8 @@
 // This file is released under Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)
 // See Legal.txt
 
+#ifndef ZEN_FMW_Array_RemoveIndexes
+
 #define ZEN_FMW_Array_RemoveIndexes(A, I) \
     _Zen_IndexesToRemoveSorted = [I, {(-1 * _this)}, "hash"] call Zen_ArraySort; \
     { \
@@ -222,3 +224,5 @@
 #define ZEN_FMW_Loadout_StdInfantryPreset (["Rifleman", "Rifleman", "Rifleman", "AT Rifleman", "Assistant AR", "Team Leader", "Squad Leader", "Grenadier", "Grenadier", "Auto Rifleman", "Auto Rifleman", "Marksman", "Medic"])
 #define ZEN_FMW_Loadout_BasicInfantryPreset (["Rifleman", "Rifleman", "Rifleman", "Assistant AR", "Team Leader", "Grenadier", "Auto Rifleman", "Medic"])
 #define ZEN_FMW_Loadout_HeavyInfantryPreset (["Team Leader", "Grenadier", "Auto Rifleman", "AT Rifleman", "AT Rifleman", "AT Specialist", "AT Specialist", "AA Specialist", "AA Specialist", "Assistant AT", "Assistant AA", "Sapper", "Miner"])
+
+#endif
