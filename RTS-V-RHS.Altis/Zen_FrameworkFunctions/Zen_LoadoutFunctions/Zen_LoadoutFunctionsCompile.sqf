@@ -4,6 +4,8 @@
 
 Zen_Loadout_Array_Global = [];
 Zen_Loadout_Action_Array_Local = [];
+Zen_AddGiveMagazine_Action_ID = "";
+Zen_AddRepackMagazines_Action_ID = "";
 
 Zen_AddGiveMagazine = compileFinal preprocessFileLineNumbers "Zen_FrameworkFunctions\Zen_LoadoutFunctions\Zen_AddGiveMagazine.sqf";
 Zen_AddLoadoutDialog = compileFinal preprocessFileLineNumbers "Zen_FrameworkFunctions\Zen_LoadoutFunctions\Zen_AddLoadoutDialog.sqf";

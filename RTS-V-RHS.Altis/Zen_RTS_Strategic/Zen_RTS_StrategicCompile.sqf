@@ -96,7 +96,16 @@ Zen_RTS_F_StrategicCreateBuildingDataClient = {
 };
 
 Zen_RTS_F_StrategicRemoveBuildingDataLocal = {
-    0 = [Zen_RTS_Strategic_Building_Objects_Local, _this] call Zen_ArrayRemoveIndex;
+    private ["_identifier", "_objData"];
+
+    _identifier = _this select 0;
+    _index = ([Zen_RTS_Strategic_Building_Objects_Local, _identifier, 0] call Zen_ArrayGetNestedIndex) select 0;
+    _objData = Zen_RTS_Strategic_Building_Objects_Local select _index;
+
+    terminate (_objData select 4);
+    terminate (_objData select 5);
+
+    0 = [Zen_RTS_Strategic_Building_Objects_Local, _index] call Zen_ArrayRemoveIndex;
 };
 
 // Zen_RTS_F_StrategicRemoveBuildingQueueServer = {
@@ -109,15 +118,8 @@ Zen_RTS_F_StrategicRemoveBuildingDataLocal = {
     // terminate (_objData select 3);
 // };
 
-Zen_RTS_F_StrategicRemoveBuildingQueueClient = {
-    private ["_identifier", "_objData"];
-
-    _identifier = _this select 0;
-    _objData = [_identifier] call Zen_RTS_StrategicBuildingObjectGetDataLocal;
-
-    terminate (_objData select 4);
-    terminate (_objData select 5);
-};
+// Zen_RTS_F_StrategicRemoveBuildingQueueClient = {
+// };
 
 // Zen_RTS_F_StrategicRequestCurrentAssetServer = {
     // private ["_buildingObjID", "_objData"];

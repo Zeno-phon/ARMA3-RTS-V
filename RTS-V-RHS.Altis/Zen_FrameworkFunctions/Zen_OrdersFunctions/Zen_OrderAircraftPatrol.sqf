@@ -55,6 +55,7 @@ _crewGroupArray = [];
 
     (group driver _veh) setCurrentWaypoint ((group driver _veh) addWaypoint [_mposCorrected, -1]);
     (group driver _veh) move _mposCorrected;
+    (driver _veh) doMove _mposCorrected;
     _veh flyInHeight _heliHeight;
     _veh setBehaviour _behavior;
     _veh setCombatMode "Red";
@@ -89,6 +90,7 @@ while {(count _vehicleArray != 0)} do {
                     _mposCorrected = [_veh, _mpos, 100] call Zen_ExtendRay;
                     (group driver _veh) setCurrentWaypoint ((group driver _veh) addWaypoint [_mposCorrected, -1]);
                     (group driver _veh) move _mposCorrected;
+                    (driver _veh) doMove _mposCorrected;
                     _veh flyInHeight _heliHeight;
                     _veh setBehaviour _behavior;
                     _veh setCombatMode "Red";

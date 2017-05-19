@@ -14,6 +14,7 @@ if (!isServer && {isNull player}) then {
         (!(isNull player) && {local player})
     };
 };
+call compileFinal preprocessFileLineNumbers "Zen_FrameworkFunctions\Zen_ActionSystem\Zen_ActionSystemCompile.sqf";
 call compileFinal preprocessFileLineNumbers "Zen_FrameworkFunctions\Zen_DataFunctions\Zen_DataFunctionsCompile.sqf";
 call compileFinal preprocessFileLineNumbers "Zen_FrameworkFunctions\Zen_DialogSystem\Zen_DialogSystemCompile.sqf";
 call compileFinal preprocessFileLineNumbers "Zen_FrameworkFunctions\Zen_FireSupportSystem\Zen_FireSupportSystemCompile.sqf";

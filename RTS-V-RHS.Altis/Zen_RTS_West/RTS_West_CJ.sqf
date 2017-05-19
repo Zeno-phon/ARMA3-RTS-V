@@ -120,35 +120,6 @@ Zen_RTS_BuildingType_West_CJ = ["Zen_RTS_F_West_CJConstructor", "Zen_RTS_F_West_
 // Assets
 /////////////////////////////////
 
-#define FORT_CONSTRUCTOR(N, T) \
-    N = { \
-        diag_log ("West " + T + " asset constructor called"); \
-        diag_log _this; \
-        _buildingObjData = _this select 0; \
-        _assetData = _this select 1; \
-        _spawnPos = _this select 3; \
-        _assetStrRaw = _assetData select 3; \
-        _building = _buildingObjData select 2; \
-        _referenceUnit = driver (_buildingObjData select 2); \
-        sleep (call compile ([_assetStrRaw, "Time: ", ","] call Zen_StringGetDelimitedPart)); \
-        ZEN_RTS_STRATEGIC_ASSET_SPAWN_MESSAGE() \
-        _vehicle = [_spawnPos, T, 0, getDir _building, false] call Zen_SpawnVehicle; \
-        ZEN_RTS_STRATEGIC_ASSET_DESTROYED_EH \
-    };
-
-FORT_CONSTRUCTOR(Zen_RTS_F_West_AssetMG, "B_HMG_01_high_F")
-FORT_CONSTRUCTOR(Zen_RTS_F_West_AssetLAND_RAZORWIRE_F, "LAND_RAZORWIRE_F")
-FORT_CONSTRUCTOR(Zen_RTS_F_West_AssetLAND_BAGBUNKER_TOWER_F, "Land_BAGBUNKER_TOWER_F")
-FORT_CONSTRUCTOR(Zen_RTS_F_West_AssetLAND_BAGFENCE_LONG_F, "Land_BagFence_Long_F")
-FORT_CONSTRUCTOR(Zen_RTS_F_West_AssetLAND_CARGO_PATROL_V1_F, "LAND_CARGO_PATROL_V1_F")
-FORT_CONSTRUCTOR(Zen_RTS_F_West_AssetB_SLINGLOAD_01_MEDEVAC_F, "B_SLINGLOAD_01_MEDEVAC_F")
-FORT_CONSTRUCTOR(Zen_RTS_F_West_AssetB_SLINGLOAD_01_FUEL_F, "B_SLINGLOAD_01_FUEL_F")
-FORT_CONSTRUCTOR(Zen_RTS_F_West_AssetBox_NATO_WpsSpecial_F, "Box_NATO_WpsSpecial_F")
-//FORT_CONSTRUCTOR(Zen_RTS_F_West_AssetB_Slingload_01_Ammo_F, "B_Slingload_01_Ammo_F")
-//FORT_CONSTRUCTOR(Zen_RTS_F_West_AssetB_Slingload_01_Repair_F, "B_Slingload_01_Repair_F")
-FORT_CONSTRUCTOR(Zen_RTS_F_West_Asset_Land_BagFence_Corner_F, "Land_BagFence_Corner_F")
-FORT_CONSTRUCTOR(Zen_RTS_F_West_Asset_Land_CncWall4_F, "Land_CncWall4_F")
-
 Zen_RTS_Asset_West_MG = ["Zen_RTS_F_West_AssetMG", "MG", "Cost: 50, Time: 10,"] call Zen_RTS_StrategicAssetCreate;
 Zen_RTS_Asset_LAND_RAZORWIRE_F= ["Zen_RTS_F_West_AssetLAND_RAZORWIRE_F", "razor wire", "Cost: 50, Time: 10,"] call Zen_RTS_StrategicAssetCreate;
 Zen_RTS_Asset_LAND_BAGBUNKER_TOWER_F= ["Zen_RTS_F_West_AssetLAND_BAGBUNKER_TOWER_F", "bunker", "Cost: 50, Time: 10,"] call Zen_RTS_StrategicAssetCreate;

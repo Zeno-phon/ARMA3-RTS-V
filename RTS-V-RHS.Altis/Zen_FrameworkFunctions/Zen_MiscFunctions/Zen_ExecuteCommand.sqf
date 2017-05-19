@@ -19,6 +19,9 @@ switch (toLower _cmd) do {
     case "addaction": {
         (_args select 0) addAction (_args select 1);
     };
+    case "addeventhandler": {
+        (_args select 0) addEventHandler (_args select 1);
+    };
     case "allowdamage": {
         (_args select 0) allowDamage (_args select 1);
     };

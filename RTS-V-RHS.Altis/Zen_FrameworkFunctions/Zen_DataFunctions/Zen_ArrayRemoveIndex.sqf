@@ -15,7 +15,7 @@ if !([_this, [["ARRAY"], ["SCALAR"]], [], 2] call Zen_CheckArguments) exitWith {
 _array = _this select 0;
 _index = _this select 1;
 
-if (_index < 0 || {_index >= count _array}) then {
+if (_index < 0 || {_index >= count _array}) exitWith {
     ZEN_FMW_Code_ErrorExitVoid("Zen_ArrayRemoveIndex", "Index is out of bounds.")
 };
 

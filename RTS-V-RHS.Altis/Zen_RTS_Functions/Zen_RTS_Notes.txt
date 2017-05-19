@@ -248,23 +248,19 @@ Variants
 // Recent Changelog
 //////////////////////////////////////////////////
 
-1. Fixed: CJ could not be created in MP
-2. Fixed: AI recyclers were not queue properly in MP
-3. Fixed: Building placement did not evaluate if placing a building was allowed before putting the preview object there
-4. Fixed: Building placement now accounts for vehicles and parked aircraft
-5. Fixed: Building placement safezone around the HQ was too small
-6. Improved: Updated to my latest framework
-7. Tweaked: Building placement safezone shape and size
+1. Fixed: East CJ did not get assigned the correct properties and actions
+2. Fixed: Buildings could not be destroyed from the MCU
+3. Improved: East tank factory assets
 
 //////////////////////////////////////////////////
 // Priority List
 //////////////////////////////////////////////////
 
-Test JIP
-Minimum creation time for all assets
-VTOL
+Destructor kills building on client
 Buildings get side visible map marker
     Zen_ShowHideMarkers
+Minimum creation time for all assets
+VTOL
 AI fire on buildings and unmanned vehicles
     ?? proxy target hidden in building geometry
 AI orders on player death

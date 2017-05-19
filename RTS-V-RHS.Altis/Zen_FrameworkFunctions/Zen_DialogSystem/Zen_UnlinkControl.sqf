@@ -17,7 +17,7 @@ _controlID = _this select 1;
 
 _index = [Zen_Dialog_Classes_Global, _dialogID, 0] call Zen_ArrayGetNestedIndex;
 if (count _index == 0) exitWith {
-    ZEN_FMW_Code_ErrorExitValue("Zen_UnlinkControl", "Invalid dialog class given")
+    ZEN_FMW_Code_ErrorExitVoid("Zen_UnlinkControl", "Invalid dialog class given")
 };
 
 _index = _index select 0;
@@ -25,6 +25,7 @@ _dialogData = Zen_Dialog_Classes_Global select _index;
 _controlArray = _dialogData select 1;
 
 0 = [_controlArray, _controlID] call Zen_ArrayRemoveValue;
+publicVariable "Zen_Dialog_Classes_Global";
 
 call Zen_StackRemove;
 if (true) exitWith {};

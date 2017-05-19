@@ -47,7 +47,7 @@ Zen_RTS_F_East_CJConstructor = {
     // };
 
     _buildingTypeData = [(_buildingObjData select 0)] call Zen_RTS_StrategicBuildingTypeGetData;
-    _assetStrRaw = _buildingObjData select 5;
+    _assetStrRaw = _buildingTypeData select 5;
 
     [(_buildingObjData select 0), east] call Zen_RTS_F_EconomyStrategicBuildDelayBuilding;
     _vehicle = [_spawnPos, "O_MRAP_02_F"] call Zen_SpawnVehicle;
@@ -61,13 +61,14 @@ Zen_RTS_F_East_CJConstructor = {
     _vehicle setVariable ["Zen_RTS_StrategicIsAIOwned", false, true];
     _vehicle setVariable ["Zen_RTS_StrategicIsAIAssigned", false, true];
 
-    _args = ["addAction", [_vehicle, ["CJ Menu", Zen_RTS_BuildMenu, [(_buildingObjData select 0), (_buildingObjData select 1)], 1, false, true, "", "(_this in _target)"]]];
+    _args = ["addAction", [_vehicle, ["CJ Menu", Zen_RTS_BuildMenu, [(_buildingObjData select 0), (_buildingObjData select 1)], 1, false, true, "", "(_this in _target) && !(_target getVariable 'Zen_RTS_StrategicIsAIOwned')"]]];
     ZEN_FMW_MP_REAll("Zen_ExecuteCommand", _args, call)
 
     _args = ["addAction", [_vehicle, ["Give CJ to AI", {SWAP_CJ_OWNER(true)}, _vehicle, 1, false, true, "", "((_this distance2D _target) < 5) && !(_target getVariable 'Zen_RTS_StrategicIsAIOwned') && (alive _target)"]]];
     ZEN_FMW_MP_REAll("Zen_ExecuteCommand", _args, call)
 
     _args = ["addAction", [_vehicle, ["Take CJ from AI", {SWAP_CJ_OWNER(false)}, _vehicle, 1, false, true, "", "((_this distance2D _target) < 5) && (_target getVariable 'Zen_RTS_StrategicIsAIOwned') && (alive _target)"]]];
+
     ZEN_FMW_MP_REAll("Zen_ExecuteCommand", _args, call)
 
     if (_level > 0) then {

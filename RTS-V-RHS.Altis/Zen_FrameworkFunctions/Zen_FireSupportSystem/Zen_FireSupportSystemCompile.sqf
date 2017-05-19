@@ -2,6 +2,7 @@
 // This file is released under Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)
 // See Legal.txt
 
+#include "..\Zen_StandardLibrary.sqf"
 #include "..\Zen_FrameworkLibrary.sqf"
 
 Zen_Fire_Support_Round_Local = objNull;
@@ -10,6 +11,7 @@ Zen_Fire_Support_Array_Global = [];
 Zen_Fire_Support_Action_Array_Global = [];
 Zen_Fire_Support_Action_Array_Local = [];
 Zen_Fire_Support_Action_Dialog_Data = ["", "", ""];
+Zen_AddFireSupportAction_Action_ID = "";
 
 Zen_AddFireSupportAction = compileFinal preprocessFileLineNumbers "Zen_FrameworkFunctions\Zen_FireSupportSystem\Zen_AddFireSupportAction.sqf";
 Zen_AddSupportActionCustom = compileFinal preprocessFileLineNumbers "Zen_FrameworkFunctions\Zen_FireSupportSystem\Zen_AddSupportActionCustom.sqf";

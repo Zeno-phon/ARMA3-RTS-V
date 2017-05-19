@@ -61,6 +61,66 @@
         !(isNil V) \
     };
 
+#define ZEN_FMW_Code_GetRemoteVarArray(A, I, V, O) \
+    if (isServer) then { \
+        ZEN_FMW_Code_GetRemoteVar_MP_RequestFunction = compile format[" \
+            %1 = %2 select %3; \
+            publicVariableServer '%1'; \
+        ", V, A, I]; \
+        (owner O) publicVariableClient "ZEN_FMW_Code_GetRemoteVar_MP_RequestFunction"; \
+        ZEN_FMW_MP_REClient("ZEN_FMW_Code_GetRemoteVar_MP_RequestFunction", [], call, O) \
+    } else { \
+        ZEN_FMW_Code_GetRemoteVar_MP_RequestFunction = compile format[" \
+            %1 = %2 select %3; \
+            (owner _this) publicVariableClient '%1'; \
+        ", V, A, I]; \
+        if (typeName O == "SCALAR") then { \
+            publicVariableServer "ZEN_FMW_Code_GetRemoteVar_MP_RequestFunction"; \
+            ZEN_FMW_MP_REServerOnly("ZEN_FMW_Code_GetRemoteVar_MP_RequestFunction", player, call) \
+        } else { \
+            if !(local O) then { \
+                (owner O) publicVariableClient "ZEN_FMW_Code_GetRemoteVar_MP_RequestFunction"; \
+                ZEN_FMW_MP_REClient("ZEN_FMW_Code_GetRemoteVar_MP_RequestFunction", player, call, O) \
+            }; \
+        }; \
+    }; \
+    ZEN_STD_Code_SleepFrames(5) \
+    waitUntil { \
+        !(isNil V) \
+    };
+
+#define ZEN_FMW_Code_GetRemoteVarArrayT(A, I, V, O) \
+    if (isServer) then { \
+        ZEN_FMW_Code_GetRemoteVar_MP_RequestFunction = compile format[" \
+            %1 = ([%2] call Zen_ArrayTranspose) select %3; \
+            publicVariableServer '%1'; \
+        ", V, A, I]; \
+        (owner O) publicVariableClient "ZEN_FMW_Code_GetRemoteVar_MP_RequestFunction"; \
+        ZEN_FMW_MP_REClient("ZEN_FMW_Code_GetRemoteVar_MP_RequestFunction", [], call, O) \
+    } else { \
+        ZEN_FMW_Code_GetRemoteVar_MP_RequestFunction = { \
+            missionNamespace setVariable [V, ([(missionNamespace getVariable A)] call Zen_ArrayTranspose) select (round call compile I)]; \
+            (owner _this) publicVariableClient V; \
+        }; \
+        ZEN_FMW_Code_GetRemoteVar_MP_RequestFunction = compile format[" \
+            %1 = ([%2] call Zen_ArrayTranspose) select %3; \
+            (owner _this) publicVariableClient '%1'; \
+        ", V, A, I]; \
+        if (typeName O == "SCALAR") then { \
+            publicVariableServer "ZEN_FMW_Code_GetRemoteVar_MP_RequestFunction"; \
+            ZEN_FMW_MP_REServerOnly("ZEN_FMW_Code_GetRemoteVar_MP_RequestFunction", player, call) \
+        } else { \
+            if !(local O) then { \
+                (owner O) publicVariableClient "ZEN_FMW_Code_GetRemoteVar_MP_RequestFunction"; \
+                ZEN_FMW_MP_REClient("ZEN_FMW_Code_GetRemoteVar_MP_RequestFunction", player, call, O) \
+            }; \
+        }; \
+    }; \
+    ZEN_STD_Code_SleepFrames(5) \
+    waitUntil { \
+        !(isNil V) \
+    };
+
 #define ZEN_FMW_Code_GiveLoadoutsOrdered(U, L, S) \
     { \
         0 = [_x, S, (L select (_forEachIndex % (count L)))] call Zen_GiveLoadout; \

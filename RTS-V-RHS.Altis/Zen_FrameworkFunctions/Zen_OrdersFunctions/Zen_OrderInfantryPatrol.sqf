@@ -74,6 +74,7 @@ _chaseFlags = [];
 
         _group setCurrentWaypoint (_group addWaypoint [_mpos, -1]);
         _group move _mpos;
+        _man doMove _mpos;
         _group setCombatMode "Red";
         _group setSpeedMode _speedMode;
         _group setBehaviour _behaviorMode;
@@ -117,6 +118,7 @@ while {(count _grpsArray != 0)} do {
 
                         _group setCurrentWaypoint (_group addWaypoint [_mpos, -1]);
                         _group move _mpos;
+                        _man doMove _mpos;
                         _group setBehaviour _behaviorMode;
                         _group setCombatMode "Red";
                         _group setSpeedMode _speedMode;
@@ -155,6 +157,7 @@ while {(count _grpsArray != 0)} do {
 
                                 _group setCurrentWaypoint (_group addWaypoint [_mpos, -1]);
                                 _group move _mpos;
+                                (leader _group) doMove _mpos;
                                 _group setSpeedMode _speedMode;
                                 _group setCombatMode "Red";
                                 if (side _group == civilian) then {
@@ -177,6 +180,7 @@ while {(count _grpsArray != 0)} do {
 
                                 _group setCurrentWaypoint (_group addWaypoint [_mpos, -1]);
                                 _group move _mpos;
+                                (leader _group) doMove _mpos;
                                 _group setBehaviour _behaviorMode;
                                 _group setCombatMode "Red";
                                 _group setSpeedMode _speedMode;

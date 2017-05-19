@@ -3,27 +3,26 @@
 // See Legal.txt
 
 #include "..\Zen_StandardLibrary.sqf"
+#include "..\Zen_FrameworkLibrary.sqf"
+
+if !(isServer) exitWith {
+    ZEN_FMW_MP_REServerOnly("Zen_AddGiveMagazine", _this, call)
+};
 
 _Zen_stack_Trace = ["Zen_AddGiveMagazine", _this] call Zen_StackAdd;
-private ["_units", "_sendPacket"];
+private ["_units"];
 
-if !([_this, [["VOID"], ["BOOL"]], [], 1] call Zen_CheckArguments) exitWith {
+if !([_this, [["VOID"]], [], 1] call Zen_CheckArguments) exitWith {
     call Zen_StackRemove;
 };
 
 _units = [(_this select 0)] call Zen_ConvertToObjectArray;
-ZEN_STD_Parse_GetSetArgumentDefault(_sendPacket, 1, true, false)
 
-if (!isDedicated && hasInterface) then {
-    {
-        0 = _x addAction ["<t color='#2D8CE0'>Give Magazine</t>", Zen_GiveMagazine, 0, 1, false, true, "", "((_target == _this) && !(surfaceIsWater (getPosATL _this)) && (vehicle _this == _this) && {(({(side _x == side _this) && ([_this, _x, 120] call Zen_IsFacing)} count (((getPosATL _target) nearEntities ['Man', 3]) - [_this])) > 0)})"];
-    } forEach _units;
+if (Zen_AddGiveMagazine_Action_ID == "") then {
+    Zen_AddGiveMagazine_Action_ID = ["<t color='#2D8CE0'>Give Magazine</t>", "Zen_GiveMagazine", [], [1, false, true, "", "((_target == _this) && !(surfaceIsWater (getPosATL _this)) && (vehicle _this == _this) && {(({(side _x == side _this) && ([_this, _x, 120] call Zen_IsFacing)} count (((getPosATL _target) nearEntities ['Man', 3]) - [_this])) > 0)})"]] call Zen_CreateAction;
 };
 
-if (isMultiplayer && {_sendPacket}) then {
-    Zen_MP_Closure_Packet = ["Zen_AddGiveMagazine", (_this)];
-    publicVariable "Zen_MP_Closure_Packet";
-};
+0 = [Zen_AddGiveMagazine_Action_ID, _units] call Zen_InvokeAction;
 
 call Zen_StackRemove;
 if (true) exitWith {};

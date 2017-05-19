@@ -57,6 +57,7 @@ _heliDriver disableAI "AutoTarget";
 
 (group _heliDriver) setCurrentWaypoint ((group _heliDriver) addWaypoint [_heliCorrectLandPos, -1]);
 (group _heliDriver) move _heliCorrectLandPos;
+(_heliDriver) doMove _heliCorrectLandPos;
 
 _heliGrp setBehaviour "careless";
 _heliGrp setCombatMode "green";

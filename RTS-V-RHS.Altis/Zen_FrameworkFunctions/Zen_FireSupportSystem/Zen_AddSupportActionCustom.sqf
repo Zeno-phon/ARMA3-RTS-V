@@ -5,6 +5,10 @@
 #include "..\Zen_StandardLibrary.sqf"
 #include "..\Zen_FrameworkLibrary.sqf"
 
+if !(isServer) exitWith {
+    ZEN_FMW_MP_REServerOnly("Zen_AddSupportActionCustom", _this, call)
+};
+
 _Zen_stack_Trace = ["Zen_AddSupportActionCustom", _this] call Zen_StackAdd;
 private ["_units", "_customFunction", "_titleString", "_maxCalls", "_customArgs", "_templateArray", "_args", "_descr"];
 
@@ -39,10 +43,10 @@ if ((count Zen_Fire_Support_Action_Array_Global) == 0) then {
     Zen_Fire_Support_Action_Dialog_Data = [_dialogID, _controlList, _controlDecr];
     publicVariable "Zen_Fire_Support_Action_Dialog_Data";
 
-    {
-        _args = ["addAction", [_x, ["<t color='#990000'>Fire Support</t>", {0 = [] spawn Zen_AddFireSupportAction_ShowDialog_MP}, [], 1, false, true, "", "((_target == _this) && {(({player in (_x select 1)} count Zen_Fire_Support_Action_Array_Global) > 0)})"]]];
-        ZEN_FMW_MP_REAll("Zen_ExecuteCommand", _args, call)
-    } forEach allUnits;
+    if (Zen_AddFireSupportAction_Action_ID == "") then {
+        Zen_AddFireSupportAction_Action_ID = ["<t color='#990000'>Fire Support</t>", "Zen_AddFireSupportAction_ShowDialog_MP", [], [1, false, true, "", "((player == _this) && {(({player in (_x select 1)} count Zen_Fire_Support_Action_Array_Global) > 0)})"]] call Zen_CreateAction;
+        0 = [Zen_AddFireSupportAction_Action_ID, allUnits] call Zen_InvokeAction;
+    };
 };
 
 _nameString = format ["Zen_support_custom_action_global_%1",([10] call Zen_StringGenerateRandom)];

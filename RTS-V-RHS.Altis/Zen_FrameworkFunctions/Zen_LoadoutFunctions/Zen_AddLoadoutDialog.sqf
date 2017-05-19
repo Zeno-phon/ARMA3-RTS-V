@@ -3,9 +3,14 @@
 // See Legal.txt
 
 #include "..\Zen_StandardLibrary.sqf"
+#include "..\Zen_FrameworkLibrary.sqf"
+
+if !(isServer) exitWith {
+    ZEN_FMW_MP_REServerOnly("Zen_AddLoadoutDialog", _this, call)
+};
 
 _Zen_stack_Trace = ["Zen_AddLoadoutDialog", _this] call Zen_StackAdd;
-private ["_objects", "_kits", "_maxUses", "_sendPacket", "_id"];
+private ["_objects", "_kits", "_maxUses", "_id"];
 
 if !([_this, [["ARRAY", "OBJECT"], ["ARRAY"], ["SCALAR"], ["BOOL"]], [["OBJECT"], ["STRING"]], 2] call Zen_CheckArguments) exitWith {
     call Zen_StackRemove;
@@ -22,8 +27,6 @@ if (count _this > 2) then {
     _this set [2, -1];
 };
 
-ZEN_STD_Parse_GetSetArgumentDefault(_sendPacket, 3, true, false)
-
 if (typeName _objects != "ARRAY") then {
     _objects = [_objects];
 };
@@ -38,17 +41,11 @@ _controlOK = ["Button", ["Text", "OK"], ["Position", [35, 0]], ["Size", [5,2]], 
     0 = [_dialogID, _x] call Zen_LinkControl;
 } forEach [_controlOK, _controlCancel, _controlList];
 
-if (!isDedicated && hasInterface) then {
-    {
-        _id = _x addAction ["<t color='#2D8CE0'>Select Loadout</t>", Zen_ShowLoadoutDialog, _dialogID, 1, false, true, "", "(alive _target && {((_target distance _this) < (1 + (((boundingBoxReal _target) select 0) distance ((boundingBoxReal _target) select 1)) / 2))})"];
-        Zen_Loadout_Action_Array_Local pushBack [_id, _maxUses, 0];
-    } forEach _objects;
-};
+_actionID = ["<t color='#2D8CE0'>Select Loadout</t>", "Zen_ShowLoadoutDialog", _dialogID, [1, false, true, "", "(alive _target && {((_target distance _this) < (1 + (((boundingBoxReal _target) select 0) distance ((boundingBoxReal _target) select 1)) / 2))})"]] call Zen_CreateAction;
+Zen_Loadout_Action_Array_Local pushBack [_actionID, _maxUses, 0];
+publicVariable "Zen_Loadout_Action_Array_Local";
 
-if (isMultiplayer && {_sendPacket}) then {
-    Zen_MP_Closure_Packet = ["Zen_AddLoadoutDialog", _this];
-    publicVariable "Zen_MP_Closure_Packet";
-};
+0 = [_actionID, _objects] call Zen_InvokeAction;
 
 call Zen_StackRemove;
 if (true) exitWith {};

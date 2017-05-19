@@ -24,7 +24,7 @@ if ((count _typeData == 0) || (count _objData == 0)) exitWith {
 };
 
 // ZEN_FMW_MP_REServerOnly("Zen_RTS_F_StrategicRemoveBuildingQueueServer", [_identifier], call)
-ZEN_FMW_MP_REServerOnly("Zen_RTS_F_StrategicRemoveBuildingQueueClient", [_identifier], call)
+// ZEN_FMW_MP_REAll("Zen_RTS_F_StrategicRemoveBuildingQueueClient", [_identifier], call)
 [_objData] call (missionNamespace getVariable (_typeData select 2));
 
 _index = ([Zen_RTS_Strategic_Building_Objects_Global, _objData select 1, 1] call Zen_ArrayGetNestedIndex) select 0;
@@ -32,7 +32,7 @@ _index = ([Zen_RTS_Strategic_Building_Objects_Global, _objData select 1, 1] call
 // 0 = [Zen_RTS_Strategic_Building_Objects_Server, _index] call Zen_ArrayRemoveIndex;
 publicVariable "Zen_RTS_Strategic_Building_Objects_Global";
 
-ZEN_FMW_MP_REAll("Zen_RTS_F_StrategicRemoveBuildingDataLocal", _index, call)
+ZEN_FMW_MP_REAll("Zen_RTS_F_StrategicRemoveBuildingDataLocal", [_identifier], call)
 
 call Zen_StackRemove;
 if (true) exitWith {};

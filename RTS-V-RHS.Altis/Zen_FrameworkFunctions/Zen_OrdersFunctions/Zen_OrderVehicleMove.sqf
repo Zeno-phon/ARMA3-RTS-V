@@ -43,6 +43,7 @@ if (_vehicle isKindOf "AIR") then {
 
 (group _vehicleDriver) setCurrentWaypoint ((group _vehicleDriver) addWaypoint [_inPos, -1]);
 (group _vehicleDriver) move _inPos;
+(_vehicleDriver) doMove _inPos;
 
 _vehicleGrp setBehaviour "safe";
 _vehicleGrp setCombatMode "green";

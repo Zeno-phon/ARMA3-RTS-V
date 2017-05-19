@@ -26,7 +26,7 @@ _taskArray = [];
 } forEach Zen_Task_Array_Global;
 
 if ((_printError) && {count _taskArray == 0}) then {
-    0 = ["Zen_GetTaskDataGlobal", "Given task does not exist", _this] call Zen_PrintError;
+    0 = ["Zen_GetTaskDataGlobal", "Given task does not exist.", _this] call Zen_PrintError;
     call Zen_StackPrint;
 };
 

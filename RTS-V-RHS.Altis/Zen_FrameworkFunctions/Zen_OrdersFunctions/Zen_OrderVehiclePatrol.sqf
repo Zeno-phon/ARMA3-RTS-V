@@ -48,7 +48,7 @@ if (_findRoads) then {
     #define CALC_POS \
         _mpos = [0,0,0]; \
         if (typeName _movecenter == "STRING") then { \
-            _mpos = [_movecenter, 0,_positionFilterArgs, 1, [_roadIndex, 2*(((getMarkerSize _movecenter) select 0) max ((getMarkerSize _movecenter) select 1))], _limitAnglesSet] call Zen_FindGroundPosition; \
+            _mpos = [_movecenter, 0, _positionFilterArgs, 1, [_roadIndex, 2*(((getMarkerSize _movecenter) select 0) max ((getMarkerSize _movecenter) select 1))], _limitAnglesSet] call Zen_FindGroundPosition; \
         } else { \
             _mpos = [_movecenter, [0, _positionFilterArgs], [], 1, [_roadIndex, 2 * _positionFilterArgs], _limitAnglesSet] call Zen_FindGroundPosition; \
         };
@@ -57,6 +57,7 @@ if (_findRoads) then {
 
     (group driver _veh) setCurrentWaypoint ((group driver _veh) addWaypoint [_mpos, -1]);
     (group driver _veh) move _mpos;
+    (driver _veh) doMove _mpos;
     _veh setBehaviour _behavior;
     _veh setCombatMode "Red";
     _veh setSpeedMode _speedMode;
@@ -89,6 +90,7 @@ while {(count _vehicleArray != 0)} do {
 
                     (group driver _veh) setCurrentWaypoint ((group driver _veh) addWaypoint [_mpos, -1]);
                     (group driver _veh) move _mpos;
+                    (driver _veh) doMove _mpos;
                     _veh setBehaviour _behavior;
                     _veh setCombatMode "Red";
                     _veh setSpeedMode _speedMode;
