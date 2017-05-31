@@ -131,15 +131,15 @@ call compileFinal preprocessFileLineNumbers "Zen_RTS_SubTerritory\Zen_RTS_SubTer
     // (RTS_Recycle_Queue select (([west, east] find ([_vehicle] call Zen_GetSide)) max 0)) pushBack _vehicle; \
     // _vehicle setVariable ["Zen_RTS_IsStrategicRepairable", false, true]; \
 
-#define BUILDING_VISUALS(T, O, C, D) \
+#define BUILDING_VISUALS(T, O, C, D, S, I) \
     _building = [_spawnPos, T, 0, D, true] call Zen_SpawnVehicle; \
+    _mkr = [_spawnPos, S, [C] call Zen_GetSideColor, [1, 1], I, 0, 0] call Zen_SpawnMarker; \
+    0 = [_mkr, side C] call Zen_ShowHideMarkers; \
     _building hideObjectGlobal true; \
-    _building hideObject true; \
     _args = [D, _buildingTypeData, _spawnPos, T, O, (_buildingTypeData select 0), side C]; \
     ZEN_FMW_MP_REAll("Zen_RTS_F_StrategicBuildingVisualLocal", _args, spawn) \
     [(_buildingTypeData select 0), side C] call Zen_RTS_F_EconomyStrategicBuildDelayBuilding; \
-    _building hideObjectGlobal false; \
-    _building hideObject false;
+    _building hideObjectGlobal false;
 
 #define ZEN_RTS_STRATEGIC_BUILDING_DESTROYED_EH(T, S) \
     if !(alive _building) exitWith { \
@@ -160,6 +160,7 @@ call compileFinal preprocessFileLineNumbers "Zen_RTS_SubTerritory\Zen_RTS_SubTer
     _args = [_buildingSpawnGrid, S]; \
     ZEN_FMW_MP_REAll("Zen_RTS_F_AddSpawnGridMarker", _args, call) \
     _building setVariable ["Zen_RTS_StrategicBuildingMarker", _buildingSpawnGrid, true]; \
+    _building setVariable ["Zen_RTS_StrategicBuildingMapMarker", _mkr, true]; \
     _building setVariable ["Zen_RTS_StrategicValue", _cost, true]; \
     _building setVariable ["Zen_RTS_IsStrategicRepairable", true, true]; \
     _building setVariable ["Zen_RTS_StrategicType", "Building", true]; \
@@ -176,6 +177,7 @@ call compileFinal preprocessFileLineNumbers "Zen_RTS_SubTerritory\Zen_RTS_SubTer
             }; \
             _building = _this select 0; \
             _buildingSpawnGrid = _building getVariable "Zen_RTS_StrategicBuildingMarker"; \
+            deleteMarker (_building getVariable "Zen_RTS_StrategicBuildingMapMarker"); \
             0 = [(RTS_Repair_Queue select ([west, east] find S)), _building] call Zen_ArrayRemoveValue; \
             _pos = getPosATL _building; \
             sleep 5; \

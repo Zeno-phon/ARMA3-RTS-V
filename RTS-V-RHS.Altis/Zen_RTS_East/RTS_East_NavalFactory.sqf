@@ -33,7 +33,7 @@ Zen_RTS_F_East_NavalConstructor = {
         0 = [_ID, [Zen_RTS_Asset_Tech_East_Upgrade_NavalFactory]] call Zen_RTS_F_StrategicAddAssetGlobal;
     };
 
-    BUILDING_VISUALS("Land_LightHouse_F", -1, EastCommander, _dir)
+    BUILDING_VISUALS("Land_LightHouse_F", -1, EastCommander, _dir, "Naval Factory", "o_art")
     ZEN_RTS_STRATEGIC_BUILDING_DESTROYED_EH(Zen_RTS_BuildingType_East_NavalFactory, east)
 
     // to-do: || false condition needs building hacking logic

@@ -8,6 +8,7 @@ FNC_AUTOTANK = {
     [_vehicle, [[0], true]] remoteExec ["lockTurret", _vehicle];
     [_vehicle, [[0, 0], true]] remoteExec ["lockTurret", _vehicle];
     [_vehicle, true] remoteExec ["lockCargo", _vehicle];
+    _vehicle allowCrewInImmobile true;
 
     // [
         // _vehicle,
@@ -135,16 +136,16 @@ FNC_AUTOTANK = {
 
             26 cutText ["", "BLACK IN", 3];
             waitUntil {
-                sleep 0.2;
+                // sleep 0.2;
                 // this need to be edited to rts respawn or ZEN
                 // (!alive player || CLY_rage_respawn)
-                !(alive player)
+                // !(alive player)
             };
 
             if !(alive player) then {
                 // RTS_Vehicle = objNull;
                 deleteVehicle driver _Vehicle;
-                deleteVehicle _Vehicle;
+                // deleteVehicle _Vehicle;
             };
         };
 

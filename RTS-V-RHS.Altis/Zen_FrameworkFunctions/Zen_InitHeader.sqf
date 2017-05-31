@@ -2,7 +2,7 @@
 // This file is released under Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)
 // See Legal.txt
 
-// This folder contains framework source code version 4/18/17
+// This folder contains framework source code version 5/24/17
 
 #include "Zen_StandardLibrary.sqf"
 #include "Zen_FrameworkLibrary.sqf"

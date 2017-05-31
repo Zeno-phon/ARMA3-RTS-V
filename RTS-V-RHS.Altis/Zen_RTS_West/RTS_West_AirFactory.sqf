@@ -39,7 +39,7 @@ Zen_RTS_F_West_AirFactoryConstructor = {
         0 = [_ID, [Zen_RTS_Asset_Tech_West_Upgrade_AirFactory]] call Zen_RTS_F_StrategicAddAssetGlobal;
     };
 
-    BUILDING_VISUALS("Land_Airport_Tower_F", -2, WestCommander, _dir)
+    BUILDING_VISUALS("Land_Airport_Tower_F", -2, WestCommander, _dir, "Air Factory", "b_air")
     ZEN_RTS_STRATEGIC_BUILDING_DESTROYED_EH(Zen_RTS_BuildingType_West_AirFactory, West)
 
     // to-do: || false condition needs building hacking logic

@@ -248,24 +248,24 @@ Variants
 // Recent Changelog
 //////////////////////////////////////////////////
 
-1. Fixed: East CJ did not get assigned the correct properties and actions
-2. Fixed: Buildings could not be destroyed from the MCU
-3. Improved: East tank factory assets
+1. Added: Building map markers visible to players on the building's side
+2. Improved: Autotank vehicles allow crew in damaged vehicles
 
 //////////////////////////////////////////////////
 // Priority List
 //////////////////////////////////////////////////
 
 Destructor kills building on client
-Buildings get side visible map marker
-    Zen_ShowHideMarkers
-Minimum creation time for all assets
-VTOL
+Time and Cost for all Assets
+    East
+        // tank factory
+    West
 AI fire on buildings and unmanned vehicles
-    ?? proxy target hidden in building geometry
+    proxy target hidden in building geometry
 AI orders on player death
     ? return to player control on respawn
     ? remove from player and give autonomous patrol orders
+VTOL
 
 //////////////////////////////////////////////////
 // Intro

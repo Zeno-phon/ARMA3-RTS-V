@@ -58,6 +58,9 @@ _crewClasses = [];
 _vehicleTurrets = [_vehicle, _turretTypes] call Zen_GetTurretPaths;
 
 _configCrew = getText (_vehicleConfigEntry >> "crew");
+if (isNil "_configCrew") then {
+    _configCrew = "";
+};
 
 if ((_configCrew == "") || {[_configCrew] call Zen_GetSide != _side}) then {
     switch (_side) do {

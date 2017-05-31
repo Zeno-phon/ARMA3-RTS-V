@@ -146,8 +146,8 @@ Zen_RTS_F_East_Tech_Enemy = {
     Zen_RTS_TechFlag_East_BuildEnemy = true;
     // publicVariable "Zen_RTS_TechFlag_East_BuildEnemy";
 
-    _buildingObjData = _this select 0;
-    _buildingObjID = _buildingObjData select 1;
+    _buildingData = _this select 0;
+    _buildingObjID = _buildingData select 1;
 
     _dataLocal = [_buildingObjID] call Zen_RTS_StrategicBuildingObjectGetDataLocal;
     _assets = _dataLocal select 1;
@@ -378,7 +378,7 @@ SUPPORT_CONSTRUCTOR(Zen_RTS_F_East_Asset_rhs_9k79_B, "rhs_9k79_B", CREW_UNITS)
 
 #define VEHCILE_CONSTRUCTOR(N, T, U) \
     N = { \
-        diag_log ("West " + T + " asset constructor called"); \
+        diag_log ("East " + T + " asset constructor called"); \
         diag_log _this; \
         _buildingObjData = _this select 0; \
         _assetData = _this select 1; \
