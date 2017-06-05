@@ -415,8 +415,8 @@ SUPPORT_CONSTRUCTOR(Zen_RTS_F_West_Asset_rhs_9k79_B, "rhs_9k79_B", CREW_UNITS)
                 } forEach (units _crewGroup); \
             }; \
         }; \
-        if (T in ["rhsusf_m1025_w_s_m2", "rhsusf_m113d_usarmy", "RHS_M2A3_BUSKIII", "m1a2sep1tuskiid_usarmy"]) then { \
-            _vehicle call FNC_AUTOTANK; \
+           if (T in ["rhsusf_m1a2sep1tuskiid_usarmy"]) then { \
+            ZEN_FMW_MP_REAll("FNC_AUTOTANK", _vehicle, call) \
         }; \
     };
             // ZEN_FMW_MP_REAll("FNC_AUTOTANK", _vehicle, call) \

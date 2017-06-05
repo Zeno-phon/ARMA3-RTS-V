@@ -1,12 +1,3 @@
-/**
-    Level 1:
-        Zen_RTS_Asset_East_RHS_Ural_Flat_VDV_01
-        Zen_RTS_Asset_East_Quadbike
-        Zen_RTS_Asset_East_Offroad
-    Level 2:
-        Zen_RTS_Asset_East_OffroadArmed
-        Zen_RTS_Asset_East_IfritHMG
-//*/
 
 // (_this select 1) : [array, spawn position, scalar, starting level]
 Zen_RTS_F_East_TankFactoryConstructor = {
@@ -42,7 +33,7 @@ Zen_RTS_F_East_TankFactoryConstructor = {
     };
 
     BUILDING_VISUALS("Land_i_Garage_V1_F", -0.5, EastCommander, _dir, "Tank Factory", "o_armor")
-    ZEN_RTS_STRATEGIC_BUILDING_DESTROYED_EH(Zen_RTS_BuildingType_East_TankFactory, east)
+    ZEN_RTS_STRATEGIC_BUILDING_DESTROYED_EH(Zen_RTS_BuildingType_East_TankFactory, East)
 
     // to-do: || false condition needs building hacking logic
     _args = ["addAction", [_building, ["<img size='3'image='pictures\build_CA.paa'/>", Zen_RTS_BuildMenu, [(_buildingObjData select 0), (_buildingObjData select 1)], 1, false, true, "", "((_target distance _this) < 15) && {(side _this == (_target getVariable 'Zen_RTS_StrategicBuildingSide')) || (false)}"]]];
@@ -92,7 +83,7 @@ UPGRADE(Zen_RTS_F_East_TankFactoryUpgrade03, ASSETS)
 #define ASSETS [Zen_RTS_Asset_East_rhs_t80, Zen_RTS_Asset_East_rhs_t80a, Zen_RTS_Asset_East_rhs_t90_tv]
 UPGRADE(Zen_RTS_F_East_TankFactoryUpgrade04, ASSETS)
 
-Zen_RTS_BuildingType_East_TankFactory = ["Zen_RTS_F_East_TankFactoryConstructor", "Zen_RTS_F_East_TankFactoryDestructor", ["Zen_RTS_F_East_TankFactoryUpgrade01", "Zen_RTS_F_East_TankFactoryUpgrade02", "Zen_RTS_F_East_TankFactoryUpgrade03","Zen_RTS_F_East_TankFactoryUpgrade04"], "Tank factory", "Cost: 2000, Time: 10, Picture: pictures\tank_ca.paa, Classname: Land_i_Garage_V1_F,"] call Zen_RTS_StrategicBuildingCreate;
+Zen_RTS_BuildingType_East_TankFactory = ["Zen_RTS_F_East_TankFactoryConstructor", "Zen_RTS_F_East_TankFactoryDestructor", ["Zen_RTS_F_East_TankFactoryUpgrade01", "Zen_RTS_F_East_TankFactoryUpgrade02", "Zen_RTS_F_East_TankFactoryUpgrade03","Zen_RTS_F_East_TankFactoryUpgrade04"], "Tank factory", "Cost: 10000, Time: 120, Picture: pictures\tank_ca.paa, Classname: Land_i_Garage_V1_F,"] call Zen_RTS_StrategicBuildingCreate;
 (RTS_Used_Building_Types select 1) pushBack  Zen_RTS_BuildingType_East_TankFactory;
 
 /////////////////////////////////
@@ -118,11 +109,11 @@ Zen_RTS_Asset_East_rhs_bmd1 = ["Zen_RTS_F_East_Asset_rhs_bmd1", "BMD1","Cost: 40
 Zen_RTS_Asset_East_rhs_bmd2 = ["Zen_RTS_F_East_Asset_rhs_bmd2", "BMD2","Cost: 4500, Time: 30,"] call Zen_RTS_StrategicAssetCreate;
 Zen_RTS_Asset_East_rhs_bmd4ma_vdv = ["Zen_RTS_F_East_Asset_rhs_bmd4ma_vdv", "BMD","Cost: 5000, Time: 30,"] call Zen_RTS_StrategicAssetCreate;
 Zen_RTS_Asset_East_rhs_sprut_vdv = ["Zen_RTS_F_East_Asset_rhs_sprut_vdv", "SPURT","Cost: 6000, Time: 30,"] call Zen_RTS_StrategicAssetCreate;
-Zen_RTS_Asset_East_rhs_t72bc_tv = ["Zen_RTS_F_East_Asset_rhs_t72bc_tv", "T72","Cost: 7000, Time: 45,"] call Zen_RTS_StrategicAssetCreate;
+Zen_RTS_Asset_East_rhs_t72bc_tv = ["Zen_RTS_F_East_Asset_rhs_t72bc_tv", "AUTO-T72","Cost: 7000, Time: 45,"] call Zen_RTS_StrategicAssetCreate;
 Zen_RTS_Asset_East_rhs_zsu234_aa = ["Zen_RTS_F_East_Asset_rhs_zsu234_aa", "ZSU234-AA","Cost: 7500, Time: 45,"] call Zen_RTS_StrategicAssetCreate;
 //tank 4 upgrade assests
 Zen_RTS_Asset_East_rhs_t80 = ["Zen_RTS_F_East_Asset_rhs_t80", "T80","Cost: 8000, Time: 45,"] call Zen_RTS_StrategicAssetCreate;
 Zen_RTS_Asset_East_rhs_t80a = ["Zen_RTS_F_East_Asset_rhs_t80a", "T80a","Cost: 8500, Time: 45,"] call Zen_RTS_StrategicAssetCreate;
 Zen_RTS_Asset_East_rhs_t90_tv = ["Zen_RTS_F_East_Asset_rhs_t90_tv", "T90","Cost: 9000, Time: 45,"] call Zen_RTS_StrategicAssetCreate;
 
-Zen_RTS_Asset_East_CJ = ["Zen_RTS_F_East_Asset_CJ","CJ", "Cost: 2000, Time: 20, Crew: 0,"] call Zen_RTS_StrategicAssetCreate;
+Zen_RTS_Asset_East_CJ = ["Zen_RTS_F_East_Asset_CJ","CJ", "Cost: 5000, Time: 20, Crew: 0,"] call Zen_RTS_StrategicAssetCreate;

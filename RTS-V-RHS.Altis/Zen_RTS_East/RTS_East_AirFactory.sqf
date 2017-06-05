@@ -1,12 +1,3 @@
-/**
-    Level 1:
-        Zen_RTS_Asset_Ka60
-        Zen_RTS_Asset_Mi8MT
-    Level 2:
-        Zen_RTS_Asset_Mi8MTV3
-    Level 3:
-        Zen_RTS_Asset_Ka52
-//*/
 
 // (_this select 1) : [array, spawn position, scalar, starting level]
 Zen_RTS_F_East_AirFactoryConstructor = {
@@ -22,7 +13,6 @@ Zen_RTS_F_East_AirFactoryConstructor = {
     _assetsToAdd = [];
     _assetsToAdd pushBack Zen_RTS_Asset_East_rhs_ka60_c;
     _assetsToAdd pushBack Zen_RTS_Asset_East_RHS_Mi8mt_vvs;
-    _assetsToAdd pushBack Zen_RTS_Asset_East_RHS_Mi8mt_Cargo_vvs;
 
     // if (Zen_RTS_TechFlag_East_BuildEnemy) then {
         // ... to do
@@ -40,7 +30,7 @@ Zen_RTS_F_East_AirFactoryConstructor = {
         0 = [_ID, [Zen_RTS_Asset_Tech_East_Upgrade_AirFactory]] call Zen_RTS_F_StrategicAddAssetGlobal;
     };
 
-    BUILDING_VISUALS("Land_Airport_Tower_F", -2, EastCommander, _dir, "Air Factory", "o_air")
+    BUILDING_VISUALS("Land_Airport_Tower_F", -0.5, EastCommander, _dir, "Air Factory", "o_air")
     ZEN_RTS_STRATEGIC_BUILDING_DESTROYED_EH(Zen_RTS_BuildingType_East_AirFactory, East)
 
     // to-do: || false condition needs building hacking logic
@@ -82,34 +72,34 @@ N = { \
 #define ASSETS [Zen_RTS_Asset_East_RHS_Mi8MTV3_vvs, Zen_RTS_Asset_East_RHS_Mi8MTV3_UPK23_vvs]
 UPGRADE(Zen_RTS_F_East_AirFactoryUpgrade01, ASSETS)
 
-#define ASSETS [Zen_RTS_Asset_East_RHS_Mi8AMT_vvs, Zen_RTS_Asset_East_RHS_Mi8AMTSh_vvs, Zen_RTS_Asset_East_RHS_Mi8AMTSh_UPK23_vvs, Zen_RTS_Asset_East_RHS_Mi8AMTSh_FAB_vvs]
+#define ASSETS [Zen_RTS_Asset_East_RHS_Mi8AMT_vvs,  Zen_RTS_Asset_East_RHS_Mi8AMTSh_UPK23_vvs, Zen_RTS_Asset_East_RHS_Mi8AMTSh_FAB_vvs]
 UPGRADE(Zen_RTS_F_East_AirFactoryUpgrade02, ASSETS)
 
-#define ASSETS [Zen_RTS_Asset_East_RHS_Mi8MTV3_FAB_vvs, Zen_RTS_Asset_East_RHS_Ka52_vvs, Zen_RTS_Asset_East_RHS_Ka52_UPK23_vvs]
+#define ASSETS [Zen_RTS_Asset_East_RHS_Ka52_vvs, Zen_RTS_Asset_East_RHS_Ka52_UPK23_vvs]
 UPGRADE(Zen_RTS_F_East_AirFactoryUpgrade03, ASSETS)
 
 #define ASSETS [Zen_RTS_Asset_East_RHS_Su25SM_vvs, Zen_RTS_Asset_East_RHS_Su25SM_KH29_vvs, Zen_RTS_Asset_East_rhs_pchela1t_vvs]
 UPGRADE(Zen_RTS_F_East_AirFactoryUpgrade04, ASSETS)
 
-Zen_RTS_BuildingType_East_AirFactory = ["Zen_RTS_F_East_AirFactoryConstructor", "Zen_RTS_F_East_AirFactoryDestructor", ["Zen_RTS_F_East_AirFactoryUpgrade01", "Zen_RTS_F_East_AirFactoryUpgrade02", "Zen_RTS_F_East_AirFactoryUpgrade03", "Zen_RTS_F_East_AirFactoryUpgrade04"], "Air Factory", "Cost: 2000, Time: 10, Picture: pictures\plane_ca.paa, Classname: Land_Airport_Tower_F,"] call Zen_RTS_StrategicBuildingCreate;
+Zen_RTS_BuildingType_East_AirFactory = ["Zen_RTS_F_East_AirFactoryConstructor", "Zen_RTS_F_East_AirFactoryDestructor", ["Zen_RTS_F_East_AirFactoryUpgrade01", "Zen_RTS_F_East_AirFactoryUpgrade02", "Zen_RTS_F_East_AirFactoryUpgrade03", "Zen_RTS_F_East_AirFactoryUpgrade04"], "Air Factory", "Cost: 20000, Time: 120, Picture: pictures\plane_ca.paa, Classname: Land_Airport_Tower_F,"] call Zen_RTS_StrategicBuildingCreate;
 (RTS_Used_Building_Types select 1) pushBack  Zen_RTS_BuildingType_East_AirFactory;
 
 /////////////////////////////////
 // Assets
 /////////////////////////////////
 
-Zen_RTS_Asset_East_rhs_ka60_c = ["Zen_RTS_F_East_Asset_rhs_ka60_c", "Ka-60 Unarmed", "Cost: 200, Time: 10,"] call Zen_RTS_StrategicAssetCreate;
-Zen_RTS_Asset_East_RHS_Mi8mt_vvs = ["Zen_RTS_F_East_Asset_RHS_Mi8mt_vvs", "Mi-8 Unarmed", "Cost: 200, Time: 10,"] call Zen_RTS_StrategicAssetCreate;
-Zen_RTS_Asset_East_RHS_Mi8mt_Cargo_vvs = ["Zen_RTS_F_East_Asset_RHS_Mi8mt_Cargo_vvs", "Mi-8 cargo", "Cost: 200, Time: 10,"] call Zen_RTS_StrategicAssetCreate;
-Zen_RTS_Asset_East_RHS_Mi8MTV3_vvs = ["Zen_RTS_F_East_Asset_RHS_Mi8MTV3_vvs", "Mi8 Rockets", "Cost: 200, Time: 10,"] call Zen_RTS_StrategicAssetCreate;
-Zen_RTS_Asset_East_RHS_Mi8MTV3_UPK23_vvs = ["Zen_RTS_F_East_Asset_RHS_Mi8MTV3_UPK23_vvs", "Mi8-UPK23", "Cost: 200, Time: 10,"] call Zen_RTS_StrategicAssetCreate;
-Zen_RTS_Asset_East_RHS_Mi8AMT_vvs = ["Zen_RTS_F_East_Asset_RHS_Mi8AMT_vvs", "Mi8-AMT", "Cost: 200, Time: 10,"] call Zen_RTS_StrategicAssetCreate;
-Zen_RTS_Asset_East_RHS_Mi8AMTSh_vvs = ["Zen_RTS_F_East_Asset_RHS_Mi8AMTSh_vvs", "Mi8-AMT-Sh", "Cost: 200, Time: 10,"] call Zen_RTS_StrategicAssetCreate;
-Zen_RTS_Asset_East_RHS_Mi8AMTSh_UPK23_vvs = ["Zen_RTS_F_East_Asset_RHS_Mi8AMTSh_UPK23_vvs", "Mi8-AMT-upk23", "Cost: 200, Time: 10,"] call Zen_RTS_StrategicAssetCreate;
-Zen_RTS_Asset_East_RHS_Mi8AMTSh_FAB_vvs = ["Zen_RTS_F_East_Asset_RHS_Mi8AMTSh_FAB_vvs", "Mi8AMT-FAB", "Cost: 200, Time: 10,"] call Zen_RTS_StrategicAssetCreate;
-Zen_RTS_Asset_East_RHS_Mi8MTV3_FAB_vvs = ["Zen_RTS_F_East_Asset_RHS_Mi8MTV3_FAB_vvs", "Mi8-FAB", "Cost: 200, Time: 10,"] call Zen_RTS_StrategicAssetCreate;
-Zen_RTS_Asset_East_RHS_Ka52_vvs = ["Zen_RTS_F_East_Asset_RHS_Ka52_vvs", "Ka-52", "Cost: 200, Time: 10,"] call Zen_RTS_StrategicAssetCreate;
-Zen_RTS_Asset_East_RHS_Ka52_UPK23_vvs = ["Zen_RTS_F_East_Asset_RHS_Ka52_UPK23_vvs", "Ka-UPK23", "Cost: 200, Time: 10,"] call Zen_RTS_StrategicAssetCreate;
-Zen_RTS_Asset_East_RHS_Su25SM_vvs = ["Zen_RTS_F_East_Asset_RHS_Su25SM_vvs", "Su25", "Cost: 200, Time: 10,"] call Zen_RTS_StrategicAssetCreate;
-Zen_RTS_Asset_East_RHS_Su25SM_KH29_vvs = ["Zen_RTS_F_East_Asset_RHS_Su25SM_KH29_vvs", "Su25-KH29", "Cost: 200, Time: 10,"] call Zen_RTS_StrategicAssetCreate;
-Zen_RTS_Asset_East_rhs_pchela1t_vvs = ["Zen_RTS_F_East_Asset_rhs_pchela1t_vvs", "pchela", "Cost: 200, Time: 10,"] call Zen_RTS_StrategicAssetCreate;
+Zen_RTS_Asset_East_rhs_ka60_c = ["Zen_RTS_F_East_Asset_rhs_ka60_c", "KA-60 (UNARMED)", "Cost: 5000, Time: 120,"] call Zen_RTS_StrategicAssetCreate;
+Zen_RTS_Asset_East_RHS_Mi8mt_vvs = ["Zen_RTS_F_East_Asset_RHS_Mi8mt_vvs", "MI-8 (UNARMED)", "Cost: 5000, Time: 120,"] call Zen_RTS_StrategicAssetCreate;
+
+Zen_RTS_Asset_East_RHS_Mi8MTV3_vvs = ["Zen_RTS_F_East_Asset_RHS_Mi8MTV3_vvs", "MI8 ROCKETS", "Cost: 7000, Time: 120,"] call Zen_RTS_StrategicAssetCreate;
+Zen_RTS_Asset_East_RHS_Mi8MTV3_UPK23_vvs = ["Zen_RTS_F_East_Asset_RHS_Mi8MTV3_UPK23_vvs", "MI8-UPK23", "Cost: 7000, Time: 120,"] call Zen_RTS_StrategicAssetCreate;
+
+Zen_RTS_Asset_East_RHS_Mi8AMT_vvs = ["Zen_RTS_F_East_Asset_RHS_Mi8AMT_vvs", "MI8-AMT", "Cost: 8000, Time: 120,"] call Zen_RTS_StrategicAssetCreate;	
+Zen_RTS_Asset_East_RHS_Mi8AMTSh_UPK23_vvs = ["Zen_RTS_F_East_Asset_RHS_Mi8AMTSh_UPK23_vvs", "MI8-AMT-UPK23", "Cost: 8000, Time: 120,"] call Zen_RTS_StrategicAssetCreate;
+Zen_RTS_Asset_East_RHS_Mi8AMTSh_FAB_vvs = ["Zen_RTS_F_East_Asset_RHS_Mi8AMTSh_FAB_vvs", "MI8AMT-FAB", "Cost: 8000, Time: 120,"] call Zen_RTS_StrategicAssetCreate;
+
+Zen_RTS_Asset_East_RHS_Ka52_vvs = ["Zen_RTS_F_East_Asset_RHS_Ka52_vvs", "KA-52", "Cost: 9000, Time: 120,"] call Zen_RTS_StrategicAssetCreate;
+Zen_RTS_Asset_East_RHS_Ka52_UPK23_vvs = ["Zen_RTS_F_East_Asset_RHS_Ka52_UPK23_vvs", "KA-UPK23", "Cost: 9000, Time: 120,"] call Zen_RTS_StrategicAssetCreate;																																					
+Zen_RTS_Asset_East_RHS_Su25SM_vvs = ["Zen_RTS_F_East_Asset_RHS_Su25SM_vvs", "SU25", "Cost: 10000, Time: 120,"] call Zen_RTS_StrategicAssetCreate;
+Zen_RTS_Asset_East_RHS_Su25SM_KH29_vvs = ["Zen_RTS_F_East_Asset_RHS_Su25SM_KH29_vvs", "SU25-KH29", "Cost: 10000, Time: 120,"] call Zen_RTS_StrategicAssetCreate;
+Zen_RTS_Asset_East_rhs_pchela1t_vvs = ["Zen_RTS_F_East_Asset_rhs_pchela1t_vvs", "PCHELA", "Cost: 15000, Time: 120,"] call Zen_RTS_StrategicAssetCreate;

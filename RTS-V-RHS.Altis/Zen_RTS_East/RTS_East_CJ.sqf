@@ -1,7 +1,3 @@
-/**
-    Level 1:
-        MG
-//*/
 
 #define SWAP_CJ_OWNER(F) \
     (_this select 3) setVariable ["Zen_RTS_StrategicIsAIOwned", F, true]; \
@@ -27,7 +23,6 @@ Zen_RTS_F_East_CJConstructor = {
     _assetsToAdd pushBack Zen_RTS_Asset_B_SLINGLOAD_01_MEDEVAC_F;
     _assetsToAdd pushBack Zen_RTS_Asset_B_SLINGLOAD_01_FUEL_F;
     _assetsToAdd pushBack Zen_RTS_Asset_Box_East_WpsSpecial_F;
-    _assetsToAdd pushBack Zen_RTS_Asset_Land_BagFence_Corner_F;
     _assetsToAdd pushBack Zen_RTS_Asset_Land_CncWall4_F;
 
     // if (Zen_RTS_TechFlag_East_BuildEnemy) then {
@@ -68,7 +63,6 @@ Zen_RTS_F_East_CJConstructor = {
     ZEN_FMW_MP_REAll("Zen_ExecuteCommand", _args, call)
 
     _args = ["addAction", [_vehicle, ["Take CJ from AI", {SWAP_CJ_OWNER(false)}, _vehicle, 1, false, true, "", "((_this distance2D _target) < 5) && (_target getVariable 'Zen_RTS_StrategicIsAIOwned') && (alive _target)"]]];
-
     ZEN_FMW_MP_REAll("Zen_ExecuteCommand", _args, call)
 
     if (_level > 0) then {
@@ -113,7 +107,7 @@ N = { \
 // #define ASSETS []
 // UPGRADE(Zen_RTS_F_East_CJUpgrade01, ASSETS)
 
-Zen_RTS_BuildingType_East_CJ = ["Zen_RTS_F_East_CJConstructor", "Zen_RTS_F_East_CJDestructor", [], "CJ", "Cost: 1000, Time: 10, Picture:pictures\rts_lvs.paa, Classname: O_MRAP_02_F,"] call Zen_RTS_StrategicBuildingCreate;
+Zen_RTS_BuildingType_East_CJ = ["Zen_RTS_F_East_CJConstructor", "Zen_RTS_F_East_CJDestructor", [], "CJ", "Cost: 5000, Time: 10, Picture:pictures\rts_lvs.paa, Classname: O_MRAP_02_F,"] call Zen_RTS_StrategicBuildingCreate;
 (RTS_Used_Building_Types select 1) pushBack Zen_RTS_BuildingType_East_CJ;
 
 /////////////////////////////////
@@ -121,12 +115,11 @@ Zen_RTS_BuildingType_East_CJ = ["Zen_RTS_F_East_CJConstructor", "Zen_RTS_F_East_
 /////////////////////////////////
 
 Zen_RTS_Asset_East_MG = ["Zen_RTS_F_East_AssetMG", "MG", "Cost: 50, Time: 10,"] call Zen_RTS_StrategicAssetCreate;
-Zen_RTS_Asset_LAND_RAZORWIRE_F= ["Zen_RTS_F_East_AssetLAND_RAZORWIRE_F", "razor wire", "Cost: 50, Time: 10,"] call Zen_RTS_StrategicAssetCreate;
-Zen_RTS_Asset_LAND_BAGBUNKER_TOWER_F= ["Zen_RTS_F_East_AssetLAND_BAGBUNKER_TOWER_F", "bunker", "Cost: 50, Time: 10,"] call Zen_RTS_StrategicAssetCreate;
-Zen_RTS_Asset_LAND_BAGFENCE_LONG_F= ["Zen_RTS_F_East_AssetLAND_BAGFENCE_LONG_F", "fence shelter", "Cost: 50, Time: 10,"] call Zen_RTS_StrategicAssetCreate;
-Zen_RTS_Asset_LAND_CARGO_PATROL_V1_F= ["Zen_RTS_F_East_AssetLAND_CARGO_PATROL_V1_F", "patrol tower", "Cost: 50, Time: 10,"] call Zen_RTS_StrategicAssetCreate;
-Zen_RTS_Asset_B_SLINGLOAD_01_MEDEVAC_F= ["Zen_RTS_F_East_AssetB_SLINGLOAD_01_MEDEVAC_F", "med tent", "Cost: 50, Time: 10,"] call Zen_RTS_StrategicAssetCreate;
-Zen_RTS_Asset_B_SLINGLOAD_01_FUEL_F= ["Zen_RTS_F_East_AssetB_SLINGLOAD_01_FUEL_F", "fuel port", "Cost: 50, Time: 10,"] call Zen_RTS_StrategicAssetCreate;
-Zen_RTS_Asset_Box_East_WpsSpecial_F= ["Zen_RTS_F_East_AssetBox_East_WpsSpecial_F", "Supply Box [NATO]", "Cost: 50, Time: 10,"] call Zen_RTS_StrategicAssetCreate;
-Zen_RTS_Asset_Land_BagFence_Corner_F= ["Zen_RTS_F_East_Asset_Land_BagFence_Corner_F", "repair port", "Cost: 50, Time: 10,"] call Zen_RTS_StrategicAssetCreate;
-Zen_RTS_Asset_Land_CncWall4_F= ["Zen_RTS_F_West_Asset_Land_CncWall4_F", "repair port", "Cost: 50, Time: 10,"] call Zen_RTS_StrategicAssetCreate;
+Zen_RTS_Asset_LAND_RAZORWIRE_F= ["Zen_RTS_F_East_AssetLAND_RAZORWIRE_F", "RAZOR WIRE", "Cost: 50, Time: 10,"] call Zen_RTS_StrategicAssetCreate;
+Zen_RTS_Asset_LAND_BAGBUNKER_TOWER_F= ["Zen_RTS_F_East_AssetLAND_BAGBUNKER_TOWER_F", "BUNKER", "Cost: 50, Time: 10,"] call Zen_RTS_StrategicAssetCreate;
+Zen_RTS_Asset_LAND_BAGFENCE_LONG_F= ["Zen_RTS_F_East_AssetLAND_BAGFENCE_LONG_F", "FENCE SHELTER", "Cost: 50, Time: 10,"] call Zen_RTS_StrategicAssetCreate;
+Zen_RTS_Asset_LAND_CARGO_PATROL_V1_F= ["Zen_RTS_F_East_AssetLAND_CARGO_PATROL_V1_F", "PATROL TOWER", "Cost: 50, Time: 10,"] call Zen_RTS_StrategicAssetCreate;
+Zen_RTS_Asset_B_SLINGLOAD_01_MEDEVAC_F= ["Zen_RTS_F_East_AssetB_SLINGLOAD_01_MEDEVAC_F", "MED TENT", "Cost: 50, Time: 10,"] call Zen_RTS_StrategicAssetCreate;
+Zen_RTS_Asset_B_SLINGLOAD_01_FUEL_F= ["Zen_RTS_F_East_AssetB_SLINGLOAD_01_FUEL_F", "FUEL PORT", "Cost: 50, Time: 10,"] call Zen_RTS_StrategicAssetCreate;
+Zen_RTS_Asset_Box_East_WpsSpecial_F= ["Zen_RTS_F_East_AssetBox_East_WpsSpecial_F", "SUPPLY BOX", "Cost: 50, Time: 10,"] call Zen_RTS_StrategicAssetCreate;
+Zen_RTS_Asset_Land_CncWall4_F= ["Zen_RTS_F_East_Asset_Land_CncWall4_F", "WALL", "Cost: 50, Time: 10,"] call Zen_RTS_StrategicAssetCreate;

@@ -131,10 +131,7 @@ FORT_CONSTRUCTOR(Zen_RTS_F_East_AssetLAND_CARGO_PATROL_V1_F, "LAND_CARGO_PATROL_
 FORT_CONSTRUCTOR(Zen_RTS_F_East_AssetB_SLINGLOAD_01_MEDEVAC_F, "B_SLINGLOAD_01_MEDEVAC_F")
 FORT_CONSTRUCTOR(Zen_RTS_F_East_AssetB_SLINGLOAD_01_FUEL_F, "B_SLINGLOAD_01_FUEL_F")
 FORT_CONSTRUCTOR(Zen_RTS_F_East_AssetBox_East_WpsSpecial_F, "Box_East_WpsSpecial_F")
-// FORT_CONSTRUCTOR(Zen_RTS_F_East_AssetB_Slingload_01_Ammo_F, "B_Slingload_01_Ammo_F")
-// FORT_CONSTRUCTOR(Zen_RTS_F_East_AssetB_Slingload_01_Repair_F, "B_Slingload_01_Repair_F")
-FORT_CONSTRUCTOR(Zen_RTS_F_East_Asset_Land_BagFence_Corner_F, "Land_BagFence_Corner_F")
-FORT_CONSTRUCTOR(Zen_RTS_F_West_Asset_Land_CncWall4_F, "Land_CncWall4_F")
+FORT_CONSTRUCTOR(Zen_RTS_F_East_Asset_Land_CncWall4_F, "Land_CncWall4_F")
 
 /////////////////////////
 // HQ
@@ -378,7 +375,7 @@ SUPPORT_CONSTRUCTOR(Zen_RTS_F_East_Asset_rhs_9k79_B, "rhs_9k79_B", CREW_UNITS)
 
 #define VEHCILE_CONSTRUCTOR(N, T, U) \
     N = { \
-        diag_log ("East " + T + " asset constructor called"); \
+        diag_log ("East" + T + " asset constructor called"); \
         diag_log _this; \
         _buildingObjData = _this select 0; \
         _assetData = _this select 1; \
@@ -391,7 +388,7 @@ SUPPORT_CONSTRUCTOR(Zen_RTS_F_East_Asset_rhs_9k79_B, "rhs_9k79_B", CREW_UNITS)
         ZEN_RTS_STRATEGIC_ASSET_PLACEMENT() \
         [_assetData select 0] call Zen_RTS_F_EconomyStrategicBuildDelayAsset; \
         ZEN_RTS_STRATEGIC_ASSET_SPAWN_MESSAGE() \
-        _vehicle = [_pos, T, 0, getDir _building + _theta, true]  call Zen_SpawnVehicle; \
+        _vehicle = [_pos, T, 0, getDir _building + _theta, true] call Zen_SpawnVehicle; \
         ZEN_RTS_STRATEGIC_ASSET_DESTROYED_EH \
         if (_crewCount > 0) then { \
             _crewGroup = [_vehicle, ([U, 0, _crewCount - 1] call Zen_ArrayGetIndexedSlice)] call Zen_SpawnGroup; \
@@ -409,7 +406,7 @@ SUPPORT_CONSTRUCTOR(Zen_RTS_F_East_Asset_rhs_9k79_B, "rhs_9k79_B", CREW_UNITS)
                 } forEach (units _crewGroup); \
             }; \
         }; \
-        if (T in ["rhs_bmp3mera_msv"]) then { \
+        if (T in ["rhs_t72bc_tv"]) then { \
             ZEN_FMW_MP_REAll("FNC_AUTOTANK", _vehicle, call) \
         }; \
     };
@@ -470,8 +467,8 @@ VEHCILE_CONSTRUCTOR(Zen_RTS_F_East_Asset_rhs_t80u, "rhs_t80u", CREW_UNITS)
 VEHCILE_CONSTRUCTOR(Zen_RTS_F_East_Asset_rhs_t90_tv, "rhs_t90_tv", CREW_UNITS)
 
 Zen_RTS_F_East_Asset_CJ = {
-    player sideChat str ("East CJ asset proxy constructor called");
-    player sideChat str _this;
+    diag_log ("East CJ asset proxy constructor called");
+    diag_log _this;
 
     _buildingObjData = _this select 0;
     _building = _buildingObjData select 2;

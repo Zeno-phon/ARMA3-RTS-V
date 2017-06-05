@@ -1,12 +1,3 @@
-/**
-    Level 1:
-        Zen_RTS_Asset_West_HEMTT_Repair
-        Zen_RTS_Asset_West_Quadbike
-        Zen_RTS_Asset_West_Offroad
-    Level 2:
-        Zen_RTS_Asset_West_OffroadArmed
-        Zen_RTS_Asset_West_HunterHMG
-//*/
 
 // (_this select 1) : [array, spawn position, scalar, starting level]
 Zen_RTS_F_West_TankFactoryConstructor = {
@@ -22,8 +13,6 @@ Zen_RTS_F_West_TankFactoryConstructor = {
     _assetsToAdd = [];
     _assetsToAdd pushBack Zen_RTS_Asset_West_rhsusf_m998_w_2dr;
     _assetsToAdd pushBack Zen_RTS_Asset_West_rhsusf_m998_w_2dr_halftop;
-    _assetsToAdd pushBack Zen_RTS_Asset_West_rhsusf_m1025_w;
-    _assetsToAdd pushBack Zen_RTS_Asset_West_rhsusf_m1025_w_s;
     _assetsToAdd pushBack Zen_RTS_Asset_West_CJ;
 
     // if (Zen_RTS_TechFlag_West_BuildEnemy) then {
@@ -102,8 +91,6 @@ Zen_RTS_BuildingType_West_TankFactory = ["Zen_RTS_F_West_TankFactoryConstructor"
 
 Zen_RTS_Asset_West_rhsusf_m998_w_2dr = ["Zen_RTS_F_West_Asset_rhsusf_m998_w_2dr","m998-2dr", "Cost: 100, Time: 10, Crew: 1,"] call Zen_RTS_StrategicAssetCreate;
 Zen_RTS_Asset_West_rhsusf_m998_w_2dr_halftop = ["Zen_RTS_F_West_Asset_rhsusf_m998_w_2dr_halftop", "m998-2dr-halftop", "Cost: 200, Time: 10, Crew: 1,"] call Zen_RTS_StrategicAssetCreate;
-Zen_RTS_Asset_West_rhsusf_m1025_w = ["Zen_RTS_F_West_Asset_rhsusf_m1025_w", "m998-2dr-fulltop", "Cost: 200, Time: 10, Crew: 1,"] call Zen_RTS_StrategicAssetCreate;
-Zen_RTS_Asset_West_rhsusf_m1025_w_s = ["Zen_RTS_F_West_Asset_rhsusf_m1025_w_s", "m998-4dr", "Cost: 200, Time: 10, Crew: 1,"] call Zen_RTS_StrategicAssetCreate;
 
 Zen_RTS_Asset_West_rhsusf_M1083A1P2_B_M2_d_fmtv_usarmy = ["Zen_RTS_F_West_Asset_rhsusf_M1083A1P2_B_M2_d_fmtv_usarmy", "M108-m2", "Cost: 200, Time: 10, Crew: 3,"] call Zen_RTS_StrategicAssetCreate;
 Zen_RTS_Asset_West_rhsusf_M1078A1P2_B_M2_wd_fmtv_usarmy = ["Zen_RTS_F_West_Asset_rhsusf_M1078A1P2_B_M2_wd_fmtv_usarmy", "M107-m2", "Cost: 200, Time: 10, Crew: 3,"] call Zen_RTS_StrategicAssetCreate;
@@ -126,7 +113,7 @@ Zen_RTS_Asset_West_RHS_M6_wd = ["Zen_RTS_F_West_Asset_RHS_M6_wd","RHS_M6_wd", "C
 Zen_RTS_Asset_West_rhsusf_m1a1aimwd_usarmy = ["Zen_RTS_F_West_Asset_rhsusf_m1a1aimwd_usarmy","rhsusf_m1a1-aim-wd", "Cost: 100, Time: 10, Crew: 3,"] call Zen_RTS_StrategicAssetCreate;
 Zen_RTS_Asset_West_rhsusf_m1a1aimd_usarmy = ["Zen_RTS_F_West_Asset_rhsusf_m1a1aimd_usarmy","m1a1-aim-d", "Cost: 100, Time: 10, Crew: 3,"] call Zen_RTS_StrategicAssetCreate;
 Zen_RTS_Asset_West_rhsusf_m1a1aim_tuski_wd = ["Zen_RTS_F_West_Asset_rhsusf_m1a1aim_tuski_wd","m1a1aim-tuski-wd", "Cost: 100, Time: 10, Crew: 3,"] call Zen_RTS_StrategicAssetCreate;
-Zen_RTS_Asset_West_rhsusf_m1a1aim_tuski_d = ["Zen_RTS_F_West_Asset_rhsusf_m1a1aim_tuski_d","m1a1=aim-tuski-d", "Cost: 100, Time: 10, Crew: 3,"] call Zen_RTS_StrategicAssetCreate;
+Zen_RTS_Asset_West_rhsusf_m1a1aim_tuski_d = ["Zen_RTS_F_West_Asset_rhsusf_m1a1aim_tuski_d","M1A1-[AUTO]", "Cost: 100, Time: 10, Crew: 3,"] call Zen_RTS_StrategicAssetCreate;
 Zen_RTS_Asset_West_rhsusf_m1a1fep_d = ["Zen_RTS_F_West_Asset_rhsusf_m1a1fep_d","m1a1-fep-d", "Cost: 100, Time: 10, Crew: 3,"] call Zen_RTS_StrategicAssetCreate;
 Zen_RTS_Asset_West_rhsusf_m1a1fep_wd = ["Zen_RTS_F_West_Asset_rhsusf_m1a1fep_wd","m1a1fep_wd", "Cost: 100, Time: 10, Crew: 3,"] call Zen_RTS_StrategicAssetCreate;
 Zen_RTS_Asset_West_rhsusf_m1a1fep_od = ["Zen_RTS_F_West_Asset_rhsusf_m1a1fep_od","m1a1fep_od", "Cost: 100, Time: 10, Crew: 3,"] call Zen_RTS_StrategicAssetCreate;

@@ -87,7 +87,7 @@ call compileFinal preprocessFileLineNumbers "Zen_RTS_SubTerritory\Zen_RTS_SubTer
     for "_r" from 10 to 50 step 10 do { \
         for "_phi" from 0 to 315 step 45 do { \
             _spawnPos = _pos vectorAdd [_r * round cos _phi, _r * round sin _phi, 0]; \
-            _objects = (nearestObjects [_spawnPos, ["LandVehicle"], 10]) + (nearestObjects [_spawnPos, ["Air"], 10]); \
+            _objects = (nearestObjects [_spawnPos, ["LandVehicle"], 50]) + (nearestObjects [_spawnPos, ["Air"], 100]); \
             if (count _objects == 0) then { \
                 _pos = _spawnPos; \
                 breakTo "main"; \
