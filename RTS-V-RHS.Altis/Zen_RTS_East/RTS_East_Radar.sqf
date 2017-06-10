@@ -56,5 +56,5 @@ UPGRADE(Zen_RTS_F_East_RadarUpgrade01, ASSETS)
 // #define ASSETS []
 // UPGRADE(Zen_RTS_F_East_RadarUpgrade02, ASSETS)
 
-Zen_RTS_BuildingType_East_Radar = ["Zen_RTS_F_East_RadarConstructor", "Zen_RTS_F_East_RadarDestructor", ["Zen_RTS_F_East_RadarUpgrade01"], "Radar", "Cost: 2000, Time: 10, Picture: pictures\target1.paa, Classname: Land_Radar_Small_F"] call Zen_RTS_StrategicBuildingCreate;
+Zen_RTS_BuildingType_East_Radar = ["Zen_RTS_F_East_RadarConstructor", "Zen_RTS_F_East_RadarDestructor", ["Zen_RTS_F_East_RadarUpgrade01"], "Radar", "Cost: 2000, Time: 120, Picture: pictures\target1.paa, Classname: Land_Radar_Small_F"] call Zen_RTS_StrategicBuildingCreate;
 (RTS_Used_Building_Types select 1) pushBack Zen_RTS_BuildingType_East_Radar;

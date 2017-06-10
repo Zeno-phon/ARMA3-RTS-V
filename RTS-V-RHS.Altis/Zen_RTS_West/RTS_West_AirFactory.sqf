@@ -1,12 +1,4 @@
-/**
-    Level 1:
-        Zen_RTS_F_West_Asset_Hummingbird
-        Zen_RTS_F_West_Hummingbird_stripped
-    Level 2:
-        Zen_RTS_F_West_AH_9_Pawnee
-        Zen_RTS_F_West_UH_80_Ghost
 
-//*/
 
 // (_this select 1) : [array, spawn position, scalar, starting level]
 Zen_RTS_F_West_AirFactoryConstructor = {
@@ -39,7 +31,7 @@ Zen_RTS_F_West_AirFactoryConstructor = {
         0 = [_ID, [Zen_RTS_Asset_Tech_West_Upgrade_AirFactory]] call Zen_RTS_F_StrategicAddAssetGlobal;
     };
 
-    BUILDING_VISUALS("Land_Airport_Tower_F", -2, WestCommander, _dir, "Air Factory", "b_air")
+    BUILDING_VISUALS("Land_Airport_Tower_F", -0.5, WestCommander, _dir, "Air Factory", "b_air")
     ZEN_RTS_STRATEGIC_BUILDING_DESTROYED_EH(Zen_RTS_BuildingType_West_AirFactory, West)
 
     // to-do: || false condition needs building hacking logic
@@ -78,38 +70,37 @@ N = { \
     (true) \
 };
 
-#define ASSETS [Zen_RTS_Asset_West_RHS_UH1Y, Zen_RTS_Asset_West_RHS_UH1Y_FFAR, Zen_RTS_Asset_West_RHS_UH1Y_FFAR_d]
+#define ASSETS [Zen_RTS_Asset_West_RHS_UH1Y, Zen_RTS_Asset_West_RHS_UH1Y_FFAR]
 UPGRADE(Zen_RTS_F_West_AirFactoryUpgrade01, ASSETS)
 
-#define ASSETS [Zen_RTS_Asset_West_RHS_CH_47F_10, Zen_RTS_Asset_West_RHS_UH60M, Zen_RTS_Asset_West_RHS_UH60M_d, Zen_RTS_Asset_West_RHS_UH60M_MEV2_d]
+#define ASSETS [Zen_RTS_Asset_West_RHS_CH_47F_10, Zen_RTS_Asset_West_RHS_UH60M, Zen_RTS_Asset_West_RHS_UH60M_MEV2_d]
 UPGRADE(Zen_RTS_F_West_AirFactoryUpgrade02, ASSETS)
 
-#define ASSETS [Zen_RTS_Asset_West_RHS_AH64D_GS, Zen_RTS_Asset_West_RHS_AH64D_wd_GS, Zen_RTS_Asset_West_RHS_AH64D_AA, Zen_RTS_Asset_West_RHS_AH64DGrey]
+#define ASSETS [Zen_RTS_Asset_West_RHS_AH64D_GS, Zen_RTS_Asset_West_RHS_AH64D_AA]
 UPGRADE(Zen_RTS_F_West_AirFactoryUpgrade03, ASSETS)
 
 #define ASSETS [Zen_RTS_Asset_West_RHS_C130J, Zen_RTS_Asset_West_RHS_AH1Z, Zen_RTS_Asset_West_RHS_A10]
 UPGRADE(Zen_RTS_F_West_AirFactoryUpgrade04, ASSETS)
 
-Zen_RTS_BuildingType_West_AirFactory = ["Zen_RTS_F_West_AirFactoryConstructor", "Zen_RTS_F_West_AirFactoryDestructor", ["Zen_RTS_F_West_AirFactoryUpgrade01", "Zen_RTS_F_West_AirFactoryUpgrade02", "Zen_RTS_F_West_AirFactoryUpgrade03", "Zen_RTS_F_West_AirFactoryUpgrade04"], "Air Factory", "Cost: 2000, Time: 10, Picture: pictures\plane_ca.paa, Classname: Land_Airport_Tower_F,"] call Zen_RTS_StrategicBuildingCreate;
+Zen_RTS_BuildingType_West_AirFactory = ["Zen_RTS_F_West_AirFactoryConstructor", "Zen_RTS_F_West_AirFactoryDestructor", ["Zen_RTS_F_West_AirFactoryUpgrade01", "Zen_RTS_F_West_AirFactoryUpgrade02", "Zen_RTS_F_West_AirFactoryUpgrade03", "Zen_RTS_F_West_AirFactoryUpgrade04"], "Air Factory", "Cost: 20000, Time: 120, Picture: pictures\plane_ca.paa, Classname: Land_Airport_Tower_F,"] call Zen_RTS_StrategicBuildingCreate;
 (RTS_Used_Building_Types select 0) pushBack  Zen_RTS_BuildingType_West_AirFactory;
 
 /////////////////////////////////
 // Assets
 /////////////////////////////////
 
-Zen_RTS_Asset_West_RHS_UH1Y_UNARMED = ["Zen_RTS_F_West_Asset_RHS_UH1Y_UNARMED", "UH1Y-UNARMED", "Cost: 200, Time: 10,"] call Zen_RTS_StrategicAssetCreate;
-Zen_RTS_Asset_West_RHS_UH1Y_UNARMED_d = ["Zen_RTS_F_West_Asset_RHS_UH1Y_UNARMED_d", "UH1Y_UNARMED-d", "Cost: 200, Time: 10,"] call Zen_RTS_StrategicAssetCreate;
-Zen_RTS_Asset_West_RHS_UH1Y = ["Zen_RTS_F_West_Asset_RHS_UH1Y", "UH1Y", "Cost: 200, Time: 10,"] call Zen_RTS_StrategicAssetCreate;
-Zen_RTS_Asset_West_RHS_UH1Y_FFAR = ["Zen_RTS_F_West_Asset_RHS_UH1Y_FFAR", "UH1Y-FFAR", "Cost: 200, Time: 10,"] call Zen_RTS_StrategicAssetCreate;
-Zen_RTS_Asset_West_RHS_UH1Y_FFAR_d = ["Zen_RTS_F_West_Asset_RHS_UH1Y_FFAR_d", "UH1Y-FFAR-d", "Cost: 200, Time: 10,"] call Zen_RTS_StrategicAssetCreate;
-Zen_RTS_Asset_West_RHS_CH_47F_10 = ["Zen_RTS_F_West_Asset_RHS_CH_47F_10", "CH-47F-10", "Cost: 200, Time: 10,"] call Zen_RTS_StrategicAssetCreate;
-Zen_RTS_Asset_West_RHS_UH60M = ["Zen_RTS_F_West_Asset_RHS_UH60M", "UH60M", "Cost: 200, Time: 10,"] call Zen_RTS_StrategicAssetCreate;
-Zen_RTS_Asset_West_RHS_UH60M_d = ["Zen_RTS_F_West_Asset_RHS_UH60M_d", "UH60M-d", "Cost: 200, Time: 10,"] call Zen_RTS_StrategicAssetCreate;
-Zen_RTS_Asset_West_RHS_UH60M_MEV2_d = ["Zen_RTS_F_West_Asset_RHS_UH60M_MEV2_d", "UH60M-MEV2-d", "Cost: 200, Time: 10,"] call Zen_RTS_StrategicAssetCreate;
-Zen_RTS_Asset_West_RHS_AH64D_GS = ["Zen_RTS_F_West_Asset_RHS_AH64D_GS", "AH64D-GS", "Cost: 200, Time: 10,"] call Zen_RTS_StrategicAssetCreate;
-Zen_RTS_Asset_West_RHS_AH64D_wd_GS = ["Zen_RTS_F_West_Asset_RHS_AH64D_wd_GS", "AH64D-wd-GS", "Cost: 200, Time: 10,"] call Zen_RTS_StrategicAssetCreate;
-Zen_RTS_Asset_West_RHS_AH64D_AA = ["Zen_RTS_F_West_Asset_RHS_AH64D_AA", "AH64D-AA", "Cost: 200, Time: 10,"] call Zen_RTS_StrategicAssetCreate;
-Zen_RTS_Asset_West_RHS_AH64DGrey = ["Zen_RTS_F_West_Asset_RHS_AH64DGrey", "AH64D-Grey", "Cost: 200, Time: 10,"] call Zen_RTS_StrategicAssetCreate;
-Zen_RTS_Asset_West_RHS_C130J = ["Zen_RTS_F_West_Asset_RHS_C130J", "C130J", "Cost: 200, Time: 10,"] call Zen_RTS_StrategicAssetCreate;
-Zen_RTS_Asset_West_RHS_AH1Z = ["Zen_RTS_F_West_Asset_RHS_AH1Z", "AH1Z", "Cost: 200, Time: 10,"] call Zen_RTS_StrategicAssetCreate;
-Zen_RTS_Asset_West_RHS_A10 = ["Zen_RTS_F_West_Asset_RHS_A10", "A10", "Cost: 200, Time: 10,"] call Zen_RTS_StrategicAssetCreate;
+Zen_RTS_Asset_West_RHS_UH1Y_UNARMED = ["Zen_RTS_F_West_Asset_RHS_UH1Y_UNARMED", "UH1Y-UNARMED", "Cost: 5000, Time: 120,"] call Zen_RTS_StrategicAssetCreate;
+Zen_RTS_Asset_West_RHS_UH1Y_UNARMED_d = ["Zen_RTS_F_West_Asset_RHS_UH1Y_UNARMED_d", "UH1Y_UNARMED-d", "Cost: 5000, Time: 120,"] call Zen_RTS_StrategicAssetCreate;
+
+Zen_RTS_Asset_West_RHS_UH1Y = ["Zen_RTS_F_West_Asset_RHS_UH1Y", "UH1Y", "Cost: 7000, Time: 120,"] call Zen_RTS_StrategicAssetCreate;
+Zen_RTS_Asset_West_RHS_UH1Y_FFAR = ["Zen_RTS_F_West_Asset_RHS_UH1Y_FFAR", "UH1Y-FFAR", "Cost: 7000, Time: 120,"] call Zen_RTS_StrategicAssetCreate;
+
+Zen_RTS_Asset_West_RHS_CH_47F_10 = ["Zen_RTS_F_West_Asset_RHS_CH_47F_10", "CH-47F-10", "Cost: 8000, Time: 120,"] call Zen_RTS_StrategicAssetCreate;
+Zen_RTS_Asset_West_RHS_UH60M = ["Zen_RTS_F_West_Asset_RHS_UH60M", "UH60M", "Cost: 8000, Time: 120,"] call Zen_RTS_StrategicAssetCreate;
+Zen_RTS_Asset_West_RHS_UH60M_MEV2_d = ["Zen_RTS_F_West_Asset_RHS_UH60M_MEV2_d", "UH60M-MEV2-d", "Cost: 8000, Time: 120,"] call Zen_RTS_StrategicAssetCreate;
+
+Zen_RTS_Asset_West_RHS_AH64D_GS = ["Zen_RTS_F_West_Asset_RHS_AH64D_GS", "AH64D-GS", "Cost: 9000, Time: 120,"] call Zen_RTS_StrategicAssetCreate;
+Zen_RTS_Asset_West_RHS_AH64D_AA = ["Zen_RTS_F_West_Asset_RHS_AH64D_AA", "AH64D-AA", "Cost: 9000, Time: 120,"] call Zen_RTS_StrategicAssetCreate;
+Zen_RTS_Asset_West_RHS_C130J = ["Zen_RTS_F_West_Asset_RHS_C130J", "C130J", "Cost: 10000, Time: 120,"] call Zen_RTS_StrategicAssetCreate;
+Zen_RTS_Asset_West_RHS_AH1Z = ["Zen_RTS_F_West_Asset_RHS_AH1Z", "AH1Z", "Cost: 10000, Time: 120,"] call Zen_RTS_StrategicAssetCreate;
+Zen_RTS_Asset_West_RHS_A10 = ["Zen_RTS_F_West_Asset_RHS_A10", "A10", "Cost: 15000, Time: 120,"] call Zen_RTS_StrategicAssetCreate;

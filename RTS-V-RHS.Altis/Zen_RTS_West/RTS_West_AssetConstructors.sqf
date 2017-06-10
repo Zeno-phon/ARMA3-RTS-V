@@ -110,7 +110,7 @@ INFANTRY_CONSTRUCTOR(Zen_RTS_F_West_Assetrhsusf_army_ocp_fso, "rhsusf_army_ocp_f
 
 #define FORT_CONSTRUCTOR(N, T) \
     N = { \
-        diag_log ("West " + T + " asset constructor called"); \
+        diag_log ("West" + T + " asset constructor called"); \
         diag_log _this; \
         _buildingObjData = _this select 0; \
         _assetData = _this select 1; \
@@ -132,9 +132,6 @@ FORT_CONSTRUCTOR(Zen_RTS_F_West_AssetLAND_CARGO_PATROL_V1_F, "LAND_CARGO_PATROL_
 FORT_CONSTRUCTOR(Zen_RTS_F_West_AssetB_SLINGLOAD_01_MEDEVAC_F, "B_SLINGLOAD_01_MEDEVAC_F")
 FORT_CONSTRUCTOR(Zen_RTS_F_West_AssetB_SLINGLOAD_01_FUEL_F, "B_SLINGLOAD_01_FUEL_F")
 FORT_CONSTRUCTOR(Zen_RTS_F_West_AssetBox_NATO_WpsSpecial_F, "Box_NATO_WpsSpecial_F")
-//FORT_CONSTRUCTOR(Zen_RTS_F_West_AssetB_Slingload_01_Ammo_F, "B_Slingload_01_Ammo_F")
-//FORT_CONSTRUCTOR(Zen_RTS_F_West_AssetB_Slingload_01_Repair_F, "B_Slingload_01_Repair_F")
-FORT_CONSTRUCTOR(Zen_RTS_F_West_Asset_Land_BagFence_Corner_F, "Land_BagFence_Corner_F")
 FORT_CONSTRUCTOR(Zen_RTS_F_West_Asset_Land_CncWall4_F, "Land_CncWall4_F")
 
 /////////////////////////
@@ -202,7 +199,7 @@ UPGRADE_CONSTRUCTOR(Zen_RTS_F_West_Tech_Upgrade_Barracks, Zen_RTS_BuildingType_W
 UPGRADE_CONSTRUCTOR(Zen_RTS_F_West_Tech_Upgrade_Radar, Zen_RTS_BuildingType_West_Radar, Zen_RTS_Asset_Tech_West_Upgrade_Radar)
 UPGRADE_CONSTRUCTOR(Zen_RTS_F_West_Tech_Upgrade_AirFactory, Zen_RTS_BuildingType_West_AirFactory, Zen_RTS_Asset_Tech_West_Upgrade_AirFactory)
 UPGRADE_CONSTRUCTOR(Zen_RTS_F_West_Tech_Upgrade_NavalFactory, Zen_RTS_BuildingType_West_NavalFactory, Zen_RTS_Asset_Tech_West_Upgrade_NavalFactory)
-UPGRADE_CONSTRUCTOR(Zen_RTS_F_West_Tech_Upgrade_SupportFactory, Zen_RTS_BuildingType_West_SupportFactory, Zen_RTS_Asset_Tech_West_Upgrade_SupportFactory)
+//UPGRADE_CONSTRUCTOR(Zen_RTS_F_West_Tech_Upgrade_SupportFactory, Zen_RTS_BuildingType_West_SupportFactory, Zen_RTS_Asset_Tech_West_Upgrade_SupportFactory)
 
 /////////////////////////
 // Naval
@@ -210,7 +207,7 @@ UPGRADE_CONSTRUCTOR(Zen_RTS_F_West_Tech_Upgrade_SupportFactory, Zen_RTS_Building
 
 #define SHIP_CONSTRUCTOR(N, T, U) \
     N = { \
-        diag_log ("West " + T + " asset constructor called"); \
+        diag_log ("West" + T + " asset constructor called"); \
         diag_log _this; \
         _buildingObjData = _this select 0; \
         _assetData = _this select 1; \
@@ -319,7 +316,7 @@ Zen_RTS_F_West_Recycler = {
 /////////////////////////
 // Support Factory
 /////////////////////////
-
+/*
 #define SUPPORT_CONSTRUCTOR(N, T, U) \
     N = { \
         diag_log ("West " + T + " asset constructor called"); \
@@ -378,13 +375,14 @@ SUPPORT_CONSTRUCTOR(Zen_RTS_F_West_Asset_rhsusf_m1025_w_m2, "rhsusf_m1025_w_m2",
 SUPPORT_CONSTRUCTOR(Zen_RTS_F_West_Asset_rhs_9k79_K, "rhs_9k79_k", CREW_UNITS)
 SUPPORT_CONSTRUCTOR(Zen_RTS_F_West_Asset_rhs_9k79_B, "rhs_9k79_B", CREW_UNITS)
 
+*/  
 /////////////////////////
 // Tank Factory
 /////////////////////////
 
 #define VEHCILE_CONSTRUCTOR(N, T, U) \
     N = { \
-        diag_log ("West " + T + " asset constructor called"); \
+        diag_log ("West" + T + " asset constructor called"); \
         diag_log _this; \
         _buildingObjData = _this select 0; \
         _assetData = _this select 1; \
@@ -415,8 +413,8 @@ SUPPORT_CONSTRUCTOR(Zen_RTS_F_West_Asset_rhs_9k79_B, "rhs_9k79_B", CREW_UNITS)
                 } forEach (units _crewGroup); \
             }; \
         }; \
-           if (T in ["rhsusf_m1a2sep1tuskiid_usarmy"]) then { \
-            ZEN_FMW_MP_REAll("FNC_AUTOTANK", _vehicle, call) \
+           if (T in ["rhsusf_m1a1aim_tuski_d"]) then { \
+            ZEN_FMW_MP_REAll("FNC_AUTOTANKWST", _vehicle, call) \
         }; \
     };
             // ZEN_FMW_MP_REAll("FNC_AUTOTANK", _vehicle, call) \

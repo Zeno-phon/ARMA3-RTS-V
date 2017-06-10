@@ -72,12 +72,12 @@ N = { \
 // #define ASSETS []
 // UPGRADE(, ASSETS)
 
-Zen_RTS_BuildingType_East_RecyclePlant = ["Zen_RTS_F_East_RecyclePlantConstructor", "Zen_RTS_F_East_RecyclePlantDestructor", [], "Recycle Plant", "Cost: 1000, Time: 10, Picture: pictures\depot_ca.paa, Classname: Land_Cargo_House_V2_F,"] call Zen_RTS_StrategicBuildingCreate;
+Zen_RTS_BuildingType_East_RecyclePlant = ["Zen_RTS_F_East_RecyclePlantConstructor", "Zen_RTS_F_East_RecyclePlantDestructor", [], "Recycle Plant", "Cost: 5000, Time: 60, Picture: pictures\depot_ca.paa, Classname: Land_Cargo_House_V2_F,"] call Zen_RTS_StrategicBuildingCreate;
 (RTS_Used_Building_Types select 1) pushBack Zen_RTS_BuildingType_East_RecyclePlant;
 
 /////////////////////////////////
 // Assets
 /////////////////////////////////
 
-Zen_RTS_Asset_East_Repairer = ["Zen_RTS_F_East_Repairer", "Repairer", "Cost: 50, Time: 10, Classname: C_man_polo_1_F_afro,"] call Zen_RTS_StrategicAssetCreate;
-Zen_RTS_Asset_East_Recycler = ["Zen_RTS_F_East_Recycler", "Recycler", "Cost: 50, Time: 10, Classname: C_man_shorts_4_F_afro,"] call Zen_RTS_StrategicAssetCreate;
+Zen_RTS_Asset_East_Repairer = ["Zen_RTS_F_East_Repairer", "Repairer", "Cost: 150, Time: 10, Classname: C_man_polo_1_F_afro,"] call Zen_RTS_StrategicAssetCreate;
+Zen_RTS_Asset_East_Recycler = ["Zen_RTS_F_East_Recycler", "Recycler", "Cost: 500, Time: 10, Classname: C_man_shorts_4_F_afro,"] call Zen_RTS_StrategicAssetCreate;

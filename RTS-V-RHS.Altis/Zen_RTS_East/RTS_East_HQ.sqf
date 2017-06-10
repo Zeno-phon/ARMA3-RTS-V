@@ -23,7 +23,7 @@ Zen_RTS_F_East_HQConstructor = {
     DETECT_BUILDING( Zen_RTS_BuildingType_East_Radar , Zen_RTS_Asset_Tech_East_Upgrade_Radar )
     DETECT_BUILDING( Zen_RTS_BuildingType_East_AirFactory , Zen_RTS_Asset_Tech_East_Upgrade_AirFactory )
     DETECT_BUILDING( Zen_RTS_BuildingType_East_NavalFactory , Zen_RTS_Asset_Tech_East_Upgrade_NavalFactory )
-    DETECT_BUILDING( Zen_RTS_BuildingType_East_SupportFactory , Zen_RTS_Asset_Tech_East_Upgrade_SupportFactory )
+    //DETECT_BUILDING( Zen_RTS_BuildingType_East_SupportFactory , Zen_RTS_Asset_Tech_East_Upgrade_SupportFactory )
 
     0 = [(_buildingObjData select 1), _assetsToAdd] call Zen_RTS_F_StrategicAddAssetGlobal;
 
@@ -70,4 +70,4 @@ Zen_RTS_Asset_Tech_East_Upgrade_Barracks = ["Zen_RTS_F_East_Tech_Upgrade_Barrack
 Zen_RTS_Asset_Tech_East_Upgrade_Radar = ["Zen_RTS_F_East_Tech_Upgrade_Radar", "Upgrade Radar", "Cost: 10000, Time: 120,", "Commander"] call Zen_RTS_StrategicAssetCreate;
 Zen_RTS_Asset_Tech_East_Upgrade_AirFactory = ["Zen_RTS_F_East_Tech_Upgrade_AirFactory", "Upgrade Air Factory", "Cost: 7000, Time: 120,", "Commander"] call Zen_RTS_StrategicAssetCreate;
 Zen_RTS_Asset_Tech_East_Upgrade_NavalFactory = ["Zen_RTS_F_East_Tech_Upgrade_NavalFactory", "Upgrade Naval Factory", "Cost: 1000, Time: 35,", "Commander"] call Zen_RTS_StrategicAssetCreate;
-Zen_RTS_Asset_Tech_East_Upgrade_SupportFactory = ["Zen_RTS_F_East_Tech_Upgrade_SupportFactory", "Upgrade SupportFactory", "Cost: 8000, Time: 120,", "Commander"] call Zen_RTS_StrategicAssetCreate;
+//Zen_RTS_Asset_Tech_East_Upgrade_SupportFactory = ["Zen_RTS_F_East_Tech_Upgrade_SupportFactory", "Upgrade SupportFactory", "Cost: 8000, Time: 120,", "Commander"] call Zen_RTS_StrategicAssetCreate;

@@ -1,7 +1,3 @@
-/**
-    Level 1:
-        MG
-//*/
 
 #define SWAP_CJ_OWNER(F) \
     (_this select 3) setVariable ["Zen_RTS_StrategicIsAIOwned", F, true]; \
@@ -27,7 +23,6 @@ Zen_RTS_F_West_CJConstructor = {
     _assetsToAdd pushBack Zen_RTS_Asset_B_SLINGLOAD_01_MEDEVAC_F;
     _assetsToAdd pushBack Zen_RTS_Asset_B_SLINGLOAD_01_FUEL_F;
     _assetsToAdd pushBack Zen_RTS_Asset_Box_NATO_WpsSpecial_F;
-    _assetsToAdd pushBack Zen_RTS_Asset_Land_BagFence_Corner_F;
     _assetsToAdd pushBack Zen_RTS_Asset_Land_CncWall4_F;
 
     // if (Zen_RTS_TechFlag_West_BuildEnemy) then {
@@ -128,5 +123,4 @@ Zen_RTS_Asset_LAND_CARGO_PATROL_V1_F= ["Zen_RTS_F_West_AssetLAND_CARGO_PATROL_V1
 Zen_RTS_Asset_B_SLINGLOAD_01_MEDEVAC_F= ["Zen_RTS_F_West_AssetB_SLINGLOAD_01_MEDEVAC_F", "med tent", "Cost: 50, Time: 10,"] call Zen_RTS_StrategicAssetCreate;
 Zen_RTS_Asset_B_SLINGLOAD_01_FUEL_F= ["Zen_RTS_F_West_AssetB_SLINGLOAD_01_FUEL_F", "fuel port", "Cost: 50, Time: 10,"] call Zen_RTS_StrategicAssetCreate;
 Zen_RTS_Asset_Box_NATO_WpsSpecial_F= ["Zen_RTS_F_West_AssetBox_NATO_WpsSpecial_F", "Supply Box [NATO]", "Cost: 50, Time: 10,"] call Zen_RTS_StrategicAssetCreate;
-Zen_RTS_Asset_Land_BagFence_Corner_F= ["Zen_RTS_F_West_Asset_Land_BagFence_Corner_F", "repair port", "Cost: 50, Time: 10,"] call Zen_RTS_StrategicAssetCreate;
 Zen_RTS_Asset_Land_CncWall4_F= ["Zen_RTS_F_West_Asset_Land_CncWall4_F", "repair port", "Cost: 50, Time: 10,"] call Zen_RTS_StrategicAssetCreate;

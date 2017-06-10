@@ -8,7 +8,7 @@ if !(isDedicated) then {
 enableSaving [false, false];
 player enableFatigue false;
 {_x setMarkerAlpha 0;} forEach ["mkFOBTemplate"];
-RTS_Intro_Titletext_Code = {titleText [format ["%1", "-= RTS V =-\nWarGame\nFor Arma 3"], "PLAIN DOWN" , .5]};
+RTS_Intro_Titletext_Code = {titleText [format ["1.2", " RTS V \nWarGame\nFor Arma 3"], "PLAIN DOWN" , .5]};
 call RTS_Intro_Titletext_Code;
 [] execVM "briefing.sqf";
 
@@ -19,8 +19,7 @@ call RTS_Intro_Titletext_Code;
 #include "functions\RTS_FNC_flipACTIONS.sqf"
 #include "functions\RTS_FNC_PUSH.sqf"
 
-#define __cppfln(xdfunc,xfile2) xdfunc = compile preprocessFileLineNumbers #xfile2
-__cppfln(barrelfun,functions\barrelfun.sqf);
+
 
 // Compile Zen Functions --------------
 Zen_RTS_AlphaMenu = compileFinal preprocessFileLineNumbers "Zen_RTS_Functions\Zen_RTS_AlphaMenu.sqf";
@@ -44,23 +43,6 @@ call compileFinal preprocessFileLineNumbers "Zen_RTS_Strategic\Zen_RTS_Strategic
 call compileFinal preprocessFileLineNumbers "Zen_RTS_Territory\Zen_RTS_TerritoryCompile.sqf";
 call compileFinal preprocessFileLineNumbers "Zen_RTS_SubTerritory\Zen_RTS_SubTerritoryCompile.sqf";
 
-// RTS Client ---------------------
-// #include "Zen_RTS_Functions\Zen_RTS_ClientExec.sqf"
-//[] exec "Karr-SquadMarkers.sqs";
-// [] exec "rts-build-addAction.sqs";
-// [] execVM "territory\rts-territoryInit.sqf";
-// [] exec "economy\rts-moneyMonitor.sqs";
-// [] exec "rts-vcl-special.sqs";
-
-// [] exec "rts-build-unitarrays.sqs";
-// [] exec "rts-client-updateArrays.sqs";
-// [] exec "rts-build-structurePosExec.sqs";
-// [] exec "rts-z-endmission.sqs";
-
-// [] execVM "rts-z-intro.sqf";
-// [] exec "rts-showMsg.sqs";
-// [] exec "rts-init-SetRandomPos.sqs";
-// 1 setRadioMsg "Null";
 
 #define ZEN_RTS_STRATEGIC_BUILDING_CONSTRUCTOR_ARGS() \
     _spawnPos = _args select 0; \
@@ -221,20 +203,12 @@ if !(isServer) exitWith {};
 sleep 1;
 
 // RTS Server -------------
-//FNC_AUTOTANK = compileFinal preprocessFileLineNumbers "FNC_AUTOTANK.sqf";
-#include "FNC_AUTOTANK.sqf";
+//
+#include "FNC_AUTOTANKWST.sqf";
+#include "FNC_AUTOTANKEST.sqf";
 
 0 = [] execVM "unflip_vehicle.sqf";
-// 0 = [] execVM "R3F_LOG\init.sqf";
 
-// [] exec "rts-init-commandermonitor.sqs";
-// [] exec "economy\rts-supplyMonitor.sqs";
-// [] exec "rts-build-serverside.sqs";
-// took this out with what ever it was attached to.. like unit monitor ... getting errors from east.
-// [] exec "test.sqs";
-// [] exec "rts-build-serverSideMonitor.sqs";
-// rts_hq sideChat "Global Scripts and Variables Initialized";
-// --------------------------
 
 // Zen Server ------------------
 diag_log diag_tickTime;
@@ -376,7 +350,7 @@ publicVariable "RTS_Building_Spawn_Grid_Markers";
 #include "Zen_RTS_West\RTS_West_TankFactory.sqf"
 #include "Zen_RTS_West\RTS_West_AirFactory.sqf"
 #include "Zen_RTS_West\RTS_West_NavalFactory.sqf"
-#include "Zen_RTS_West\RTS_West_SupportFactory.sqf"
+//#include "Zen_RTS_West\RTS_West_SupportFactory.sqf"
 #include "Zen_RTS_West\RTS_West_RecyclePlant.sqf"
 #include "Zen_RTS_West\RTS_West_CJ.sqf"
 
@@ -386,7 +360,7 @@ publicVariable "RTS_Building_Spawn_Grid_Markers";
 #include "Zen_RTS_East\RTS_East_TankFactory.sqf"
 #include "Zen_RTS_East\RTS_East_AirFactory.sqf"
 #include "Zen_RTS_East\RTS_East_NavalFactory.sqf"
-#include "Zen_RTS_East\RTS_East_SupportFactory.sqf"
+//#include "Zen_RTS_East\RTS_East_SupportFactory.sqf"
 #include "Zen_RTS_East\RTS_East_RecyclePlant.sqf"
 #include "Zen_RTS_East\RTS_East_CJ.sqf"
 

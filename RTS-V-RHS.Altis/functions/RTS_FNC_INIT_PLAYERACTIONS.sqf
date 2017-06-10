@@ -33,4 +33,6 @@ RTS_FNC_INIT_PLAYERACTIONS = {
 
     _msg = Format["%1 is your commander.", _name];
     rts_hq sideChat _msg;
+
+
 };

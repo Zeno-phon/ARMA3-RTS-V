@@ -109,7 +109,7 @@ INFANTRY_CONSTRUCTOR(Zen_RTS_F_East_Asset_rhs_msv_efreitor, "rhs_msv_efreitor", 
 
 #define FORT_CONSTRUCTOR(N, T) \
     N = { \
-        diag_log ("East " + T + " asset constructor called"); \
+        diag_log ("East" + T + " asset constructor called"); \
         diag_log _this; \
         _buildingObjData = _this select 0; \
         _assetData = _this select 1; \
@@ -198,7 +198,7 @@ UPGRADE_CONSTRUCTOR(Zen_RTS_F_East_Tech_Upgrade_Barracks, Zen_RTS_BuildingType_E
 UPGRADE_CONSTRUCTOR(Zen_RTS_F_East_Tech_Upgrade_Radar, Zen_RTS_BuildingType_East_Radar, Zen_RTS_Asset_Tech_East_Upgrade_Radar)
 UPGRADE_CONSTRUCTOR(Zen_RTS_F_East_Tech_Upgrade_AirFactory, Zen_RTS_BuildingType_East_AirFactory, Zen_RTS_Asset_Tech_East_Upgrade_AirFactory)
 UPGRADE_CONSTRUCTOR(Zen_RTS_F_East_Tech_Upgrade_NavalFactory, Zen_RTS_BuildingType_East_NavalFactory, Zen_RTS_Asset_Tech_East_Upgrade_NavalFactory)
-UPGRADE_CONSTRUCTOR(Zen_RTS_F_East_Tech_Upgrade_SupportFactory, Zen_RTS_BuildingType_East_SupportFactory, Zen_RTS_Asset_Tech_East_Upgrade_SupportFactory)
+//UPGRADE_CONSTRUCTOR(Zen_RTS_F_East_Tech_Upgrade_SupportFactory, Zen_RTS_BuildingType_East_SupportFactory, Zen_RTS_Asset_Tech_East_Upgrade_SupportFactory)
 
 /////////////////////////
 // Naval Factory
@@ -206,7 +206,7 @@ UPGRADE_CONSTRUCTOR(Zen_RTS_F_East_Tech_Upgrade_SupportFactory, Zen_RTS_Building
 
 #define SHIP_CONSTRUCTOR(N, T, U) \
     N = { \
-        diag_log ("East " + T + " asset constructor called"); \
+        diag_log ("East" + T + " asset constructor called"); \
         diag_log _this; \
         _buildingObjData = _this select 0; \
         _assetData = _this select 1; \
@@ -315,7 +315,7 @@ Zen_RTS_F_East_Recycler = {
 /////////////////////////
 // Support Factory
 /////////////////////////
-
+/*
 #define SUPPORT_CONSTRUCTOR(N, T, U) \
     N = { \
         diag_log ("East " + T + " asset constructor called"); \
@@ -368,7 +368,7 @@ SUPPORT_CONSTRUCTOR(Zen_RTS_F_East_Asset_rhs_prp3_vdv, "rhs_prp3_vdv", CREW_UNIT
 #define CREW_UNITS ["rhs_vdv_driver_armored", "rhs_vdv_crew_commander", "rhs_vdv_armoredcrew", "rhs_vdv_combatcrew"]
 SUPPORT_CONSTRUCTOR(Zen_RTS_F_East_Asset_rhs_9k79_K, "rhs_9k79_k", CREW_UNITS)
 SUPPORT_CONSTRUCTOR(Zen_RTS_F_East_Asset_rhs_9k79_B, "rhs_9k79_B", CREW_UNITS)
-
+*/
 /////////////////////////
 // Tank Factory
 /////////////////////////
@@ -407,7 +407,7 @@ SUPPORT_CONSTRUCTOR(Zen_RTS_F_East_Asset_rhs_9k79_B, "rhs_9k79_B", CREW_UNITS)
             }; \
         }; \
         if (T in ["rhs_t72bc_tv"]) then { \
-            ZEN_FMW_MP_REAll("FNC_AUTOTANK", _vehicle, call) \
+            ZEN_FMW_MP_REAll("FNC_AUTOTANKEST", _vehicle, call) \
         }; \
     };
 

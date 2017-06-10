@@ -79,12 +79,12 @@ UPGRADE(Zen_RTS_F_East_NavalUpgrade01, ASSETS)
 // #define ASSETS []
 // UPGRADE(Zen_RTS_F_East_NavalUpgrade02, ASSETS)
 
-Zen_RTS_BuildingType_East_NavalFactory = ["Zen_RTS_F_East_NavalConstructor", "Zen_RTS_F_East_NavalDestructor", ["Zen_RTS_F_East_NavalUpgrade01"], "Naval Factory", "Cost: 2000, Time: 10, Picture: pictures\naval_ca.paa, Classname: Land_LightHouse_F,"] call Zen_RTS_StrategicBuildingCreate;
+Zen_RTS_BuildingType_East_NavalFactory = ["Zen_RTS_F_East_NavalConstructor", "Zen_RTS_F_East_NavalDestructor", ["Zen_RTS_F_East_NavalUpgrade01"], "Naval Factory", "Cost: 2000, Time: 30, Picture: pictures\naval_ca.paa, Classname: Land_LightHouse_F,"] call Zen_RTS_StrategicBuildingCreate;
 (RTS_Used_Building_Types select 1) pushBack  Zen_RTS_BuildingType_East_NavalFactory;
 
 /////////////////////////////////
 // Assets
 /////////////////////////////////
 
-Zen_RTS_Asset_East_GunBoat = ["Zen_RTS_F_East_AssetZodiac","Armed Patrol Boat", "Cost: 200, Time: 10,"] call Zen_RTS_StrategicAssetCreate;
+Zen_RTS_Asset_East_GunBoat = ["Zen_RTS_F_East_AssetZodiac","Armed Patrol Boat", "Cost: 500, Time: 10,"] call Zen_RTS_StrategicAssetCreate;
 Zen_RTS_Asset_East_Zodiac = ["Zen_RTS_F_East_AssetGunBoat","Zodiac", "Cost: 100, Time: 10,"] call Zen_RTS_StrategicAssetCreate;
